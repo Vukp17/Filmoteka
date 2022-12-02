@@ -1,0 +1,77 @@
+{
+  "movies": {
+    "-NI3hKqv5xL3OwYjOnKj": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNmVmYzcwNzMtMWM1NS00MWIyLThlMDEtYzUwZDgzODE1NmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "Title": "To Kill a Mockingbird",
+      "Type": "movie",
+      "Year": "movie",
+      "imdbID": "tt0056592",
+      "isRented": false
+    },
+    "-NI4IgT5wNDuHbwTHMAQ": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTYwMjg3MjY3OV5BMl5BanBnXkFtZTcwNTc4MDU3MQ@@._V1_SX300.jpg",
+      "Title": "Righteous Kill",
+      "Type": "movie",
+      "Year": "2008",
+      "imdbID": "tt1034331",
+      "isRented": false
+    },
+    "-NI4JAhnbM0JUveMVVe3": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNzM3NDFhYTAtYmU5Mi00NGRmLTljYjgtMDkyODQ4MjNkMGY2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "Title": "Kill Bill: Vol. 1",
+      "Type": "movie",
+      "Year": "2003",
+      "imdbID": "tt0266697",
+      "isRented": true
+    },
+    "-NII6tgL4cBgDElFbnn_": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNTE1OWI1YzgtZjEyMy00MjQ4LWE0NWMtYTNhYjc0ZDQ3ZGRkXkEyXkFqcGdeQXVyNDQ2MTMzODA@._V1_SX300.jpg",
+      "Title": "The Book of Eli",
+      "Type": "movie",
+      "Year": "2010",
+      "imdbID": "tt1037705",
+      "isRented": false
+    },
+    "-NII6tq8zV007LjX0OSl": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTc3NTUzNTI4MV5BMl5BanBnXkFtZTgwNjU0NjU5NzE@._V1_SX300.jpg",
+      "Title": "The Jungle Book",
+      "Type": "movie",
+      "Year": "2016",
+      "imdbID": "tt3040964",
+      "isRented": false
+    },
+    "-NII6u18TX2p_kFCSgpx": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTg3MDI5ODEtMDU4ZC00NDA1LWFhZTQtZDIyZjk0NDgzZTE2XkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
+      "Title": "The Jungle Book",
+      "Type": "movie",
+      "Year": "1967",
+      "imdbID": "tt0061852",
+      "isRented": false
+    }
+  },
+  "rents": {
+    "-NII7xed-3kooIlsk9-j": {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNzM3NDFhYTAtYmU5Mi00NGRmLTljYjgtMDkyODQ4MjNkMGY2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "Title": "Kill Bill: Vol. 1",
+      "Type": "movie",
+      "Year": "2003",
+      "id": "-NI4JAhnbM0JUveMVVe3",
+      "imdbID": "tt0266697",
+      "user": "milanseid123@gmail.com"
+    }
+  },
+  "users": {
+    "-NHo5zL5CA3U9LFQEVEp": {
+      "email": "mila@mila.com",
+      "hadAaccess": true,
+      "password": "mila123",
+      "role": "admin"
+    },
+    "-NI4hSOpCRX-aq1PDbeQ": {
+      "email": "milanseid123@gmail.com",
+      "hadAaccess": false,
+      "password": "123123",
+      "role": "user"
+    }
+  }
+}
