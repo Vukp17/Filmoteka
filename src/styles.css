@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+app-footer{
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+}
+
+app-admin{
+    width: 100%;
+    left: 0;
+    top: 10;
+}
+
+/*     Card design        */
+.cImg{
+    height:500px;
+    width: 100%;
+    margin-bottom: 15px;
+    transition: 0.3s ease-in-out;
+}
+.cImg:hover{
+    transition: 0.3s ease-in-out;
+    transform: scale(1.1)
+}
+
+.cardMain{
+    padding:20px;
+    margin: 50px;
+}
+

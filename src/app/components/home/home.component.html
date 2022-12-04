@@ -1,0 +1,13 @@
+<h1 class="header">Upcoming movies</h1>
+<div class="container">
+  <ng-container *ngFor="let item of types">
+    <h2>{{ item.type }} movies</h2>
+    <app-carousel [carouselElement]="item.type"></app-carousel>
+  </ng-container>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+<ng-container *ngIf="user$ | async as user" ; else nonUser>
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <img src="assets/images/Filmotek.svg" height="40" class="mr-2" />
+    </ng-template>
+    <ng-template pTemplate="end">
+      <button
+        pButton
+        label="Logout"
+        icon="pi pi-power-off"
+        class="p-button-raised p-button-rounded"
+        class="p-button-danger"
+        (click)="Logout()"
+      ></button>
+
+    </ng-template>
+  </p-menubar>
+</ng-container>
+
+<ng-template #nonUser>
+
+
+  <p-menubar>
+    <ng-template pTemplate="start">
+      <img src="assets/images/Filmotek.svg" height="40" class="mr-2" />
+    </ng-template>
+    <ng-template pTemplate="end">
+   
+      <button
+        pButton
+        label="Login"
+        icon="pi pi-power-off"
+        class="p-button-raised p-button-rounded"
+        routerLink="login"
+      ></button>
+    </ng-template>
+  </p-menubar>
+</ng-template>

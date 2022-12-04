@@ -1,0 +1,74 @@
+<body>
+  <div>
+
+
+    <p-card
+      class="cardMain"
+      header="{{ movies.Title }}"
+      subheader="{{ movies.Type }}"
+      [style]="{ width: '360px' }"
+      styleClass="p-card-shadow"
+    >
+      <ng-template pTemplate="header">
+        <img
+          class="cImg"
+          alt="Card"
+          [src]="movies.Poster"
+          (click)="showDialog(movies.imdbID); searchByKeyword(movies.Title)"
+        />
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <p-button
+          class="d-flex justify-content-center"
+          styleClass="p-button-lg p-button-danger"
+          label="Delete"
+          icon="pi pi-trash"
+          (click)="Remove(movies.key)"
+        ></p-button>
+        <p-button
+          class="d-flex justify-content-center"
+          styleClass="p-button-lg p-button-warning"
+          label="Rent"
+          (click)="Rent(movies, movies.key)"
+          icon="pi pi-plus"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <p-dialog
+    [(visible)]="display"
+    [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [style]="{ width: '50vw' }"
+  >
+    <ng-template pTemplate="header"> {{ details.Title }} </ng-template>
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Plot</h1>
+        <p>{{ details.Plot }}</p>
+        <p-button
+        class="d-flex justify-content-left"
+        styleClass="p-button-lg p-button-warning"
+        label="Rent"
+        (click)="Rent(movies, movies.key)"
+        icon="pi pi-plus"
+      ></p-button>
+      </div>
+      <div class="d-flex justify-content-center col-md-6">
+        <img [src]="details.Poster" alt="" />
+
+      </div>
+    </div>
+    <ng-template pTemplate="footer"><h1 class="d-flex justify-content-center">Trailer</h1>
+      <div class="row">
+        <ng-container
+          *ngFor="let item of response.items"       
+        >
+            <iframe width="560" height="315"  frameBorder="0" [src]="getVideoSource(item.id.videoId)"></iframe>
+  
+        </ng-container>
+      </div>
+    </ng-template>
+  </p-dialog>
+</body>

@@ -1,0 +1,12 @@
+<div class="row">
+  <ng-container *ngFor="let item of movies | async">
+    <ng-container *ngIf = "item.isRented == false">
+      <app-movie-item
+        class="d-flex justify-content-center col-xl-4 col-lg-6 col-md-6 col-xs-12"
+        [movies]="item"
+        (moviesSelected)="OnMovieSeleted(item)"
+      >
+      </app-movie-item>
+    </ng-container>
+  </ng-container>
+</div>

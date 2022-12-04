@@ -1,0 +1,24 @@
+
+<div>
+    <p-card
+      class="cardMain"
+      header="{{ movies.Title }}"
+      subheader="{{ movies.Type }}"
+      [style]="{ width: '360px' }"
+      styleClass="p-card-shadow"
+    >
+      <ng-template pTemplate="header">
+        <img class="cImg" alt="Card" [src]="movies.Poster" />
+      </ng-template>
+  
+      <ng-template pTemplate="footer">
+        <p-button
+          class="d-flex justify-content-center"
+          styleClass="p-button-lg p-button-primary"
+          label="Add movie"
+          icon="pi pi-check"
+         (click)="Push(movies,movies.imdbID)"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
