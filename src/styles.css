@@ -1,53 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
-app-footer{
+app-footer {
     padding: 10px 10px 0px 10px;
     bottom: 0;
     width: 100%;
+    position: fixed;
+
 }
 
-app-admin{
+app-admin {
     width: 100%;
     left: 0;
     top: 10;
 }
 
 /*     Card design        */
-.cImg{
-    height:500px;
+.cImg {
+    height: 500px;
     width: 100%;
     margin-bottom: 15px;
     transition: 0.3s ease-in-out;
 }
-.cImg:hover{
+
+.cImg:hover {
     transition: 0.3s ease-in-out;
     transform: scale(1.1)
 }
 
-.cardMain{
-    padding:20px;
+.cardMain {
+    padding: 20px;
     margin: 50px;
 }
 
-body{
+body {
     background-color: #141414;
     color: #fff;
 }
-.form-container{
+
+.form-container {
     display: block;
     max-width: 300px;
     margin: auto;
 
 
-    background:#D9D9D9;
-    padding:48px;
+    background: #D9D9D9;
+    padding: 48px;
     border-radius: 16px;
 
 
 }
-.form-container mat-form-field{
+
+.form-container mat-form-field {
     width: 100%;
 }
+
 .center {
-    display:flex;
+    display: flex;
     justify-content: center;
 }

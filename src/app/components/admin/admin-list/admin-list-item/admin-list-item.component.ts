@@ -18,7 +18,7 @@ export class AdminListItemComponent implements OnInit {
     this.film = this.api.getMovies();
     console.log(this.movies)
   }
-  async Push(movies: Movies, imdbID: string) {
+  async push(movies: Movies, imdbID: string) {
     if (await this.post.chekcMovie(imdbID, this.film)) {
       this.toastService.warning('Film vec postoji u bazi!');
     } else {

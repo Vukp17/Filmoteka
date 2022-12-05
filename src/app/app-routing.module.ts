@@ -71,7 +71,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'ladning',
+    path: 'landing',
     pathMatch: 'full',
     component: LandingComponent,
     //...canActivate(redirectToHome)

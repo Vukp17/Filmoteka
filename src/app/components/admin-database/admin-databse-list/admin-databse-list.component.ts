@@ -12,14 +12,14 @@ export class AdminDatabseListComponent implements OnInit {
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
-    this.Ucitaj();
+    this.loadMovies();
   }
 
   ngOnChanges(){
-    this.Ucitaj();
+    this.loadMovies();
   }
 
-  Ucitaj(){
+  loadMovies(){
     this.movies = this.api.getMovies();
     console.log(this.movies)
   }

@@ -52,7 +52,7 @@ export class MenubarComponent implements OnInit {
         { label: 'DataBase', icon: 'pi pi-fw pi-database', routerLink: ['/admin-list'] },
       ]
     }
-  Logout() {
+  logout() {
     this.authService.logout().subscribe(() => {
       this.router.navigate(['/login']);
 

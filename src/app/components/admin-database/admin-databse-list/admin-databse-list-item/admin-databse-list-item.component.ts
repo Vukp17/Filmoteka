@@ -22,7 +22,7 @@ export class AdminDatabseListItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  Remove(key: any,isRented: boolean | undefined): void {
+  remove(key: any,isRented: boolean | undefined): void {
     if(isRented==true){
       this.toastService.warning("Film jer rentovan ne moze se obrisati iz baze")
     }else{

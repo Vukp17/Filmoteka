@@ -25,5 +25,7 @@ export class AdminListComponent implements OnInit {
 
   }
   
-  onKey(event: any) { this.inputValue = event.target.value; }
+  onKey(event: any) {
+     this.inputValue = event.target.value; 
+    }
 }

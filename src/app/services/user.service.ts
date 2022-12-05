@@ -42,13 +42,6 @@ export class UserService {
 
   }
 
-  set Access(hadAccess: boolean) {
-    this.hadAccess = hadAccess
-  }
-  get Access() {
-    return this.hadAccess
-  }
-
 
   set Users(user: Users[]) {
     this.users = user
