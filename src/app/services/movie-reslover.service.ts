@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import { Observable } from 'rxjs';
-import { Movies } from '../components/movies/movies.model';
+import { Movies } from '../models/movies.model';
 import { ApiService } from './api.service';
 import { MovieService } from './movie.service';
 @Injectable({

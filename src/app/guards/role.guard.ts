@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { Users } from '../components/signup/user.model';
+import { Users } from '../models/user.model';
 import { ApiService } from '../services/api.service';
 import { AuthentificationService } from '../services/authentification.service';
 import { PostService } from '../services/post.service';

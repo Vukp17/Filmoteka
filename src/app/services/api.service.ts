@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { MovieService } from './movie.service';
-import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
-import { Movies } from '../components/movies/movies.model';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Movies } from '../models/movies.model';
+import { map, Observable } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
-import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject, } from '@angular/fire/compat/database';
-import { Users } from '../components/signup/user.model';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
+import { Users } from '../models/user.model';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,12 +15,12 @@ export class ApiService {
   moviesRef: AngularFireList<Movies>;
   rentsRef: AngularFireList<Movies>;
   movieRef: AngularFireObject<any>;
-  itemsRents: Observable<any[]>;
-  itemsMovies: Observable<any[]>;
+  itemsRents: Observable<Movies[]>;
+  itemsMovies: Observable<Movies[]>;
   users: Users[]
-  error:string = "";
-  response:any = {}
-  constructor(private http: HttpClient,private sanitizer:DomSanitizer, private movieService: MovieService, private db: AngularFireDatabase, public database: Database) {
+  error: string = "";
+  response: any = {}
+  constructor(private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
     this.moviesRef = db.list('movies');
     this.rentsRef = db.list('rents')
     /////Rents payload key
@@ -82,28 +80,26 @@ export class ApiService {
       isRented: false
     });
   }
-
-  subjekat = new BehaviorSubject<string>('pocetna vrednos')
-  
-  subjekat2 = new BehaviorSubject<string>('2')
-  changeSubject(value: string) {
-    this.subjekat.next(value)
-  }
-
-  changeSubject2() {
-    this.subjekat.next('PROMENA')
-  }
-
-
   loadUsers(): Observable<Users[]> {
     const url = 'https://movieapp-4d0c2-default-rtdb.europe-west1.firebasedatabase.app/users.json';
     return this.http.get<Users[]>(url);
   }
   loadMoviesDetails(id: string) {
-
-    const url = "http://www.omdbapi.com/?i=" + id + "&apikey=d0e90712";
+    const url = "http://www.omdbapi.com/?i=" + id + "&apikey=" + environment.omdb_api_key;
     return this.http.get(url)
+  }
 
+  searchByKeyword(title: string) {
+    const url = "https://www.googleapis.com/youtube/v3/search"
+
+    const urlParams = new HttpParams()
+      .set('part', 'snippet')
+      .set('q', title)
+      .set('maxResults', 1)
+      .set('key', environment.youtube_api_key ?? 'error ')
+    const options = { params: urlParams }
+
+    return this.http.get<any>(url, options)
 
   }
 

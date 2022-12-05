@@ -1,12 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+///Services
 import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { PostService } from 'src/app/services/post.service';
-import { Movies } from '../../movies.model';
+import { Movies } from '../../../../models/movies.model';
+
 @Component({
   selector: 'app-movie-item',
   templateUrl: './movie-item.component.html',
@@ -18,7 +19,7 @@ export class MovieItemComponent implements OnInit {
   email: string | any;
   details: any = []
   display: boolean = false;
-
+  ////Api
   error: string = "";
   response: any = {}
 
@@ -29,7 +30,7 @@ export class MovieItemComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
+
 
   }
   onSelected() {
@@ -48,43 +49,17 @@ export class MovieItemComponent implements OnInit {
     this.api.loadMoviesDetails(id).subscribe(result => {
       this.display = true;
       this.details = result
+      console
     })
 
   }
-  // serachYoutube(title: string) {
-  //   this.api.searchByKeyword(title)
-  // }
-  // getVideo(id: string) {
-  //   this.api.getVideoSource(id)
-  // }
-
-
   searchByKeyword(title: string) {
-    const url = "https://www.googleapis.com/youtube/v3/search"
-
-    const urlParams = new HttpParams()
-      .set('part','snippet')
-      .set('q', title)
-      .set('maxResults', 1)
-      .set('key', 'AIzaSyAzaSAkDKh7ZYw7jd98E9a0y4Bdv2bWVKQ')
-    const options = { params: urlParams }
-
-    this.http.get<any>(url, options).subscribe(result => {
-
+    this.api.searchByKeyword(title).subscribe(result => {
       this.response = result
     })
-    console.log(this.response)
   }
-
-
-
-
-  
-
-  getVideoSource(id:string): SafeResourceUrl {
-      return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/"+id)
-   
-    
+  getVideoSource(id: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
 }
 

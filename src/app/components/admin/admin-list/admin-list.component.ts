@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Movies } from '../../movies/movies.model';
+import { Movies } from '../../../models/movies.model';
 
 @Component({
   selector: 'app-admin-list',

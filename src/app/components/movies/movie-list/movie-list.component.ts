@@ -2,7 +2,7 @@ import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
-import { Movies } from '../movies.model';
+import { Movies } from '../../../models/movies.model';
 
 @Component({
   selector: 'app-movie-list',

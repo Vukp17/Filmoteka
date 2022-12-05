@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Movies } from 'src/app/components/movies/movies.model';
+import { Movies } from 'src/app/models/movies.model';
 import { ApiService } from 'src/app/services/api.service';
 import { PostService } from 'src/app/services/post.service';
 

@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { RoleGuard } from './guards/role.guard';
 import { LandingComponent } from './components/landing/landing.component';
+import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['movies']);
@@ -51,7 +52,7 @@ const routes: Routes = [
     path: 'admin',
     pathMatch: 'full',
     component: AdminComponent,
-    canActivate:[RoleGuard],
+    canActivate:[RoleGuard,redirectToLogin],
     data:{
          expectedRoles:'admin'
     }
@@ -61,6 +62,13 @@ const routes: Routes = [
     path: "",
     redirectTo: "/home",
     pathMatch: "full",
+  },
+  {
+    path: 'admin-list',
+    pathMatch: 'full',
+    component: AdminDatabaseComponent,
+    canActivate:[RoleGuard,redirectToLogin],
+
   },
   {
     path: 'ladning',

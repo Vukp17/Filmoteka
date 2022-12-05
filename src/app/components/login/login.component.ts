@@ -5,7 +5,7 @@ import { Router, RouterStateSnapshot } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { PostService } from 'src/app/services/post.service';
 import { filter, map, mergeMap, Observable, switchMap } from 'rxjs';
-import { Users } from '../signup/user.model';
+import { Users } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
 import { UserService } from 'src/app/services/user.service';
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.post.Role=true
             this.user.Email=this.users[i].email
           }
-
+        
         }
         if (this.isAdmin) {
           this.router.navigate(['/admin']);

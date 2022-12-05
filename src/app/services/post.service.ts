@@ -8,8 +8,8 @@ import * as _ from 'lodash';
 import * as firebase from 'firebase/app';
 import { AuthentificationService } from './authentification.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject, PathReference } from '@angular/fire/compat/database';
-import { Users } from '../components/signup/user.model';
-import { Movies } from '../components/movies/movies.model';
+import { Users } from '../models/user.model';
+import { Movies } from '../models/movies.model';
 import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'

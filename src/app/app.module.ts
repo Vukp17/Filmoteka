@@ -15,6 +15,7 @@ import {CardModule} from 'primeng/card';
 import {CarouselModule} from 'primeng/carousel';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
+import {DividerModule} from 'primeng/divider';
 ///////Material////////
 import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -46,6 +47,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 //////Hot-toast
 import { HotToastModule } from '@ngneat/hot-toast';
+import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
+import { AdminDatabseListComponent } from './components/admin-database/admin-databse-list/admin-databse-list.component';
+import { AdminDatabseListItemComponent } from './components/admin-database/admin-databse-list/admin-databse-list-item/admin-databse-list-item.component';
 
 
 
@@ -70,7 +74,10 @@ import { HotToastModule } from '@ngneat/hot-toast';
     HomeComponent,
     AdminComponent,
     AdminListComponent,
-    AdminListItemComponent
+    AdminListItemComponent,
+    AdminDatabaseComponent,
+    AdminDatabseListComponent,
+    AdminDatabseListItemComponent
 
   ],
   imports: [
@@ -90,6 +97,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
     CardModule,
     CarouselModule,
     InputTextModule,
+    DividerModule,
     //Material
     MatInputModule,
     MatToolbarModule,

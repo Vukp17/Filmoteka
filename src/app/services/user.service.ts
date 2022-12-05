@@ -3,7 +3,7 @@ import { map, Observable, tap } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
-import { Users } from '../components/signup/user.model';
+import { Users } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 
 

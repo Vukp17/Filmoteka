@@ -21,13 +21,6 @@
       <ng-template pTemplate="footer">
         <p-button
           class="d-flex justify-content-center"
-          styleClass="p-button-lg p-button-danger"
-          label="Delete"
-          icon="pi pi-trash"
-          (click)="Remove(movies.key)"
-        ></p-button>
-        <p-button
-          class="d-flex justify-content-center"
           styleClass="p-button-lg p-button-warning"
           label="Rent"
           (click)="Rent(movies, movies.key)"
@@ -59,16 +52,29 @@
         <img [src]="details.Poster" alt="" />
 
       </div>
-    </div>
-    <ng-template pTemplate="footer"><h1 class="d-flex justify-content-center">Trailer</h1>
-      <div class="row">
-        <ng-container
-          *ngFor="let item of response.items"       
-        >
-            <iframe width="560" height="315"  frameBorder="0" [src]="getVideoSource(item.id.videoId)"></iframe>
   
-        </ng-container>
-      </div>
+
+    </div>
+    <ng-template pTemplate="footer">
     </ng-template>
+
+    <p-divider></p-divider>
+    <div class="row embed-responsive embed-responsive-16by9"> <h2>Trailer</h2>
+      <ng-container
+        *ngFor="let item of response.items"       
+      >
+          <iframe width="315" height="315" 
+           frameBorder="0" [src]="getVideoSource(item.id.videoId)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+      </ng-container>
+    </div>
+    <p-divider></p-divider>
+    <div>
+      <h2>About {{details.Title}}</h2>
+      <p>Gener: {{details.Genre}}</p>
+      <p>Writer: {{details.Writer}}:</p>
+      <p>Language: {{details.Language}}</p>
+      <p>Rating: {{details.imdbRating}}</p>
+    </div>
   </p-dialog>
 </body>

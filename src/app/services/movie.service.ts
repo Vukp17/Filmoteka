@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Movies } from '../components/movies/movies.model';
+import { Movies } from '../models/movies.model';
 import { ApiService } from './api.service';
 
 @Injectable({
