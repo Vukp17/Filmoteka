@@ -4,6 +4,7 @@ export class Users {
     password: string;
     role: string;
     hadAccess:boolean;
+
     constructor(email: string,
         password: string,
         role: string) {
@@ -11,4 +12,5 @@ export class Users {
         this.password = password;
         this.role = role;
     }
+    
 }
