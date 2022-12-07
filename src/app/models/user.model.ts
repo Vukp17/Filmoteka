@@ -1,14 +1,12 @@
-export class Users {
+export class User {
 
+    admin: boolean;
+    user_id: string;
     email: string;
-    password: string;
-    role: string;
-    hadAccess:boolean;
-    constructor(email: string,
-        password: string,
-        role: string) {
+
+    constructor(admin: boolean,user_id: string, email:string) {
+        this.admin= admin;
+        this.user_id = user_id;
         this.email = email;
-        this.password = password;
-        this.role = role;
     }
 }

@@ -5,7 +5,7 @@ import { map, Observable } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject, } from '@angular/fire/compat/database';
-import { Users } from '../models/user.model';
+import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ApiService {
   movieRef: AngularFireObject<any>;
   itemsRents: Observable<Movies[]>;
   itemsMovies: Observable<Movies[]>;
-  users: Users[]
+  users: User[]
   error: string = "";
   response: any = {}
   constructor(private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
@@ -81,9 +81,9 @@ export class ApiService {
       isRented: false
     });
   }
-  loadUsers(): Observable<Users[]> {
+  loadUsers(): Observable<User[]> {
     const url = 'https://movieapp-4d0c2-default-rtdb.europe-west1.firebasedatabase.app/users.json';
-    return this.http.get<Users[]>(url);
+    return this.http.get<User[]>(url);
   }
   loadMoviesDetails(id: string) {
     const url = "http://www.omdbapi.com/?i=" + id + "&apikey=" + environment.omdb_api_key;

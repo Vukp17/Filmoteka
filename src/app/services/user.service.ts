@@ -3,19 +3,19 @@ import { map, Observable, tap } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
 import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
-import { Users } from '../models/user.model';
+import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  usersRef: AngularFireList<Users>;
+  user = new BehaviorSubject<User>(null);
+  usersRef: AngularFireList<User>;
   itemRef: AngularFireObject<any>;
   items: Observable<any[]>;
-  users: Users[]
+  users: User[]
   email: string
   hadAccess: boolean
   constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient) {
@@ -30,12 +30,11 @@ export class UserService {
   getUsers() {
     return this.items;
   }
-  pushUser(email: string, password: string, role: string) {
+  pushUser(email: string, admin: boolean, user_id: string) {
     this.usersRef.push({
       email: email,
-      password: password,
-      role: role,
-      hadAccess: false
+      admin: admin,
+      user_id : user_id
 
     });
 
@@ -50,7 +49,7 @@ export class UserService {
   }
 
 
-  set Users(user: Users[]) {
+  set Users(user: User[]) {
     this.users = user
   }
   get Users() {

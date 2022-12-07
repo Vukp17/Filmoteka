@@ -6,9 +6,11 @@ import { MegaMenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { PostService } from 'src/app/services/post.service';
-import { Users } from '../../../models/user.model';
+import { User } from '../../../models/user.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menubar',
@@ -18,14 +20,21 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MenubarComponent implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
-    public authService: AuthService
+    public authService: AuthService,
+    private userService: UserService
   ) {}
-
+userSub: Subscription;
   items: MenuItem[];
   adminItems: MenuItem[];
+user: User;
+isAdmin:boolean = false;
 
   ngOnInit() {
-
+    this.userSub= this.authService.user.subscribe((data) =>{
+      console.log(!!data);
+      console.log(data.admin);
+      this.isAdmin = data.admin;
+    })
       this.items = [
       { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       {

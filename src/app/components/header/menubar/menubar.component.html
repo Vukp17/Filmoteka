@@ -12,6 +12,14 @@
         class="p-button-danger"
         (click)="logout()"
       ></button>
+      <button
+      *ngIf="isAdmin"
+        pButton
+        label="admin radi"
+        class="p-button-raised p-button-rounded"
+        class="p-button-danger"
+       
+      ></button>
     </ng-template>
   </p-menubar>
 

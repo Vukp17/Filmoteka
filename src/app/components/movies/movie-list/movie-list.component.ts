@@ -1,5 +1,6 @@
 import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Movies } from '../../../models/movies.model';
@@ -14,10 +15,11 @@ export class MovieListComponent implements OnInit,OnChanges {
   @Output() movieWasSelected = new EventEmitter<Movies>();
   movies:any;
 
-  constructor(private api:ApiService) { }
+  constructor(private api:ApiService,private afAuth: AngularFireAuth ) { }
 
   ngOnInit(): void {
    this.Ucitaj();
+   this.isAdmin();
   }
   OnMovieSeleted(movie: Movies) {
        this.movieWasSelected.emit(movie);
@@ -28,5 +30,14 @@ export class MovieListComponent implements OnInit,OnChanges {
   }
   ngOnChanges(){
     this.Ucitaj();
+  }
+  isAdmin(){
+    this.afAuth.onAuthStateChanged((user) => {
+      user?.getIdTokenResult().then((idtoken) => {
+        console.log(idtoken.claims);
+         return idtoken.claims['admin'];
+      });
+    });
+    return false;
   }
 }

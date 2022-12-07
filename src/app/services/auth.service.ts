@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/user.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +12,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   userLoggedIn: boolean; // other components can check on this variable for the login status of the user
  
+  user = new BehaviorSubject<User>(null);
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -26,7 +30,9 @@ export class AuthService {
     });
   }
 
-  
+  get userObject(){
+return this.user;
+  }
 
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth
@@ -34,6 +40,15 @@ export class AuthService {
       .then(() => {
         console.log('Auth Service: loginUser: success');
         // this.router.navigate(['/dashboard']);
+        this.afAuth.onAuthStateChanged((user) => {
+          user?.getIdTokenResult().then((idtoken) => {
+        //   console.log(idtoken.claims['admin']);
+      //     console.log(typeof(idtoken.claims['admin']))
+             const currnetUser = new User(idtoken.claims['admin'],idtoken.claims['user_id'],idtoken.claims['email']);
+             this.user.next(currnetUser);
+          });
+        });
+        console.log();
       })
       .catch((error) => {
         console.log('Auth Service: login error...');
@@ -58,11 +73,12 @@ export class AuthService {
   isAdmin(){
     this.afAuth.onAuthStateChanged((user) => {
       user?.getIdTokenResult().then((idtoken) => {
-        console.log(idtoken.claims['admin'])
+      // console.log(idtoken.claims['admin']);
+     //  console.log(typeof(idtoken.claims['admin']))
          return idtoken.claims['admin'];
       });
     });
-    return false;
+    return null;
   }
 
   }
