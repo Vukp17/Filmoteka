@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Movies } from 'src/app/models/movies.model';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthentificationService } from 'src/app/services/authentification.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class AdminDatabseListItemComponent implements OnInit {
   @Input() movies: Movies;
-  constructor(public api: ApiService, private authService: AuthentificationService,
+  constructor(public api: ApiService, private authService: AuthService,
     private post: PostService, private toastService: HotToastService, private sanitizer: DomSanitizer, private http: HttpClient) {
    
   }

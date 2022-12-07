@@ -6,12 +6,17 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { RentMoviesComponent } from './components/rent-movies/rent-movies.component';
 import { SingupComponent } from './components/signup/signup.component';
 import { MovieResloverService } from './services/movie-reslover.service';
-import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import {
+  canActivate,
+  redirectUnauthorizedTo,
+  redirectLoggedInTo,
+} from '@angular/fire/auth-guard';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { RoleGuard } from './guards/role.guard';
 import { LandingComponent } from './components/landing/landing.component';
 import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['movies']);
@@ -20,70 +25,54 @@ const routes: Routes = [
     path: 'rent',
     pathMatch: 'full',
     component: RentMoviesComponent,
-    ...canActivate(redirectToLogin)
+    canActivate: [AuthGuard],
   },
   {
     path: 'movies',
     component: MoviesComponent,
-    //resolve : [MovieResloverService]
-    ...canActivate(redirectToLogin)
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
     component: HomeComponent,
-    //resolve : [MovieResloverService]
-    //...canActivate(redirectToLogin)
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent,
-    ...canActivate(redirectToHome)
-
   },
   {
     path: 'signup',
     pathMatch: 'full',
     component: SingupComponent,
-    ...canActivate(redirectToHome)
-
   },
   {
     path: 'admin',
     pathMatch: 'full',
     component: AdminComponent,
-    canActivate:[RoleGuard,redirectToLogin],
-    data:{
-         expectedRoles:'admin'
-    }
-   
+    canActivate: [AuthGuard],
   },
   {
-    path: "",
-    redirectTo: "/home",
-    pathMatch: "full",
+    path: '',
+    redirectTo: '/landing',
+    pathMatch: 'full',
   },
   {
     path: 'admin-list',
     pathMatch: 'full',
     component: AdminDatabaseComponent,
-    canActivate:[RoleGuard,redirectToLogin],
-
+    canActivate: [AuthGuard],
   },
   {
-    path: 'ladning',
+    path: 'landing',
     pathMatch: 'full',
     component: LandingComponent,
-    //...canActivate(redirectToHome)
-
   },
 ];
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes),
-  ],
-  exports: [RouterModule]
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

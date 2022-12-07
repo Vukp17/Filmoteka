@@ -1,82 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthentificationService } from 'src/app/services/authentification.service';
-import { Router, RouterStateSnapshot } from '@angular/router';
-import { HotToastService } from '@ngneat/hot-toast';
-import { PostService } from 'src/app/services/post.service';
-import { filter, map, mergeMap, Observable, switchMap } from 'rxjs';
-import { Users } from '../../models/user.model';
-import { HttpClient } from '@angular/common/http';
-import { ApiService } from 'src/app/services/api.service';
-import { UserService } from 'src/app/services/user.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [ApiService]
+  styleUrls: ['./login.component.css']
 })
 
 
 export class LoginComponent implements OnInit {
-  isAdmin: boolean = false;
-  users: Users[];
-
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl(''),
-  });
-  constructor(private post: PostService, private authService: AuthentificationService,
-     private api: ApiService, private router: Router, private toast: HotToastService,private user: UserService) { }
+  loginForm: FormGroup;
+  firebaseErrorMessage: string;
+  form: FormGroup = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  })
   ngOnInit(): void {
-    document.body.className = "selector";
-    this.api.loadUsers().subscribe((result: Users[]) => {
-      const values = Object.values(result);
-      this.users = values;
-    })
   }
-  //login from form
-  get email() {
-    return this.loginForm.get("email");
-  }
-  get password() {
-    return this.loginForm.get("password");
-  }
-  submit() {
-    const { email, password } = this.loginForm.value;
-    if (!this.loginForm.valid || !email || !password) {
+
+  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth) {
+    this.loginForm = new FormGroup({
+        'email': new FormControl('', [Validators.required, Validators.email]),
+        'password': new FormControl('', Validators.required)
+    });
+
+    this.firebaseErrorMessage = '';
+}
+
+
+loginUser() {
+  if (this.loginForm.invalid)
       return;
-    }
-    this.authService
-      .login(email, password)
-      .pipe(
-        this.toast.observe({
-          success: 'Logged in successfully',
-          loading: 'Logging in...',
-          error: ({ message }) => `There was an error: ${message} `,
-        })
-      ).subscribe(() => {
-        //provera
-        console.log(email)
-        for (let i = 0; i < this.users.length; i++) {
-          if (email == this.users[i].email && this.users[i].role == "admin") {
-            this.isAdmin = true
-            this.post.Role=true
-            this.user.Email=this.users[i].email
-          }
-        
-        }
-        if (this.isAdmin) {
-          this.router.navigate(['/admin']);
-          console.log(this.isAdmin)
-        } else if (!this.isAdmin) {
-          console.log(this.isAdmin)
-          this.router.navigate(['/movies']);
-        }
-      });
-  }
 
-
-
+  this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
+      if (result == null) {                               // null is success, false means there was an error
+          console.log('logging in...');
+          this.router.navigate(['/home']);                // when the user is logged in, navigate them to dashboard
+      }
+      else if (result.isValid == false) {
+          console.log('login error', result);
+          this.firebaseErrorMessage = result.message;
+      }
+  });
+}
 
 }

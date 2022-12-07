@@ -19,6 +19,8 @@ import {DividerModule} from 'primeng/divider';
 ///////Material////////
 import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 //////COMPONENTS/////
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -100,7 +102,9 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     DividerModule,
     //Material
     MatInputModule,
+    MatButtonModule,
     MatToolbarModule,
+    MatCardModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

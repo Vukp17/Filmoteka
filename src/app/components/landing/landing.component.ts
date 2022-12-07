@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-landing',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
   backgroundUrl="/src/assets/images/background.jpg"
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }

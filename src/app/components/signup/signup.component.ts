@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HotToastService } from '@ngneat/hot-toast';
-import { switchMap } from 'rxjs';
-import { AuthentificationService } from 'src/app/services/authentification.service';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,75 +13,37 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class SingupComponent implements OnInit {
-  signUpForm = this.fb.group(
-    {
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    },
-    { validators: passwordsMatchValidator() }
-  );
+ 
+  signupForm: FormGroup;
+  firebaseErrorMessage: string;
   
-  constructor(
-    private authService: AuthentificationService,
-    private router: Router,
-    private toast: HotToastService,
-    private userService: UserService,
-    //private usersService: UsersService,
-    private fb: NonNullableFormBuilder
-  ) { }
+  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth,private db: AngularFirestore,private fns: AngularFireFunctions) {
+      this.firebaseErrorMessage = '';
+  }
 
   ngOnInit(): void {
-    document.body.className = "selector";
-  }
-  get email() {
-    return this.signUpForm.get('email');
-  }
-
-  get password() {
-    return this.signUpForm.get('password');
-  }
-
-  get confirmPassword() {
-    return this.signUpForm.get('confirmPassword');
-  }
-
-  get name() {
-    return this.signUpForm.get('name');
-  }
-  submit() {
-    const { name, email, password } = this.signUpForm.value;
-
-    if (!this.signUpForm.valid || !name || !password || !email) {
-      return;
-    }
-
-    this.authService
-      .signUp(name, email, password)
-      .pipe(
-        this.toast.observe({
-          success: 'Congrats! You are all signed up',
-          loading: 'Signing up...',
-          error: ({ message }) => `${message}`,
-        })
-      )
-      .subscribe(() => {
-        this.router.navigate(['/movies']);
-        this.userService.pushUser(email,password,"user");
+      this.signupForm = new FormGroup({
+          'displayName': new FormControl('', Validators.required),
+          'email': new FormControl('', [Validators.required, Validators.email]),
+          'password': new FormControl('', Validators.required)
       });
   }
-}
-export function passwordsMatchValidator():ValidatorFn  {
-  return(control:AbstractControl):ValidationErrors | null => {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
 
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordsDontMatch: true };
-    } else {
-      return null;
-    }
-  };
+  signup() {
+      if (this.signupForm.invalid)                            // if there's an error in the form, don't submit it
+          return;
+
+      this.authService.signupUser(this.signupForm.value).then((result) => {
+            
+          if (result == null)                                 // null is success, false means there was an error
+              this.router.navigate(['/movies']);
+          else if (result.isValid == false)
+              this.firebaseErrorMessage = result.message;
+      }).catch(() => {
+
+      });
+  }
+ 
 }
+
 

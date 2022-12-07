@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthentificationService } from 'src/app/services/authentification.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-rent-movies-list',
@@ -9,8 +9,8 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 })
 export class RentMoviesListComponent implements OnInit {
   movies:any;
-  user$ = this.authService.currentUser$;
-  constructor(private api:ApiService,private authService:AuthentificationService) { }
+  
+  constructor(private api:ApiService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.Ucitaj()

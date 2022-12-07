@@ -1,33 +1,21 @@
-<div class="form-container">
-    <h1>Login</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="submit()">
-      <mat-form-field>
-        <input matInput  placeholder="Email adress" formControlName="email" />
-        <mat-error *ngIf="email?.errors?.['required']">
-           Email is required
-        </mat-error>
-        <mat-error *ngIf="email?.errors?.['required']">
-          Please enter a correct Email
-       </mat-error>
-  
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Password"
-          formControlName="password"
-          type="password"
-        />
-        <mat-error *ngIf="email?.errors?.['required']">
-          Please enter a correct password blaga blaga blaga
-       </mat-error>
-      </mat-form-field>
-      <div class="center margin-top">
-        <button mat-raised-button color="primary" type="submit">login</button>
+<mat-card>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser()" type="">
+      <p>
+          <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input autocomplete="off" formControlName="email" type="email" matInput placeholder="Email">
+          </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
+          </mat-form-field>
+      </p>
+      <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+          <span>{{ firebaseErrorMessage }}</span>
       </div>
-  
-      <span  class="center margin-top">You didnt have an account <a routerLink="/signup">Singup</a></span>
-      
-    </form>
-  </div>
-  
+
+      <button mat-raised-button color="primary">Login</button>
+  </form>
+</mat-card>

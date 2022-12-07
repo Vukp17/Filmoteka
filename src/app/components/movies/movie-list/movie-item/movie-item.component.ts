@@ -4,7 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 ///Services
 import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthentificationService } from 'src/app/services/authentification.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { Movies } from '../../../../models/movies.model';
 
@@ -23,9 +23,8 @@ export class MovieItemComponent implements OnInit {
   error: string = "";
   response: any = {}
 
-  constructor(public api: ApiService, private authService: AuthentificationService,
+  constructor(public api: ApiService, private authService: AuthService,
     private post: PostService, private toastService: HotToastService, private sanitizer: DomSanitizer, private http: HttpClient) {
-    this.email = this?.authService?.auth?.currentUser?.email;
   }
 
 
