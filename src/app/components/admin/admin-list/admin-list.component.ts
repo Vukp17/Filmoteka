@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 import { Movies } from '../../../models/movies.model';
 
 @Component({
@@ -10,20 +11,22 @@ import { Movies } from '../../../models/movies.model';
 export class AdminListComponent implements OnInit {
   movies: Movies[];
   inputValue: string;
-  constructor(private http: HttpClient) { }
+  search:string;
+  constructor(private http: HttpClient, private api: ApiService) { }
 
   ngOnInit(): void {
- 
+
+    // ovde dodati enter your movie paramaeters
+  }
+
+  ngOnChanges():void {
+    this.loadMovies()
   }
   loadMovies() {
-    const url = "https://www.omdbapi.com/?s="+this.inputValue+"&apikey=d0e90712";
-    return this.http.get<Movies[]>(url).
-      subscribe((result: any) => {
-        this.movies = result.Search
-        console.log(this.movies)
-      })
-
+    this.api.adminLoadMovies(this.search)
+    .subscribe((result) => {
+      this.movies = result.Search
+    })
   }
-  
-  onKey(event: any) { this.inputValue = event.target.value; }
+
 }

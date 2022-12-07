@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
   //AngularFireLists(Observables)
+
   moviesRef: AngularFireList<Movies>;
   rentsRef: AngularFireList<Movies>;
   movieRef: AngularFireObject<any>;
@@ -102,5 +103,12 @@ export class ApiService {
     return this.http.get<any>(url, options)
 
   }
+
+  adminLoadMovies(search: string) {
+    const url = "https://www.omdbapi.com/?s="+ search +"&apikey=d0e90712";
+    return this.http.get<any>(url)
+  }
+
+
 
 }
