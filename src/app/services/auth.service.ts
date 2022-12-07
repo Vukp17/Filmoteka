@@ -70,6 +70,7 @@ return this.user;
         if (error.code) return { isValid: false, message: error.message };
       });
   }
+  
   isAdmin(){
     this.afAuth.onAuthStateChanged((user) => {
       user?.getIdTokenResult().then((idtoken) => {

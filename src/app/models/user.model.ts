@@ -9,4 +9,5 @@ export class User {
         this.user_id = user_id;
         this.email = email;
     }
+    
 }

@@ -9,24 +9,27 @@ import { Movies } from '../../../models/movies.model';
   styleUrls: ['./admin-list.component.css']
 })
 export class AdminListComponent implements OnInit {
+
   movies: Movies[];
-  inputValue: string;
-  search:string;
+  search: string;
+  error: string = 'Please enter your search!';
+
   constructor(private http: HttpClient, private api: ApiService) { }
 
   ngOnInit(): void {
-
-    // ovde dodati enter your movie paramaeters
   }
 
-  ngOnChanges():void {
+  ngOnChanges(): void {
     this.loadMovies()
   }
+
   loadMovies() {
     this.api.adminLoadMovies(this.search)
-    .subscribe((result) => {
-      this.movies = result.Search
-    })
+      .subscribe((result) => {
+        this.movies = result.Search
+        this.error = result.Error
+      })
   }
+
 
 }
