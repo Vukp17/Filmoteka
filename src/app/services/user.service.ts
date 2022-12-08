@@ -6,19 +6,22 @@ import { AngularFireList, AngularFireObject } from '@angular/fire/compat/databas
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { IdTokenResult } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  user = new BehaviorSubject<User>(null);
+  userToken = new Promise<IdTokenResult>(null);
   usersRef: AngularFireList<User>;
   itemRef: AngularFireObject<any>;
   items: Observable<any[]>;
   users: User[]
   email: string
   hadAccess: boolean
-  constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient) {
+  constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient,private afAuth:AngularFireAuth) {
+    
     this.email = ""
     this.usersRef = db.list('users');
     this.items = this.usersRef?.snapshotChanges().pipe(
@@ -27,6 +30,13 @@ export class UserService {
       )
     );
   }
+
+  async getUserClaims(){
+this.userToken = (await this.afAuth.currentUser).getIdTokenResult();
+return (await this.userToken);
+  }
+
+
   getUsers() {
     return this.items;
   }

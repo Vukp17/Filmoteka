@@ -1,44 +1,56 @@
-<div >
-  <p-menubar [model]="items" *ngIf="afAuth.user | async;else nonUser">
+<p-menubar [model]="items" *ngIf="(afAuth.user | async) && isAdmin else user">
+  <ng-template pTemplate="start">
+    <h2>FILMOTEKA</h2>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button
+    
+      pButton
+      label="Logout"
+      class="p-button-raised p-button-rounded"
+      class="p-button-danger"
+      icon="pi pi-sign-out"
+      (click)="logout()"
+    ></button>
+ 
+  </ng-template>
+</p-menubar>
+
+<p-menubar [model]="userItems" *ngIf=" (afAuth.user | async) && !isAdmin else nonUser" #user>
     <ng-template pTemplate="start">
       <h2>FILMOTEKA</h2>
     </ng-template>
     <ng-template pTemplate="end">
       <button
-      
         pButton
         label="Logout"
         class="p-button-raised p-button-rounded"
         class="p-button-danger"
+        icon="pi pi-sign-out"
         (click)="logout()"
       ></button>
-      <button
-      *ngIf="isAdmin"
+    </ng-template>
+  </p-menubar>
+
+  <ng-template #nonUser>
+    <div  *ngIf="!(afAuth.user | async) ">
+    <p-menubar [model]="notLoggedInItems">
+      <ng-template pTemplate="start">
+        <h2>FILMOTEKA</h2>
+      </ng-template>
+      <ng-template pTemplate="end">
+        <button
         pButton
-        label="admin radi"
+        label="Log In"
         class="p-button-raised p-button-rounded"
         class="p-button-danger"
-       
+        icon="pi pi-sign-in"
+        routerLink="/login"
       ></button>
-    </ng-template>
-  </p-menubar>
+      </ng-template>
+    </p-menubar>
+  </div>
+  </ng-template>
 
+  
 
-
-<ng-template #nonUser>
-  <p-menubar [model]="nonUserItems">
-    <ng-template pTemplate="start">
-      <h2>FILMOTEKA</h2>
-    </ng-template>
-    <ng-template pTemplate="end">
-      <button
-      pButton
-      label="login"
-      class="p-button-raised p-button-rounded"
-      class="p-button-danger"
-      icon="pi pi-user"
-      routerLink="/login"
-    ></button>
-    </ng-template>
-  </p-menubar>
-</ng-template>

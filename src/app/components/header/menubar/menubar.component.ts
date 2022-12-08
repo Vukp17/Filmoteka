@@ -11,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
+import { IdTokenResult } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-menubar',
@@ -18,30 +19,31 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./menubar.component.css'],
 })
 export class MenubarComponent implements OnInit {
+
   constructor(
     public afAuth: AngularFireAuth,
     public authService: AuthService,
     private userService: UserService
   ) { }
-  userSub: Subscription;
+  
   items: MenuItem[];
-  nonUserItems: MenuItem[];
-  user: User;
-  isAdmin: boolean | undefined = false;
+  userItems: MenuItem[];
+  notLoggedInItems: MenuItem[];
+  navColor = 'primary';
+  isLoggedIn = false;
+  userSubscription = null;
+  isAdmin = false;
+  user = null;
+
+  loginClicked = false;
+  logoutClicked = false;
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe((data) => {
-      console.log(!!data);
-      console.log(data?.admin);
-      this.isAdmin = data?.admin;
-    })
-    this.nonUserItems = [
-      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/landing'] },
-    ];
-    this.items = [
+ 
+   this.items = [
       { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       {
-        label: 'Add movie',
+        label: 'Add movies',
         icon: 'pi pi-fw pi-video',
         routerLink: ['/admin'],
       },
@@ -51,7 +53,39 @@ export class MenubarComponent implements OnInit {
         routerLink: ['/admin-list'],
       },
     ];
+    this.userItems = [
+      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
+      {
+        label: 'Movies',
+        icon: 'pi pi-fw pi-video',
+        routerLink: ['/movies'],
+      },
+      {
+        label: 'Rent',
+        icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: ['/rent'],
+      },
+    ];
+ 
+
+    this.authService.isLoggedInSubject
+    .subscribe( isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+  
+  this.authService.isAdminSubject
+    .subscribe( isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+  
+  this.authService.userSubject
+    .subscribe( user => {
+      this.user = user;
+    });
+   
+
   }
+
   logout(): void {
     this.afAuth.signOut();
   }

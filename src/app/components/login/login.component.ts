@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -18,6 +19,12 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl('')
   })
+  
+ 
+
+  hide = true;
+  errorMessage = '';
+  loading = false;
   ngOnInit(): void {
   }
 
@@ -30,7 +37,30 @@ export class LoginComponent implements OnInit {
     this.firebaseErrorMessage = '';
 }
 
+submit() {
+  this.loading = true;
+  this.authService.loginUser(this.form.value.username, this.form.value.password)
+    .then(resp => {
+      this.loading = false;
+      this.doClaimsNavigation();
+    })
+    .catch(error => {
+      this.loading = false;
+      const errorCode = error.code;
 
+      if (errorCode === 'auth/wrong-password') {
+        this.errorMessage = 'Wrong password!';
+      }
+      else if (errorCode === 'auth/user-not-found') {
+        this.errorMessage = 'User with given username does not exist!';
+      } else {
+        this.errorMessage = `Error: ${errorCode}.`;
+      }
+
+      this.form.reset({username: this.form.value.username, password: ''});
+    });
+
+}
 loginUser() {
   if (this.loginForm.invalid)
       return;
@@ -48,5 +78,19 @@ loginUser() {
       }
   });
 }
-
+doClaimsNavigation() {
+  console.log('\nWaiting for claims navigation...')
+  this.authService.isAdminSubject
+    .pipe(take(1)) // completes the observable after 1 take ==> to not run this after user logs out... because the subject will be updated again
+    .subscribe(
+      isAdmin => {
+        if (isAdmin) {
+          this.router.navigate(['/admin']);
+        }
+        else {
+          this.router.navigate(['/items']);
+        }
+      }
+    )
+}
 }
