@@ -1,11 +1,11 @@
 <div >
-  <p-menubar [model]="items" *ngIf="(afAuth.user | async)">
+  <p-menubar [model]="items" *ngIf="afAuth.user | async;else nonUser">
     <ng-template pTemplate="start">
       <h2>FILMOTEKA</h2>
     </ng-template>
     <ng-template pTemplate="end">
       <button
-      *ngIf="(afAuth.user | async)"
+      
         pButton
         label="Logout"
         class="p-button-raised p-button-rounded"
@@ -23,5 +23,22 @@
     </ng-template>
   </p-menubar>
 
-  
-</div>
+
+
+<ng-template #nonUser>
+  <p-menubar [model]="nonUserItems">
+    <ng-template pTemplate="start">
+      <h2>FILMOTEKA</h2>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <button
+      pButton
+      label="login"
+      class="p-button-raised p-button-rounded"
+      class="p-button-danger"
+      icon="pi pi-user"
+      routerLink="/login"
+    ></button>
+    </ng-template>
+  </p-menubar>
+</ng-template>

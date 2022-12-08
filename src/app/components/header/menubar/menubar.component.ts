@@ -22,20 +22,23 @@ export class MenubarComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public authService: AuthService,
     private userService: UserService
-  ) {}
-userSub: Subscription;
+  ) { }
+  userSub: Subscription;
   items: MenuItem[];
-  adminItems: MenuItem[];
-user: User;
-isAdmin:boolean = false;
+  nonUserItems: MenuItem[];
+  user: User;
+  isAdmin: boolean | undefined = false;
 
   ngOnInit() {
-    this.userSub= this.authService.user.subscribe((data) =>{
+    this.userSub = this.authService.user.subscribe((data) => {
       console.log(!!data);
-      console.log(data.admin);
-      this.isAdmin = data.admin;
+      console.log(data?.admin);
+      this.isAdmin = data?.admin;
     })
-      this.items = [
+    this.nonUserItems = [
+      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/landing'] },
+    ];
+    this.items = [
       { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       {
         label: 'Add movie',

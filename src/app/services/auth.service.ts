@@ -12,7 +12,7 @@ import { User } from '../models/user.model';
 export class AuthService {
   userLoggedIn: boolean; // other components can check on this variable for the login status of the user
  
-  user = new BehaviorSubject<User>(null);
+  user = new BehaviorSubject<User | null>(null);
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
