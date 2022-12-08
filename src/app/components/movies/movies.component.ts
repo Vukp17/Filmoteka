@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
-import { Movies } from '../../models/movies.model';
+import { Movie } from '../../models/movies.model';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { Movies } from '../../models/movies.model';
   providers: [MovieService,ApiService]
 })
 export class MoviesComponent implements OnInit {
-selectedMovie : Movies;
+selectedMovie : Movie;
   constructor(private movieService:MovieService) { }
 
   ngOnInit(): void {

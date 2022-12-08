@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Movies } from '../../../models/movies.model';
+import { Movie } from '../../../models/movies.model';
 
 @Component({
   selector: 'app-admin-databse-list',
@@ -12,15 +12,14 @@ export class AdminDatabseListComponent implements OnInit {
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
-    this.Ucitaj();
+    this.loadMovies();
   }
 
   ngOnChanges(){
-    this.Ucitaj();
+    this.loadMovies();
   }
 
-  Ucitaj(){
-    this.movies = this.api.getMovies();
-    console.log(this.movies)
+  loadMovies(){
+   this.movies = this.api.getMovies();
   }
 }

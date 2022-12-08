@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Movies } from 'src/app/models/movies.model';
+import { Movie } from 'src/app/models/movies.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
@@ -13,7 +13,7 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./admin-databse-list-item.component.css']
 })
 export class AdminDatabseListItemComponent implements OnInit {
-  @Input() movies: Movies;
+  @Input() movies: Movie;
   constructor(public api: ApiService, private authService: AuthService,
     private post: PostService, private toastService: HotToastService, private sanitizer: DomSanitizer, private http: HttpClient) {
    

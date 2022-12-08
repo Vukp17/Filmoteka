@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Movies } from '../../../models/movies.model';
+import { Movie } from '../../../models/movies.model';
 
 @Component({
   selector: 'app-admin-list',
@@ -10,7 +10,7 @@ import { Movies } from '../../../models/movies.model';
 })
 export class AdminListComponent implements OnInit {
 
-  movies: Movies[];
+  movies: Movie[];
   search: string;
   error: string = 'Please enter your search!';
 

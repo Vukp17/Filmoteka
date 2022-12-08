@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import { Observable } from 'rxjs';
-import { Movies } from '../models/movies.model';
+import { Movie } from '../models/movies.model';
 import { ApiService } from './api.service';
 import { MovieService } from './movie.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MovieResloverService implements Resolve<Movies[]>{
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Movies[] | Observable<Movies[]> | Promise<Movies[]> {
+export class MovieResloverService implements Resolve<Movie[]>{
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Movie[] | Observable<Movie[]> | Promise<Movie[]> {
     throw new Error('Method not implemented.');
   }
 

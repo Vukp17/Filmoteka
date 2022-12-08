@@ -1,4 +1,4 @@
-export class Movies {
+export class Movie {
 
     Title: string;
     Year: string;
@@ -9,6 +9,8 @@ export class Movies {
     isRented?: boolean
     user?: string
     id?: string
+
+    
     constructor(Title: string, Year: string, imdbID: string, Type: string, Poster: string,  isRented?: boolean,user?: string,id?: string) {
        this.Title=Title;
        this.Year = Year;

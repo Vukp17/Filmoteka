@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movies } from 'src/app/models/movies.model';
+import { Movie } from 'src/app/models/movies.model';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./rent-movies-item.component.css']
 })
 export class RentMoviesItemComponent implements OnInit {
-  @Input() movies: Movies;
+  @Input() movies: Movie;
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {

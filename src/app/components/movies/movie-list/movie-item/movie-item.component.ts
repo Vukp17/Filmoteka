@@ -6,7 +6,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-import { Movies } from '../../../../models/movies.model';
+import { Movie } from '../../../../models/movies.model';
 
 @Component({
   selector: 'app-movie-item',
@@ -14,7 +14,7 @@ import { Movies } from '../../../../models/movies.model';
   styleUrls: ['./movie-item.component.css']
 })
 export class MovieItemComponent implements OnInit {
-  @Input() movies: Movies;
+  @Input() movies: Movie;
   @Output() moviesSelected = new EventEmitter<void>();
   email: string | any;
   details: any = []
@@ -40,7 +40,7 @@ export class MovieItemComponent implements OnInit {
     this.toastService.success('Uspenso izbrisan iz baze')
 
   }
-  Rent(movies: Movies, key: any) {
+  Rent(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.email, key)
   }
 

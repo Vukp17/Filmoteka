@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
-import { Movies } from '../../models/movies.model';
+import { Movie } from '../../models/movies.model';
 
 @Component({
   selector: 'app-carousel',
@@ -11,7 +11,7 @@ import { Movies } from '../../models/movies.model';
 })
 export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselElement: string;
-  movies: Movies[];
+  movies: Movie[];
 
   responsiveOptions;
 
@@ -44,7 +44,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
   loadMovies(key: string) {
     const url = "https://www.omdbapi.com/?s=" + key + "&apikey=d0e90712";
-    return this.http.get<Movies[]>(url).
+    return this.http.get<Movie[]>(url).
       subscribe((result: any) => {
         this.movies = result.Search
         console.log(result)

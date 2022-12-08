@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Movies } from '../models/movies.model';
+import { Movie } from '../models/movies.model';
 import { map, Observable } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
@@ -13,11 +13,11 @@ import { environment } from 'src/environments/environment';
 export class ApiService {
   //AngularFireLists(Observables)
 
-  moviesRef: AngularFireList<Movies>;
-  rentsRef: AngularFireList<Movies>;
+  moviesRef: AngularFireList<Movie>;
+  rentsRef: AngularFireList<Movie>;
   movieRef: AngularFireObject<any>;
-  itemsRents: Observable<Movies[]>;
-  itemsMovies: Observable<Movies[]>;
+  itemsRents: Observable<Movie[]>;
+  itemsMovies: Observable<Movie[]>;
   users: User[]
   error: string = "";
   response: any = {}
@@ -37,7 +37,7 @@ export class ApiService {
       )
     );
   }
-  getMovies() {
+  getMovies(){
     return this.itemsMovies;
   }
   getRents() {
@@ -48,7 +48,7 @@ export class ApiService {
     console.log(id)
   }
 
-  pushMovie(movies: Movies) {
+  pushMovie(movies: Movie) {
     this.moviesRef.push({
       Title: movies.Title,
       Poster: movies.Poster,
@@ -58,7 +58,7 @@ export class ApiService {
       isRented: false
     });
   }
-  pushMovieRents(movies: Movies, user: string, key: string) {
+  pushMovieRents(movies: Movie, user: string, key: string) {
     this.rentsRef.push({
       Title: movies.Title,
       Poster: movies.Poster,
