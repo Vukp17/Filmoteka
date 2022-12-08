@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Movie } from '../../../models/movies.model';
+import { Movie } from '../../../models/movie.model';
 
 @Component({
   selector: 'app-admin-list',

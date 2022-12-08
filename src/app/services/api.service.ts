@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Movie } from '../models/movies.model';
+import { Movie } from '../models/movie.model';
 import { map, Observable } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
@@ -21,6 +21,8 @@ export class ApiService {
   users: User[]
   error: string = "";
   response: any = {}
+
+
   constructor(private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
     this.moviesRef = db.list('movies');
     this.rentsRef = db.list('rents')
@@ -37,15 +39,18 @@ export class ApiService {
       )
     );
   }
+
+
   getMovies(){
     return this.itemsMovies;
   }
+
   getRents() {
     return this.itemsRents;
   }
+
   deleteMovie(id: string) {
     this.moviesRef.remove(id);
-    console.log(id)
   }
 
   pushMovie(movies: Movie) {
@@ -76,7 +81,6 @@ export class ApiService {
 
   returnMovie(key: string, id: string) {
     this.rentsRef.remove(key);
-    console.log(id)
     update(ref(this.database, 'movies/' + id), {
       isRented: false
     });
@@ -103,6 +107,7 @@ export class ApiService {
     return this.http.get<any>(url, options)
 
   }
+
 
   adminLoadMovies(search: string) {
     const url = "https://www.omdbapi.com/?s="+ search +"&apikey=d0e90712";

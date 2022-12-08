@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Movie } from 'src/app/models/movies.model';
+import { Movie } from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
@@ -14,22 +14,21 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class AdminDatabseListItemComponent implements OnInit {
   @Input() movies: Movie;
-  constructor(public api: ApiService, private authService: AuthService,
-    private post: PostService, private toastService: HotToastService, private sanitizer: DomSanitizer, private http: HttpClient) {
-   
-  }
+  constructor(public api: ApiService, private toastService: HotToastService,) {
 
+  }
 
   ngOnInit(): void {
+
   }
-  Remove(key: any,isRented: boolean | undefined): void {
-    if(isRented==true){
+
+  Remove(key: any, isRented: boolean | undefined): void {
+    if (isRented == true) {
       this.toastService.warning("Film jer rentovan ne moze se obrisati iz baze")
-    }else{
+    } else {
       this.api.deleteMovie(key)
       this.toastService.success('Uspenso izbrisan iz baze')
     }
-
 
   }
 }
