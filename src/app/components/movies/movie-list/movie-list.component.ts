@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/cor
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
-import { Movie } from '../../../models/movies.model';
+import { Movie } from '../../../models/movie.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -19,7 +19,7 @@ export class MovieListComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
    this.Ucitaj();
-   this.isAdmin();
+  //  this.isAdmin();
   }
   OnMovieSeleted(movie: Movie) {
        this.movieWasSelected.emit(movie);
@@ -31,13 +31,14 @@ export class MovieListComponent implements OnInit,OnChanges {
   ngOnChanges(){
     this.Ucitaj();
   }
-  isAdmin(){
-    this.afAuth.onAuthStateChanged((user) => {
-      user?.getIdTokenResult().then((idtoken) => {
-        console.log(idtoken.claims);
-         return idtoken.claims['admin'];
-      });
-    });
-    return false;
-  }
+
+
+  // isAdmin(){
+  //   this.afAuth.onAuthStateChanged((user) => {
+  //     user?.getIdTokenResult().then((idtoken) => {
+  //        return idtoken.claims['admin'];
+  //     });
+  //   });
+  //   return false;
+  // }
 }

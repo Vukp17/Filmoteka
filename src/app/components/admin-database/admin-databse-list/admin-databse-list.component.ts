@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Movie } from '../../../models/movies.model';
+import { Movie } from '../../../models/movie.model';
 
 @Component({
   selector: 'app-admin-databse-list',
@@ -8,7 +8,9 @@ import { Movie } from '../../../models/movies.model';
   styleUrls: ['./admin-databse-list.component.css']
 })
 export class AdminDatabseListComponent implements OnInit {
-  movies:any;
+
+  movies:Movie[];
+
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
@@ -20,6 +22,8 @@ export class AdminDatabseListComponent implements OnInit {
   }
 
   loadMovies(){
-   this.movies = this.api.getMovies();
+    this.api.getMovies().subscribe(data =>{
+      this.movies = data
+    });
   }
 }

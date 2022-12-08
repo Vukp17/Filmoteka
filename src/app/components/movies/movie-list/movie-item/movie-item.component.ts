@@ -6,7 +6,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-import { Movie } from '../../../../models/movies.model';
+import { Movie } from '../../../../models/movie.model';
 
 @Component({
   selector: 'app-movie-item',

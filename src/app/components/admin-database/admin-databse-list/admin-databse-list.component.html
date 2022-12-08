@@ -1,9 +1,9 @@
 <div class="row">
-    <ng-container *ngFor="let item of movies | async">
+    <ng-container *ngFor="let movie of movies">
    
         <app-admin-databse-list-item
-          class="d-flex justify-content-center col-xl-4 col-lg-6 col-md-6 col-xs-12"
-          [movies]="item"
+          class="d-flex justify-content-center col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-xs-12"
+          [movies]="movie"
         
         >
         </app-admin-databse-list-item>
