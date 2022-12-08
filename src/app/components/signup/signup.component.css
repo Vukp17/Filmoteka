@@ -1,27 +1,54 @@
-.form-container{
-    display: block;
-    max-width: 300px;
-    margin: auto;
-
-
-    background:#D9D9D9;
-    padding:48px;
-    border-radius: 16px;
-
-
-}
-.form-container mat-form-field{
-    width: 100%;
-}
-.center {
-    display:flex;
+.login-form-flex {
+    display: flex;
     justify-content: center;
-}
-
-.margin-top {
-    margin-top:16px;
-
-}
-.text-center {
-    text-align: center;
-}
+    align-items: center;
+    height: 100%;
+    width:100%;
+   
+  
+  }
+  
+  .button-flex-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+  mat-card{
+    width: 50%;
+    background-color:#262625;
+    color: white;
+    border-radius: 3%
+  }
+  
+  mat-card-content{
+    justify-content: center;
+    align-items: center;
+    display :flex;
+  
+  }
+  mat-from-field{
+    color: white;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: rgb(217, 2, 2);
+    color: white;
+  }
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px;
+    padding: 0.75em 0.75em 0 0.75em;
+    border: 1px solid #f94747;
+    color: white;
+  }
+  mat-card-title{
+    justify-content: center;
+    align-items: center;
+    display :flex;
+  }
+  .footer{
+    justify-content: left;
+    display :flex; 
+  }
+  .footer-text{
+    margin-top: 10px;
+  }

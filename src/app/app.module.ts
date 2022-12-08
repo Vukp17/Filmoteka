@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 //////COMPONENTS/////
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -105,6 +106,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
+    MatDividerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
