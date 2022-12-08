@@ -21,7 +21,7 @@ export class MovieListComponent implements OnInit, OnChanges {
     this.load();
     //  this.isAdmin();
   }
-  OnMovieSeleted(movie: Movie) {
+  onMovieSeleted(movie: Movie) {
     this.movieWasSelected.emit(movie);
   }
   load() {

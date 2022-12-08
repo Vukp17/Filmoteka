@@ -11,16 +11,14 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class AdminListItemComponent implements OnInit {
   @Input() movies: Movie;
-  film:any;
-  constructor( private api: ApiService, private movieService: MovieService, private toastService: HotToastService) { }
+
+  constructor(private api: ApiService, private movieService: MovieService, private toastService: HotToastService) { }
 
   ngOnInit(): void {
-    this.film = this.api.getMovies();
-    console.log(this.movies)
-    this.movieService.load();
+
   }
-  async Push(movies: Movie, imdbID: string) {
-    if (this.movieService.checkIfMovieExsist(imdbID)==true) {
+  pushMovie(movies: Movie, imdbID: string) {
+    if (this.movieService.checkIfMovieExsist(imdbID) == true) {
       this.toastService.warning('Film vec postoji u bazi!');
     } else {
       this.api.pushMovie(movies)
