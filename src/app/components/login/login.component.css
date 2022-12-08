@@ -26,18 +26,11 @@ mat-card-content{
   display :flex;
 
 }
-
-
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: rgb(217, 2, 2);
-
+.mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
+  background-color: #f44336;
+  width: 100%;
 }
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-  border-radius: 4px;
-  padding: 0.75em 0.75em 0 0.75em;
-  border: 1px solid #f94747;
- 
-}
+
 mat-card-title{
   justify-content: center;
   align-items: center;

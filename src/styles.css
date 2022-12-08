@@ -54,4 +54,19 @@ body{
 }
 
 
+html, body, app-root {
 
+    margin: 0;
+    }
+
+
+    .inventory-body {
+
+        background-image: url("src\assets\images\filmoteka-background.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        }
