@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Movie } from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
-import { PostService } from 'src/app/services/post.service';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-admin-list-item',
@@ -12,17 +12,17 @@ import { PostService } from 'src/app/services/post.service';
 export class AdminListItemComponent implements OnInit {
   @Input() movies: Movie;
   film:any;
-  constructor(private post: PostService, private api: ApiService, private toastService: HotToastService) { }
+  constructor( private api: ApiService, private movieService: MovieService, private toastService: HotToastService) { }
 
   ngOnInit(): void {
     this.film = this.api.getMovies();
     console.log(this.movies)
+    this.movieService.load();
   }
   async Push(movies: Movie, imdbID: string) {
-    if (true) {
+    if (this.movieService.checkIfMovieExsist(imdbID)==true) {
       this.toastService.warning('Film vec postoji u bazi!');
     } else {
-      
       this.api.pushMovie(movies)
       this.toastService.success('Uspenso si dodao film u bazu')
     }

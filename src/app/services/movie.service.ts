@@ -9,10 +9,25 @@ import { ApiService } from './api.service';
 export class MovieService implements OnInit {
   movies: Movie[];
   isAdmin: boolean
-  constructor(private http: HttpClient) { }
+  constructor(private api: ApiService) { }
   ngOnInit(): void {
-
+    this.load();
   }
-
-
+  checkIfMovieExsist(imdbID: string): boolean {
+    let isExist: boolean = false;
+    for (let item of this.movies) {
+      if (item.imdbID == imdbID) {
+        isExist = true
+      }
+    }
+    console.log(isExist)
+    return isExist
+  }
+  
+  load() {
+    this.api.getMovies().subscribe(data => {
+      this.movies = data
+      console.log(this.movies)
+    });
+  }
 }
