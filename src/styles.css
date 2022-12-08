@@ -31,6 +31,7 @@ app-admin{
 body{
     background-color: #141414;
     color: #fff;
+
 }
 .form-container{
     display: block;
@@ -51,3 +52,6 @@ body{
     display:flex;
     justify-content: center;
 }
+
+
+

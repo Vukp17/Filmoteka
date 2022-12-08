@@ -1,8 +1,18 @@
-
-
-
-
-<div *ngIf="!(afAuth.user | async)">
-    User is not logged in
-</div>
-
+<body>
+  <div clas *ngIf="!(afAuth.user | async)">
+    <h1 class="d-flex justify-content-center">Welcome to Filmoteka</h1>
+    <div class="carousel container">
+      <app-carousel></app-carousel>
+    </div>
+    <div class="get-started-button">
+      <button
+        pButton
+        label="Get started"
+        class="p-button-raised p-button-rounded"
+        class="p-button-danger"
+        styleClass="p-button-lg"
+        routerLink="/login" 
+      ></button>
+    </div>
+  </div>
+</body>

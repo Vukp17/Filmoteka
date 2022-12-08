@@ -12,6 +12,8 @@ import { Movie } from '../../models/movies.model';
 export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselElement: string;
   movies: Movie[];
+  moviesFromDatabase: any;
+
 
   responsiveOptions;
 
@@ -40,7 +42,17 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.loadMovies(this.carouselElement);
+    if(this.carouselElement==undefined){
+      this.loadMoviesDatabase()
+    }else{
+      this.loadMovies(this.carouselElement);
+    }
+ 
+  }
+  loadMoviesDatabase(){
+    this.api.getMovies().subscribe(data =>{
+      this.movies = data
+    })
   }
   loadMovies(key: string) {
     const url = "https://www.omdbapi.com/?s=" + key + "&apikey=d0e90712";

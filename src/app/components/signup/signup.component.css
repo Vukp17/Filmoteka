@@ -17,7 +17,8 @@
     width: 50%;
     background-color:#262625;
     color: white;
-    border-radius: 3%
+    border-radius: 3%;
+    opacity: 0.6;
   }
   
   mat-card-content{
