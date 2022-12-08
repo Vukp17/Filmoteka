@@ -16,6 +16,7 @@ export class MovieService implements OnInit {
   checkIfMovieExsist(imdbID: string): boolean {
     let isExist: boolean = false;
     for (let item of this.movies) {
+      console.log(item)
       if (item.imdbID == imdbID) {
         isExist = true
       }
@@ -23,7 +24,6 @@ export class MovieService implements OnInit {
     console.log(isExist)
     return isExist
   }
-  
   load() {
     this.api.getMovies().subscribe(data => {
       this.movies = data

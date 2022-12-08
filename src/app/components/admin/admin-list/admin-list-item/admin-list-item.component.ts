@@ -15,7 +15,7 @@ export class AdminListItemComponent implements OnInit {
   constructor(private api: ApiService, private movieService: MovieService, private toastService: HotToastService) { }
 
   ngOnInit(): void {
-
+    this.movieService.load()
   }
   pushMovie(movies: Movie, imdbID: string) {
     if (this.movieService.checkIfMovieExsist(imdbID) == true) {

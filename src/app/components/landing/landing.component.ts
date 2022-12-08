@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.Emulated, 
 })
 export class LandingComponent implements OnInit {
   backgroundUrl="/src/assets/images/background.jpg"
