@@ -1,5 +1,6 @@
 <div class="row">
-    <ng-container *ngFor="let item of movies | async">
+  {{message}}
+    <ng-container *ngFor="let item of movies">
     <ng-container >
       <ng-container >
         <app-rent-movies-item
@@ -9,6 +10,7 @@
         >
         </app-rent-movies-item>
       </ng-container>
+      
     </ng-container>
   </ng-container>
   </div>

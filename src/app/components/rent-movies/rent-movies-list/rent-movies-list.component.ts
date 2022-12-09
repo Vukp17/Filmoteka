@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Movie } from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,15 +9,23 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./rent-movies-list.component.css']
 })
 export class RentMoviesListComponent implements OnInit {
-  movies:any;
+  movies:Movie[];
+  message: string;
   
   constructor(private api:ApiService,private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.Ucitaj()
+    this.loadRentedMovies()
   }
-  Ucitaj(){
-    this.movies = this.api.getRents();
-    console.log(this.movies)
+  
+  loadRentedMovies(){
+     this.api.getRents().subscribe(data =>{
+      if (data.length == 0) {
+        this.message = 'You dont have any rented movies at the moment.'
+      }
+      else {
+        this.movies = data
+      }
+    });
   }
 }

@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  //AngularFireLists(Observables)
 
   moviesRef: AngularFireList<Movie>;
   rentsRef: AngularFireList<Movie>;
@@ -45,7 +44,7 @@ export class ApiService {
     return this.itemsMovies;
   }
 
-  getRents() {
+  getRents(): Observable<Movie[]> {
     return this.itemsRents;
   }
 
