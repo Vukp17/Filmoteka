@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 ////////ROUTING//////////
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { NgImageSliderModule } from 'ng-image-slider';
 ///////PRIME NG////////
 import { AccordionModule } from 'primeng/accordion';    
@@ -58,6 +58,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     AdminListItemComponent,
     AdminDatabaseComponent,
     AdminDatabseListComponent,
-    AdminDatabseListItemComponent
+    AdminDatabseListItemComponent,
 
   ],
   imports: [

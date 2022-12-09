@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router'
 import { LoginComponent } from './components/login/login.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { RentMoviesComponent } from './components/rent-movies/rent-movies.component';
@@ -17,6 +17,7 @@ import { RoleGuard } from './guards/role.guard';
 import { LandingComponent } from './components/landing/landing.component';
 import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthComponent } from './components/auth/auth.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['movies']);
@@ -27,6 +28,7 @@ const routes: Routes = [
     component: RentMoviesComponent,
     canActivate: [AuthGuard],
   },
+
   {
     path: 'movies',
     component: MoviesComponent,
