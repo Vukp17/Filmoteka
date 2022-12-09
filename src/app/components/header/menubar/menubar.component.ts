@@ -82,11 +82,12 @@ export class MenubarComponent implements OnInit {
     .subscribe( user => {
       this.user = user;
     });
-   
 
+ 
   }
 
   logout(): void {
     this.afAuth.signOut();
+    this.authService.resetState();
   }
 }

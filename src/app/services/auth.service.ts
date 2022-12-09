@@ -17,6 +17,8 @@ export class AuthService {
   user: User = null;
   claims: any = {};
   isAdmin = false;
+  userEmail: string;
+  userEmailSubject= new Subject<string>();
   isLoggedInSubject = new Subject<boolean>();
   userSubject = new Subject();
   claimsSubject = new Subject();
@@ -45,12 +47,13 @@ getAuthState(){
       if (authUser) { // logged in
         this.isLoggedInSubject.next(true);
         this.uid = authUser.uid;
-
+        this.userEmail = authUser.email;
         this.claims = authUser.getIdTokenResult()
           .then( idTokenResult => {
             this.claims = idTokenResult.claims;
             this.isAdmin = this.hasClaim('admin');
             console.log(this.hasClaim('admin'));
+            this.userEmailSubject.next(this.userEmail);
             this.isAdminSubject.next(this.isAdmin);
             this.claimsSubject.next(this.claims);
           });
@@ -82,7 +85,9 @@ resetState() {
   get userObject(){
 return this.user1;
   }
-
+autoLogin(){
+  this.getAuthState();
+}
   
 
   loginUser(email: string, password: string): Promise<any> {
@@ -91,8 +96,6 @@ return this.user1;
       .then(() => {
         this.afAuth.onAuthStateChanged((user) => {
           user?.getIdTokenResult().then((idtoken) => {
-             const currnetUser = new User(idtoken.claims['admin'],idtoken.claims['user_id'],idtoken.claims['email']);
-             this.user1.next(currnetUser);
              this.getAuthState();
           });
         });
