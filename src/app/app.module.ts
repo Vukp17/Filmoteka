@@ -16,6 +16,7 @@ import {CarouselModule} from 'primeng/carousel';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
+import {TableModule} from 'primeng/table';
 ///////Material////////
 import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -53,7 +54,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 import { AdminDatabseListComponent } from './components/admin-database/admin-databse-list/admin-databse-list.component';
 import { AdminDatabseListItemComponent } from './components/admin-database/admin-databse-list/admin-databse-list-item/admin-databse-list-item.component';
-
 
 
 
@@ -102,6 +102,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     CarouselModule,
     InputTextModule,
     DividerModule,
+    TableModule,
     //Material
     MatInputModule,
     MatButtonModule,

@@ -5,6 +5,7 @@ import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ export class SingupComponent implements OnInit {
   signupForm: FormGroup;
   firebaseErrorMessage: string;
   
-  constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth,private db: AngularFirestore,private fns: AngularFireFunctions) {
+  constructor(private authService: AuthService,private userService: UserService,private router: Router, private afAuth: AngularFireAuth,private db: AngularFirestore,private fns: AngularFireFunctions) {
       this.firebaseErrorMessage = '';
   }
 
@@ -35,8 +36,10 @@ export class SingupComponent implements OnInit {
 
       this.authService.signupUser(this.signupForm.value).then((result) => {
             
-          if (result == null)                                 // null is success, false means there was an error
+          if (result == null)        
+                                        // null is success, false means there was an error
               this.router.navigate(['/movies']);
+
           else if (result.isValid == false)
               this.firebaseErrorMessage = result.message;
       }).catch(() => {

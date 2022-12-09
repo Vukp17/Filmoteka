@@ -51,12 +51,6 @@ return (await this.userToken);
 
   }
 
-  set Access(hadAccess: boolean) {
-    this.hadAccess = hadAccess
-  }
-  get Access() {
-    return this.hadAccess
-  }
 
 
   set Users(user: User[]) {
