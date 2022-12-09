@@ -54,6 +54,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 import { AdminDatabseListComponent } from './components/admin-database/admin-databse-list/admin-databse-list.component';
 import { AdminDatabseListItemComponent } from './components/admin-database/admin-databse-list/admin-databse-list-item/admin-databse-list-item.component';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+
 
 
 
@@ -82,6 +84,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     AdminDatabaseComponent,
     AdminDatabseListComponent,
     AdminDatabseListItemComponent,
+    AccessDeniedComponent,
 
   ],
   imports: [

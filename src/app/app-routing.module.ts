@@ -18,6 +18,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthComponent } from './components/auth/auth.component';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['movies']);
@@ -53,7 +54,7 @@ const routes: Routes = [
     path: 'admin',
     pathMatch: 'full',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,RoleGuard],
   },
   {
     path: '',
@@ -64,12 +65,17 @@ const routes: Routes = [
     path: 'admin-list',
     pathMatch: 'full',
     component: AdminDatabaseComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,RoleGuard],
   },
   {
     path: 'landing',
     pathMatch: 'full',
     component: LandingComponent,
+  },
+  {
+    path: 'access-denied',
+    pathMatch: 'full',
+    component: AccessDeniedComponent,
   },
 ];
 @NgModule({
