@@ -17,6 +17,7 @@ export class AppComponent  {
   }
   ngOnInit(): void {
     this.authService.autoLogin();
+    this.authService.getCurrentUserEmail();
    }
 
 

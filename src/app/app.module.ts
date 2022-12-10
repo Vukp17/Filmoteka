@@ -16,6 +16,7 @@ import {CarouselModule} from 'primeng/carousel';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
+import {TableModule} from 'primeng/table';
 ///////Material////////
 import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -52,6 +53,8 @@ import { AdminDatabaseComponent } from './components/admin-database/admin-databa
 import { AdminDatabseListComponent } from './components/admin-database/admin-databse-list/admin-databse-list.component';
 import { AdminDatabseListItemComponent } from './components/admin-database/admin-databse-list/admin-databse-list-item/admin-databse-list-item.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { UserTableComponent } from './user-table/user-table.component';
 
 
 
@@ -79,7 +82,8 @@ import { AuthComponent } from './components/auth/auth.component';
     AdminDatabaseComponent,
     AdminDatabseListComponent,
     AdminDatabseListItemComponent,
-    AuthComponent
+    AuthComponent,
+    UserTableComponent
 
   ],
   imports: [
@@ -100,6 +104,7 @@ import { AuthComponent } from './components/auth/auth.component';
     CarouselModule,
     InputTextModule,
     DividerModule,
+    TableModule,
     //Material
     MatInputModule,
     MatButtonModule,

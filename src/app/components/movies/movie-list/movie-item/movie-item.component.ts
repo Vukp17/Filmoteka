@@ -1,11 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 ///Services
 import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { UserService } from 'src/app/services/user.service';
 import { Movie } from '../../../../models/movie.model';
 
 @Component({
@@ -23,8 +25,11 @@ export class MovieItemComponent implements OnInit {
   error: string = "";
   response: any = {}
 
-  constructor(public api: ApiService, private authService: AuthService,
-    private post: PostService, private toastService: HotToastService, private sanitizer: DomSanitizer, private http: HttpClient) {
+  constructor(public api: ApiService, public authService: AuthService,
+    private toastService: HotToastService,private userService: UserService,
+    private sanitizer: DomSanitizer) {
+    this.authService.getCurrentUserEmail()
+
   }
 
 
@@ -41,7 +46,7 @@ export class MovieItemComponent implements OnInit {
 
   }
   Rent(movies: Movie, key: any) {
-    this.api.pushMovieRents(movies, this.email, key)
+    this.api.pushMovieRents(movies, this.userService.Email, key)
   }
 
   showDialog(id: string) {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Movie } from '../../models/movie.model';
@@ -13,11 +14,17 @@ export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselElement: string;
   movies: Movie[];
 
-
+  details: any = []
+  display: boolean = false;
+  ////Api
+  error: string = "";
+  response: any = {}
 
   responsiveOptions;
+  message: string;
 
-  constructor(private http: HttpClient, private api: ApiService, private movieService: MovieService) {
+  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
+    this.movies=[]
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -46,7 +53,8 @@ export class CarouselComponent implements OnInit, OnChanges {
     if(this.carouselElement==undefined){
       this.loadMoviesDatabase()
     }else{
-      this.loadMovies(this.carouselElement);
+     
+      this.fetchMoviesbyType(this.carouselElement)
     }
  
   }
@@ -55,13 +63,36 @@ export class CarouselComponent implements OnInit, OnChanges {
       this.movies = data
     })
   }
-  loadMovies(key: string) {
-    this.api.adminLoadMovies(key).
-      subscribe((result: any) => {
-        this.movies = result.Search
-        console.log(result)
-      })
 
+ async fetchMoviesbyType(key: string){
+    this.api.getMovies().subscribe(data =>{
+      for(let item of data){
+      if (item.Type==key) {
+        this.movies.push(item);
+      }else{
+       
+      
+      }
+      
+    }
+    
+    });
+  }
+  showDialog(id: string) {
+    this.api.loadMoviesDetails(id).subscribe(result => {
+      this.display = true;
+      this.details = result
+      console
+    })
+
+  }
+  searchByKeyword(title: string) {
+    this.api.searchByKeyword(title).subscribe(result => {
+      this.response = result
+    })
+  }
+  getVideoSource(id: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
 }
 

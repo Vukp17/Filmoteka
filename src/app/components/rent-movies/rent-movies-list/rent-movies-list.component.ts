@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-rent-movies-list',
@@ -11,11 +12,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RentMoviesListComponent implements OnInit {
   movies:Movie[];
   message: string;
-  
-  constructor(private api:ApiService,private authService:AuthService) { }
+  email: string
+  constructor(private api:ApiService,private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadRentedMovies()
+    this.email=this.userService.Email
   }
   
   loadRentedMovies(){

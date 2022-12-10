@@ -1,13 +1,9 @@
-<h1 class="header">Upcoming movies</h1>
+<h1 class="header">Filmoteka movies and series base</h1>
 <div class="container">
   <ng-container *ngFor="let item of types">
-    <h2>{{ item.type }} movies</h2>
+    <div class="type-title">
+      <h2>{{ item.type }}</h2>
+    </div>
     <app-carousel [carouselElement]="item.type"></app-carousel>
   </ng-container>
 </div>
-
-
-
-
-
-

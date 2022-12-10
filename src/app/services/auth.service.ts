@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
+import { UserService } from './user.service';
 import { from, Observable, switchMap, take, of } from 'rxjs';
 
 @Injectable({
@@ -10,6 +11,7 @@ import { from, Observable, switchMap, take, of } from 'rxjs';
 })
 
 export class AuthService {
+  [x: string]: any;
 
   userLoggedIn: boolean; // other components can check on this variable for the login status of the user
 
@@ -28,6 +30,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
+    private userService: UserService,
   ) {
     this.afAuth.onAuthStateChanged((user) => {
       // set up a subscription to always know the login status of the user
@@ -57,13 +60,18 @@ export class AuthService {
                 this.isAdminSubject.next(this.isAdmin);
                 this.claimsSubject.next(this.claims);
               });
-
           }
           else { // logged out
             console.log('Auth Service says: no User is logged in.');
           }
         }
       );
+  }
+  
+  getCurrentUserEmail() {
+    return this.afAuth.user.subscribe(user => {
+      this.userService.Email = user.email;
+    });
   }
 
   hasClaim(claim): boolean {
