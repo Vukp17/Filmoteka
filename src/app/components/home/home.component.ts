@@ -7,7 +7,9 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  types = [{ type: 'War', }, { type: 'Love' }, { type: 'Action' }];
+  // types = [{ type: 'War', }, { type: 'Love' }, { type: 'Action' }];
+
+  types = [{ type: 'movie', }, { type: 'series' }];
 
 
   constructor(private api: ApiService) { }

@@ -1,23 +1,41 @@
-<p-carousel [value]="movies"  [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
-    <ng-template pTemplate="header">
-    </ng-template>
-    <ng-template let-movies  pTemplate="item">
-        <div class="product-item">
-            <div class="product-item-content">
-                <div class="mb-3">
-                    <img [src]="movies.Poster" [alt]="movies.Title" class="product-image" />
-                </div>
-                <div>
-                    <h4 class="mb-1">{{movies.Title}}</h4>
-                    <h6 class="mt-0 mb-3">{{movies.Type}}</h6>
-              
-                    <div class="car-buttons mt-5">
-                        <p-button type="button" styleClass="p-button-danger p-button-rounded mr-2" icon="pi pi-search"></p-button>
-                        <p-button type="button" styleClass="p-button-secondary p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
-                       
-                    </div>
-                </div>
+<ng-container *ngIf="movies.length!=0">
+  <p-carousel
+    [value]="movies"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template pTemplate="header"> </ng-template>
+    <ng-template let-movies pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="mb-3">
+            <img
+              [src]="movies.Poster"
+              [alt]="movies.Title"
+              class="product-image"
+            />
+          </div>
+          <div>
+            <h4 class="mb-1">{{ movies.Title }}</h4>
+            <h6 class="mt-0 mb-3">{{ movies.Type }}</h6>
+
+            <div class="car-buttons mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button-danger p-button-rounded mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-secondary p-button-rounded mr-2"
+                icon="pi pi-star-fill"
+              ></p-button>
             </div>
+          </div>
         </div>
+      </div>
     </ng-template>
-</p-carousel>
+  </p-carousel>
+</ng-container>

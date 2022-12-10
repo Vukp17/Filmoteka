@@ -16,8 +16,10 @@ export class CarouselComponent implements OnInit, OnChanges {
 
 
   responsiveOptions;
+  message: string;
 
   constructor(private http: HttpClient, private api: ApiService, private movieService: MovieService) {
+    this.movies=[]
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -46,7 +48,8 @@ export class CarouselComponent implements OnInit, OnChanges {
     if(this.carouselElement==undefined){
       this.loadMoviesDatabase()
     }else{
-      this.loadMovies(this.carouselElement);
+     
+      this.fetchMoviesbyType(this.carouselElement)
     }
  
   }
@@ -55,13 +58,20 @@ export class CarouselComponent implements OnInit, OnChanges {
       this.movies = data
     })
   }
-  loadMovies(key: string) {
-    this.api.adminLoadMovies(key).
-      subscribe((result: any) => {
-        this.movies = result.Search
-        console.log(result)
-      })
 
+ async fetchMoviesbyType(key: string){
+    this.api.getMovies().subscribe(data =>{
+      for(let item of data){
+      if (item.Type==key) {
+        this.movies.push(item);
+      }else{
+       
+        console.log("tip je serija")
+      }
+      
+    }
+    console.log(this.movies)
+    });
   }
 }
 
