@@ -1,6 +1,6 @@
 <p-menubar [model]="items" *ngIf="(afAuth.user | async) && isAdmin else user">
   <ng-template pTemplate="start">
-    <h2>FILMOTEKA</h2>
+    <h2 class="titleFilmoteka">FILMOTEKA</h2>
   </ng-template>
   <ng-template pTemplate="end">
     <button
@@ -18,7 +18,7 @@
 
 <p-menubar [model]="userItems" *ngIf=" (afAuth.user | async) && !isAdmin else nonUser" #user>
     <ng-template pTemplate="start">
-      <h2>FILMOTEKA</h2>
+      <h2 class="titleFilmoteka">FILMOTEKA</h2>
     </ng-template>
     <ng-template pTemplate="end">
       <button
@@ -36,7 +36,7 @@
     <div  *ngIf="!(afAuth.user | async) ">
     <p-menubar [model]="notLoggedInItems">
       <ng-template pTemplate="start">
-        <h2>FILMOTEKA</h2>
+        <h2 class="titleFilmoteka">FILMOTEKA</h2>
       </ng-template>
       <ng-template pTemplate="end">
         <button
@@ -45,7 +45,7 @@
         class="p-button-raised p-button-rounded"
         class="p-button-danger"
         icon="pi pi-sign-in"
-        routerLink="/login"
+        routerLink="/auth"
       ></button>
       </ng-template>
     </p-menubar>
