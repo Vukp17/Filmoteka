@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from 'src/app/services/api.service';
@@ -11,20 +10,22 @@ import { Movie } from '../../models/movie.model';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit, OnChanges {
+
   @Input() carouselElement: string;
+
   movies: Movie[];
+  moviesType: string = 'movies';
+  seriesType: string = 'series';
 
   details: any = []
   display: boolean = false;
   ////Api
   error: string = "";
   response: any = {}
-
-  responsiveOptions;
-  message: string;
+  responsiveOptions: any;
 
   constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
-    this.movies=[]
+    this.movies = []
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -42,58 +43,54 @@ export class CarouselComponent implements OnInit, OnChanges {
         numScroll: 1
       }
     ];
-
   }
+
   ngOnChanges(changes: SimpleChanges): void {
 
   }
-  
 
   ngOnInit() {
-    if(this.carouselElement==undefined){
-      this.loadMoviesDatabase()
-    }else{
-     
-      this.fetchMoviesbyType(this.carouselElement)
-    }
- 
+    this.fillCorousel()
   }
-  loadMoviesDatabase(){
-    this.api.getMovies().subscribe(data =>{
+
+  loadByType(element: string) { // load movies by type
+    this.api.getItemsByType(element).subscribe(data => {
+      this.movies = data
+      console.log(this.movies)
+    })
+  }
+
+  loadMoviesDatabase() { // loads all movies from database
+    this.api.getMovies().subscribe(data => {
       this.movies = data
     })
   }
 
- async fetchMoviesbyType(key: string){
-    this.api.getMovies().subscribe(data =>{
-      for(let item of data){
-      if (item.Type==key) {
-        this.movies.push(item);
-      }else{
-       
-      
-      }
-      
-    }
-    
-    });
-  }
-  showDialog(id: string) {
+  showDialog(id: string) { // opens movie details with modal
     this.api.loadMoviesDetails(id).subscribe(result => {
       this.display = true;
       this.details = result
-      console
     })
-
   }
-  searchByKeyword(title: string) {
+
+  searchByKeyword(title: string) { // searches for youtube video with keyword
     this.api.searchByKeyword(title).subscribe(result => {
       this.response = result
     })
   }
-  getVideoSource(id: string): SafeResourceUrl {
+  getVideoSource(id: string): SafeResourceUrl { // gets the video source for youtube trailer
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
+
+  fillCorousel() { // fills the corousel 
+    if (this.carouselElement == undefined) {
+      this.loadMoviesDatabase()
+    }
+    else {
+      this.loadByType(this.carouselElement)
+    }
+  }
+
 }
 
 
