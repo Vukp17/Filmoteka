@@ -7,15 +7,12 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject, } from '@angular/fire/compat/database';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
-import { forEach } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  rentedMovie: Movie;
-  rentedMovies: Observable<Movie[]>
 
   moviesRef: AngularFireList<Movie>;
   rentsRef: AngularFireList<Movie>;
@@ -45,39 +42,41 @@ export class ApiService {
     );
   }
 
-
-  getRentedMovies() {
+  getRentedMovies() { // filter by isRented = true
     return this.moviesRef.valueChanges().pipe(
       map(movies => movies.filter(movie => movie.isRented === true))
     );
   }
 
-  getUnrentedMovies() {
+  getUnrentedMovies() { // filter by isRented = false
     return this.moviesRef.valueChanges().pipe(
       map(movies => movies.filter(movie => movie.isRented === false))
     );
   }
-  
 
+  getItemsByType(type: string){ // filter item by type
+    return this.moviesRef.valueChanges().pipe(
+      map(movies => movies.filter(movie => movie.Type == type)))
+  }
 
-  getMovies(){
+  getMovies(){ // Returns full movie list
     return this.itemsMovies;
   }
+  
   getDate(){
     this.date=new Date();
-
     // return this.date.toISOString().substr(0,10);
   }
 
-  getRents(): Observable<Movie[]> {
+  getRents(): Observable<Movie[]> { // get all rents
     return this.itemsRents;
   }
 
-  deleteMovie(id: string) {
+  deleteMovie(id: string) { // delete movie from database
     this.moviesRef.remove(id);
   }
 
-  pushMovie(movies: Movie) {
+  pushMovie(movies: Movie) { // push movie to database
     this.moviesRef.push({
       Title: movies.Title,
       Poster: movies.Poster,
@@ -87,7 +86,8 @@ export class ApiService {
       isRented: false
     });
   }
-  pushMovieRents(movies: Movie, user: string, key: string) {
+
+  pushMovieRents(movies: Movie, user: string, key: string) { // push rent to database
     this.rentsRef.push({
       Title: movies.Title,
       Poster: movies.Poster,
@@ -104,37 +104,33 @@ export class ApiService {
 
   }
 
-  returnMovie(key: string, id: string) {
+  returnMovie(key: string, id: string) { // return movie from rent list
     this.rentsRef.remove(key);
     update(ref(this.database, 'movies/' + id), {
       isRented: false
     });
   }
-  loadUsers(): Observable<User[]> {
+  loadUsers(): Observable<User[]> { // fetch users from realtime database
     const url = 'https://movieapp-4d0c2-default-rtdb.europe-west1.firebasedatabase.app/users.json';
     return this.http.get<User[]>(url);
   }
-  loadMoviesDetails(id: string) {
+  loadMoviesDetails(id: string) { // movie load function based on ID
     const url = "http://www.omdbapi.com/?i=" + id + "&apikey=" + environment.omdb_api_key;
     return this.http.get(url)
   }
 
-  searchByKeyword(title: string) {
+  searchByKeyword(title: string) { // youtube search api
     const url = "https://www.googleapis.com/youtube/v3/search"
-
     const urlParams = new HttpParams()
       .set('part', 'snippet')
       .set('q', title)
       .set('maxResults', 1)
       .set('key', environment.youtube_api_key ?? 'error ')
     const options = { params: urlParams }
-
     return this.http.get<any>(url, options)
-
   }
 
-
-  adminLoadMovies(search: string) {
+  adminLoadMovies(search: string) { // admin search api
     const url = "https://www.omdbapi.com/?s="+ search +"&apikey=d0e90712";
     return this.http.get<any>(url)
   }
