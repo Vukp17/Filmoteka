@@ -1,7 +1,7 @@
 export class User {
 
     admin: boolean;
-    user_id: string;
+    user_id?: string;
     email: string;
 
     constructor(admin: boolean,user_id: string, email:string) {

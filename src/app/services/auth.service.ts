@@ -11,7 +11,7 @@ import { from, Observable, switchMap, take, of } from 'rxjs';
 })
 
 export class AuthService {
-  [x: string]: any;
+ 
 
   userLoggedIn: boolean; // other components can check on this variable for the login status of the user
 
@@ -26,7 +26,6 @@ export class AuthService {
   claimsSubject = new Subject();
   isAdminSubject = new Subject<boolean>();
 
-  user1 = new BehaviorSubject<User | null>(null);
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -90,9 +89,7 @@ export class AuthService {
   }
 
 
-  get userObject() {
-    return this.user1;
-  }
+ 
   autoLogin() {
     this.getAuthState();
   }

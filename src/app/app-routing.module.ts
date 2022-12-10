@@ -17,6 +17,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthComponent } from './components/auth/auth.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
+import { AdminAnalyticsComponent } from './components/admin-analytics/admin-analytics.component';
+
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['movies']);
@@ -61,10 +63,10 @@ const routes: Routes = [
     canActivate: [AuthGuard,RoleGuard],
   },
   {
-    path: 'admin-list',
+    path: 'admin-db-list',
     pathMatch: 'full',
     component: AdminDbListComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,RoleGuard],
   },
   {
     path: 'landing',

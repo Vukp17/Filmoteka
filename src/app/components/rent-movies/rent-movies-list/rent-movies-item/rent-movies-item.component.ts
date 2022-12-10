@@ -21,9 +21,11 @@ export class RentMoviesItemComponent implements OnInit {
     const isoString = Date.parse(this.movies.date);
     const rentDate = new Date(isoString);
     let now = new Date();
-    const daysLeft =
+    let daysLeft =
       30 -
       Math.trunc((now.getTime() - rentDate.getTime()) / (1000 * 3600 * 24));
-    return daysLeft;
+  
+      
+      return daysLeft;
   }
 }

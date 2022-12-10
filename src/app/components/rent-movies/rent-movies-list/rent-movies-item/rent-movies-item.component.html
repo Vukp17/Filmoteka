@@ -1,5 +1,5 @@
-<div>
-    <p-card
+<div [ngClass]="{'red-bg': returnDaysLeft() < 1}">
+    <p-card 
       class="cardMain"
       header="{{ movies.Title }}"
       subheader="{{ movies.Type }}"
@@ -9,7 +9,7 @@
       <ng-template pTemplate="header">
         <img class="cImg" alt="Card" [src]="movies.Poster" />
       </ng-template>
-      <p>Days left: {{returnDaysLeft()}}</p>
+      <p [ngClass]="{'red-text': returnDaysLeft() < 1}">Days left: {{returnDaysLeft()}}</p>
       <ng-template pTemplate="footer">
         <p-button
           class="d-flex justify-content-center"
