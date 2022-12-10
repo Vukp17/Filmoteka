@@ -51,6 +51,12 @@ const routes: Routes = [
     canActivate: [AuthGuard,RoleGuard],
   },
   {
+    path: 'admin-analytics',
+    pathMatch: 'full',
+    component: AdminAnalyticsComponent,
+    canActivate: [AuthGuard,RoleGuard],
+  },
+  {
     path: '',
     redirectTo: '/landing',
     pathMatch: 'full',

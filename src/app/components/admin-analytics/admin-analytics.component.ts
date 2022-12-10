@@ -9,12 +9,12 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./admin-analytics.component.css'],
 })
 export class AdminAnalyticsComponent implements OnInit {
-  
+
   usersObservable: Observable<User[]>;
   users: User[];
   user: User;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -22,8 +22,8 @@ export class AdminAnalyticsComponent implements OnInit {
 
   //get users
   getUsers() {
-    this.api.getUsers().subscribe(data =>{
+    this.api.getUsers().subscribe(data => {
       this.users = data;
     })
   }
-}
+} 
