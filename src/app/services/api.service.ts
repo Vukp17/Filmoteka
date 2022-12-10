@@ -19,6 +19,7 @@ export class ApiService {
   itemsMovies: Observable<Movie[]>;
   users: User[]
   error: string = "";
+  date:Date = new Date();
   response: any = {}
 
 
@@ -42,6 +43,11 @@ export class ApiService {
 
   getMovies(){
     return this.itemsMovies;
+  }
+  getDate(){
+    this. date=new Date();
+
+    return this.date.toISOString().substr(0,10);
   }
 
   getRents(): Observable<Movie[]> {
@@ -70,6 +76,7 @@ export class ApiService {
       Year: movies.Year,
       imdbID: movies.imdbID,
       user: user,
+      date: this.date.toISOString().substr(0,10),
       id: key
     });
     update(ref(this.database, 'movies/' + key), {

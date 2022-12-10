@@ -9,14 +9,14 @@
       <ng-template pTemplate="header">
         <img class="cImg" alt="Card" [src]="movies.Poster" />
       </ng-template>
-  
+      <p>{{movies.date}}</p>
       <ng-template pTemplate="footer">
         <p-button
           class="d-flex justify-content-center"
           styleClass="p-button-lg p-button-danger"
           label="Return"
           icon="pi pi-trash"
-         (click)="Return(movies.key,movies.id)"
+         (click)="returnMovie(movies.key,movies.id)"
         ></p-button>
       </ng-template>
     </p-card>

@@ -70,6 +70,11 @@ const routes: Routes = [
     pathMatch: 'full',
     component: AuthComponent,
   },
+  {
+    path: 'access-denied',
+    pathMatch: 'full',
+    component: AccessDeniedComponent,
+  },
 ];
 @NgModule({
   declarations: [],

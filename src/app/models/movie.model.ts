@@ -5,6 +5,7 @@ export class Movie {
     imdbID: string;
     Type: string;
     Poster: string;
+    date?:string;
     key?: string | null;
     isRented?: boolean
     user?: string
