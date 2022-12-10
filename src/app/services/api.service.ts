@@ -111,7 +111,7 @@ export class ApiService {
     });
   }
   loadUsers(): Observable<User[]> {
-    const url = 'https://movieapp-4d0c2-default-rtdb.europe-west1.firebasedatabase.app/users.json';
+    const url = 'https://angular-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/users.json';
     return this.http.get<User[]>(url);
   }
   loadMoviesDetails(id: string) {
