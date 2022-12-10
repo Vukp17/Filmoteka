@@ -6,11 +6,15 @@
             <th>Movies Rented</th>
             <th>Quantity</th>
         </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-user>
-    
-            <td>{{user.email}}</td>
-            <td>{{user.admin}}</td>
+
+        <div class="container" *ngFor="let user of users"> 
+            {{user.email}}
+            {{user.admin}}
        
+        </div>
+
     </ng-template>
+
+  
+
 </p-table>

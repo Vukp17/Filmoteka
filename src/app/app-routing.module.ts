@@ -29,7 +29,6 @@ const routes: Routes = [
     component: RentMoviesComponent,
     canActivate: [AuthGuard],
   },
-
   {
     path: 'movies',
     component: MoviesComponent,
@@ -63,12 +62,6 @@ const routes: Routes = [
     canActivate: [AuthGuard,RoleGuard],
   },
   {
-    path: 'admin-db-list',
-    pathMatch: 'full',
-    component: AdminDbListComponent,
-    canActivate: [AuthGuard,RoleGuard],
-  },
-  {
     path: 'landing',
     pathMatch: 'full',
     component: LandingComponent,
@@ -82,6 +75,12 @@ const routes: Routes = [
     path: 'access-denied',
     pathMatch: 'full',
     component: AccessDeniedComponent,
+  },
+  {
+    path: 'admin-analytics',
+    pathMatch: 'full',
+    component: AdminAnalyticsComponent,
+    canActivate: [AuthGuard,RoleGuard],
   },
 ];
 @NgModule({

@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./admin-analytics.component.css'],
 })
 export class AdminAnalyticsComponent implements OnInit {
+  
   usersObservable: Observable<User[]>;
   users: User[];
   user: User;
@@ -21,6 +22,8 @@ export class AdminAnalyticsComponent implements OnInit {
 
   //get users
   getUsers() {
-    this.usersObservable = this.api.loadUsers();
+    this.api.getUsers().subscribe(data =>{
+      this.users = data;
+    })
   }
 }

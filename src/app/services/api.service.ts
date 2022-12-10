@@ -17,29 +17,53 @@ export class ApiService {
   moviesRef: AngularFireList<Movie>;
   rentsRef: AngularFireList<Movie>;
   movieRef: AngularFireObject<any>;
+  usersRef: AngularFireList<Movie>
+
   itemsRents: Observable<Movie[]>;
   itemsMovies: Observable<Movie[]>;
+  itemsUsers: Observable<User[]>;
+
   users: User[]
   error: string = "";
-  date:Date = new Date();
+  date: Date = new Date();
   response: any = {}
 
 
   constructor(private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
-    this.moviesRef = db.list('movies');
-    this.rentsRef = db.list('rents');
-    /////Rents payload key
+   this.loadMoviesPayload()
+   this.loadRentsPayload()
+   this.loadUserPayload()
+  }
+
+  loadRentsPayload() {
+    this.rentsRef = this.db.list('rents');
     this.itemsRents = this.rentsRef?.snapshotChanges().pipe(
       map((changes: any[]) =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
-    /////Movies payload key
+  }
+
+  loadMoviesPayload() {
+    this.moviesRef = this.db.list('movies');
     this.itemsMovies = this.moviesRef?.snapshotChanges().pipe(
       map((changes: any[]) =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
+  }
+
+  loadUserPayload() {
+    this.usersRef = this.db.list('users');
+    this.itemsUsers = this.usersRef?.snapshotChanges().pipe(
+      map((changes: any[]) =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.itemsUsers
   }
 
   getRentedMovies() { // filter by isRented = true
@@ -54,17 +78,17 @@ export class ApiService {
     );
   }
 
-  getItemsByType(type: string){ // filter item by type
+  getItemsByType(type: string) { // filter item by type
     return this.moviesRef.valueChanges().pipe(
       map(movies => movies.filter(movie => movie.Type == type)))
   }
 
-  getMovies(){ // Returns full movie list
+  getMovies() { // Returns full movie list
     return this.itemsMovies;
   }
-  
-  getDate(){
-    this.date=new Date();
+
+  getDate() {
+    this.date = new Date();
     // return this.date.toISOString().substr(0,10);
   }
 
@@ -101,7 +125,6 @@ export class ApiService {
     update(ref(this.database, 'movies/' + key), {
       isRented: true
     });
-
   }
 
   returnMovie(key: string, id: string) { // return movie from rent list
@@ -114,6 +137,7 @@ export class ApiService {
     const url = 'https://angular-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/users.json';
     return this.http.get<User[]>(url);
   }
+
   loadMoviesDetails(id: string) { // movie load function based on ID
     const url = "http://www.omdbapi.com/?i=" + id + "&apikey=" + environment.omdb_api_key;
     return this.http.get(url)
@@ -131,10 +155,8 @@ export class ApiService {
   }
 
   adminLoadMovies(search: string) { // admin search api
-    const url = "https://www.omdbapi.com/?s="+ search +"&apikey=d0e90712";
+    const url = "https://www.omdbapi.com/?s=" + search + "&apikey=d0e90712";
     return this.http.get<any>(url)
   }
-
-
 
 }
