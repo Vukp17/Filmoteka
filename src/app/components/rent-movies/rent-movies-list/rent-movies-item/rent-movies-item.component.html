@@ -9,7 +9,7 @@
       <ng-template pTemplate="header">
         <img class="cImg" alt="Card" [src]="movies.Poster" />
       </ng-template>
-      <p>{{movies.date}}</p>
+      <p>Days left: {{returnDaysLeft()}}</p>
       <ng-template pTemplate="footer">
         <p-button
           class="d-flex justify-content-center"
