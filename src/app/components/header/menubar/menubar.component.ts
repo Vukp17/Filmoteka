@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 //Prime
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
@@ -12,20 +12,20 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { IdTokenResult } from '@angular/fire/auth';
+import { TranslateService } from '@ngx-translate/core';
 
+interface Country {
+  name: string,
+  code: string
+}
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css'],
 })
-export class MenubarComponent implements OnInit {
 
-  constructor(
-    public afAuth: AngularFireAuth,
-    public authService: AuthService,
-    private userService: UserService
-  ) { }
-  
+
+export class MenubarComponent implements OnInit, OnChanges{
   items: MenuItem[];
   userItems: MenuItem[];
   notLoggedInItems: MenuItem[];
@@ -34,14 +34,31 @@ export class MenubarComponent implements OnInit {
   userSubscription = null;
   isAdmin = false;
   user = null;
+  countries: Country[];
+
+  selectedCountryCode: Country;
 
   loginClicked = false;
   logoutClicked = false;
 
+  constructor(
+    public afAuth: AngularFireAuth,
+    public authService: AuthService,
+    private userService: UserService,
+    private translate: TranslateService
+  ) {
+
+   }
+
+
   ngOnInit() {
- 
+    console.log(this.selectedCountryCode)
+    this.countries = [
+      {name: 'Englis', code: 'en'},
+      {name: 'Deutch', code: 'de'},
+  ];
    this.items = [
-      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
+      { label: "Home", icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       {
         label: 'Add movies',
         icon: 'pi pi-fw pi-video',
@@ -54,9 +71,12 @@ export class MenubarComponent implements OnInit {
       },
     ];
     this.userItems = [
-      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
-      {
-        label: 'Movies',
+      { 
+      label: "('navbar.home' | translate)",
+      icon: 'pi pi-fw pi-home', 
+      routerLink: ['/home'] },
+      { 
+        label: this.translate.instant('navbar.login '),
         icon: 'pi pi-fw pi-video',
         routerLink: ['/movies'],
       },
@@ -85,9 +105,15 @@ export class MenubarComponent implements OnInit {
 
  
   }
-
+  ngOnChanges(){
+    console.log(this.selectedCountryCode)
+  }
   logout(): void {
     this.afAuth.signOut();
     this.authService.resetState();
+  }
+  setLanguage(){
+    this.translate.use(this.selectedCountryCode.code);
+    console.log(this.selectedCountryCode.code)
   }
 }

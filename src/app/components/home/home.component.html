@@ -1,7 +1,7 @@
 <div class="container">
   <ng-container *ngFor="let item of types">
     <hr>
-    <h1 class="corouselTitle">{{item.type | uppercase}}</h1>
+    <h1 class="corouselTitle">{{item.type | translate | uppercase}}</h1>
     <hr>
     <app-carousel [carouselElement]="item.type"></app-carousel>
   </ng-container>

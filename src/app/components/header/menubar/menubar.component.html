@@ -3,6 +3,8 @@
     <h2 class="titleFilmoteka">FILMOTEKA</h2>
   </ng-template>
   <ng-template pTemplate="end">
+    <p-selectButton (click)="setLanguage()" [options]="countries" [(ngModel)]="selectedCountryCode" optionLabel="name" ></p-selectButton>
+
     <button
     
       pButton
@@ -21,14 +23,16 @@
       <h2 class="titleFilmoteka">FILMOTEKA</h2>
     </ng-template>
     <ng-template pTemplate="end">
+    
       <button
         pButton
-        label="Logout"
+        label="{{'navbar.login' | translate}}"
         class="p-button-raised p-button-rounded"
         class="p-button-danger"
         icon="pi pi-sign-out"
         (click)="logout()"
       ></button>
+      <p-selectButton (click)="setLanguage()" [options]="countries" [(ngModel)]="selectedCountryCode" optionLabel="name" ></p-selectButton>
     </ng-template>
   </p-menubar>
 
@@ -39,6 +43,8 @@
         <h2 class="titleFilmoteka">FILMOTEKA</h2>
       </ng-template>
       <ng-template pTemplate="end">
+        <p-selectButton (click)="setLanguage()" [options]="countries" [(ngModel)]="selectedCountryCode" optionLabel="name" ></p-selectButton>
+
         <button
         pButton
         label="Log In"

@@ -3,21 +3,20 @@
 <div class="container mt-5">
     <h1 class="titleFilmoteka mt-5"> FILMOTEKA</h1>
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
- 
-      <p class="text-muted mt-2">  {{isLoginMode ? '' : 'Please enter your e-mail :'}} </p>
-        <input autocomplete="off" class="w-100" formControlName="email" type="email"  placeholder="Email" />
+      <p class="text-muted mt-2">  {{isLoginMode ? '' : 'auth.email' | translate}} </p>
+        <input autocomplete="off" class="w-100" formControlName="email" type="email"  placeholder=" {{ 'auth.em' | translate}}" />
       
-        <p class="text-muted mt-2"> {{isLoginMode ? '' : 'Please enter your password :'}} </p>
-        <input autocomplete="off" class="w-100" formControlName="password" type="password"  placeholder="Password" />
+        <p class="text-muted mt-2"> {{isLoginMode ? '' : 'auth.password' | translate}} </p>
+        <input autocomplete="off" class="w-100" formControlName="password" type="password"  placeholder=" {{ 'auth.pass' | translate}}" />
         
         <div class="w-100" *ngIf="firebaseErrorMessage != ''" class="error-style">
             <span>{{ firebaseErrorMessage }}</span>
         </div>
    
-        <button class="w-100" [disabled]="!loginForm.valid"> {{isLoginMode ? 'Login' : 'Sign Up' }}</button>
+        <button class="w-100" [disabled]="!loginForm.valid"> {{isLoginMode ? ('auth.login' | translate) :('auth.signup' | translate)}}</button>
     
         <div class="text-center">
-        <a class="text-muted" (click)="onSwitchMode()"> {{ isLoginMode ? 'Dont have an account? Click here' : 'Already have an account? Click here' }}</a>
+        <a class="text-muted" (click)="onSwitchMode()"> {{ isLoginMode ? ('auth.account' | translate) : ('auth.already_have' | translate)}}</a>
       </div>
     </form>
 </div></div>

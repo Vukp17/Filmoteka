@@ -1,0 +1,34 @@
+{
+  "movies": "Filme",
+  "series": "Series",
+  "navbar": {
+    "home": "Heim",
+    "movies": "Filme",
+    "rent": "Miete",
+    "login": "Login"
+  },
+  "auth": {
+    "email": "Please enter your e-mail address",
+    "password": "Please enter your password :",
+    "login": "Log in",
+    "signup": "Signup",
+    "account": "Don't have an account? click here",
+    "already_have": "Already have an account? Click here",
+    "pass": "Password",
+    "em": "Email"
+  },
+  "items": {
+    "Home": "Home",
+    "Addmovies": "Add Movies",
+    "DataBase": "DataBase"
+  },
+  "landing": {
+    "welcome": "Welcome to ",
+    "desc": "The biggest movie base on the Internet",
+    "bGetStarted": "Get Started"
+  },
+  "carousel": {
+    "about": "About",
+    "favorite": "Favorite"
+  }
+}

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, OnChanges, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Movie } from '../models/movie.model';
 import { map, Observable } from 'rxjs';
 import { Database, ref, update } from '@angular/fire/database';
@@ -7,10 +7,11 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject, } from '@angular/fire/compat/database';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService implements OnInit, OnChanges {
 
   moviesRef: AngularFireList<Movie>;
   rentsRef: AngularFireList<Movie>;
@@ -20,9 +21,9 @@ export class ApiService {
   users: User[]
   error: string = "";
   response: any = {}
+  headers:HttpHeaders
 
-
-  constructor(private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
+  constructor(private translateService: TranslateService, private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
     this.moviesRef = db.list('movies');
     this.rentsRef = db.list('rents')
     /////Rents payload key
@@ -38,9 +39,16 @@ export class ApiService {
       )
     );
   }
+  ngOnInit() {
+    this.headers = new HttpHeaders()
+      .set('Accept-Language', this.translateService.currentLang);
+  }
+  ngOnChanges() {
+    this.headers = new HttpHeaders()
+      .set('Accept-Language', this.translateService.currentLang);
+  }
 
-
-  getMovies(){
+  getMovies() {
     return this.itemsMovies;
   }
 
@@ -89,13 +97,14 @@ export class ApiService {
     return this.http.get<User[]>(url);
   }
   loadMoviesDetails(id: string) {
-    const url = "http://www.omdbapi.com/?i=" + id + "&apikey=" + environment.omdb_api_key;
+    console.log(this.translateService.currentLang)
+  
+    const url = "http://www.omdbapi.com/?i=" + id + "&apikey=" + environment.omdb_api_key+"&lang=" + this.translateService.currentLang;
     return this.http.get(url)
   }
 
   searchByKeyword(title: string) {
     const url = "https://www.googleapis.com/youtube/v3/search"
-
     const urlParams = new HttpParams()
       .set('part', 'snippet')
       .set('q', title)
@@ -109,7 +118,7 @@ export class ApiService {
 
 
   adminLoadMovies(search: string) {
-    const url = "https://www.omdbapi.com/?s="+ search +"&apikey=d0e90712";
+    const url = "https://www.omdbapi.com/?s=" + search + "&apikey=d0e90712";
     return this.http.get<any>(url)
   }
 

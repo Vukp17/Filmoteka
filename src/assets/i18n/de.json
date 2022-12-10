@@ -1,0 +1,39 @@
+{
+    
+    "movies": "Filme",
+    "series": "Serie",
+    "navbar": {
+        "home": "Heim",
+        "movies": "Filme",
+        "rent": "Miete",
+        "login": "Einloggen"
+      },
+    "auth": {
+        "email": "Bitte geben Sie ihre E-Mail-Adresse ein ",
+        "password": "Bitte geben Sie Ihr Passwort ein :",
+        "login": "Einloggen",
+        "signup": "Anmelden",
+        "account": "Sie haben kein Konto? Klick hier",
+        "already_have":"Sie haben bereits ein Konto? Klick hier",
+        "pass":"Passwort",
+        "em":"Email"
+    
+      },
+    "items": {
+        "Home": "Heim",
+        "Addmovies": "Filme",
+        "DataBase": "Miete"
+    },
+    "landing": {
+        "welcome": "Willkommen zu",
+        "desc": "Die größte Filmdatenbank im Internet",
+        "bGetStarted": "Loslegen"
+
+    },
+    "carousel": {
+        "about": "Um",
+        "favorite": "Favorit"
+      }
+      
+    
+}

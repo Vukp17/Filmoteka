@@ -24,6 +24,8 @@
     "@coreui/angular": "^4.2.14",
     "@ngneat/hot-toast": "^4.1.0",
     "@ngneat/overview": "^3.0.0",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^5.2.2",
     "ng-image-slider": "^6.1.0",
     "primeicons": "^6.0.1",

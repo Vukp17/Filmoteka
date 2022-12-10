@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Injectable, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { map } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Movie } from '../../models/movie.model';
@@ -8,7 +10,8 @@ import { Movie } from '../../models/movie.model';
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.css']
+  styleUrls: ['./carousel.component.css'],
+
 })
 export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselElement: string;
@@ -23,8 +26,9 @@ export class CarouselComponent implements OnInit, OnChanges {
   responsiveOptions;
   message: string;
 
-  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
-    this.movies=[]
+  constructor(private sanitizer: DomSanitizer, private myTranslateService: MyTranslateService, private api: ApiService, private movieService: MovieService) {
+
+    this.movies = []
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -47,44 +51,48 @@ export class CarouselComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
 
   }
-  
+
 
   ngOnInit() {
-    if(this.carouselElement==undefined){
+    if (this.carouselElement == undefined) {
       this.loadMoviesDatabase()
-    }else{
-     
+    } else {
+
       this.fetchMoviesbyType(this.carouselElement)
     }
- 
+
   }
-  loadMoviesDatabase(){
-    this.api.getMovies().subscribe(data =>{
+  loadMoviesDatabase() {
+    this.api.getMovies().subscribe(data => {
       this.movies = data
     })
   }
 
- async fetchMoviesbyType(key: string){
-    this.api.getMovies().subscribe(data =>{
-      for(let item of data){
-      if (item.Type==key) {
-        this.movies.push(item);
-      }else{
-       
-      
+  async fetchMoviesbyType(key: string) {
+    this.api.getMovies().subscribe(data => {
+      for (let item of data) {
+        if (item.Type == key) {
+          this.movies.push(item);
+        } else {
+
+
+        }
+
       }
-      
-    }
-    
+
     });
   }
   showDialog(id: string) {
-    this.api.loadMoviesDetails(id).subscribe(result => {
-      this.display = true;
-      this.details = result
-      console
-    })
-
+    console.log("alo")
+    this.api.loadMoviesDetails(id).pipe(
+      // Translate the response data
+      map((response) => {
+        const translatedResponse = this.myTranslateService.translate(response)
+        
+        this.details =translatedResponse
+        console.log(translatedResponse)
+      })
+    );
   }
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(result => {
@@ -97,3 +105,11 @@ export class CarouselComponent implements OnInit, OnChanges {
 }
 
 
+@Injectable()
+export class MyTranslateService extends TranslateService {
+  // Custom translate method
+  translate(data: any) {
+    // Use the translate method of the TranslateService to translate the data
+    return this.get(data).toPromise();
+  }
+}
