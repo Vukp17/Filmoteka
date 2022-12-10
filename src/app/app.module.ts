@@ -54,7 +54,7 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import { UserTableComponent } from './user-table/user-table.component';
 import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
 import { AdminDbListItemComponent } from './components/admin/admin-db-list/admin-db-list-item/admin-db-list-item.component';
-import { AdminAnalyticsComponent } from './components/admin-analytics/admin-analytics.component';
+import { AdminAnalyticsComponent } from './components/admin/admin-analytics/admin-analytics.component';
 
 
 
@@ -83,7 +83,8 @@ import { AdminAnalyticsComponent } from './components/admin-analytics/admin-anal
     UserTableComponent,
     AdminDbListComponent,
     AdminDbListItemComponent,
-    AdminAnalyticsComponent
+    AdminAnalyticsComponent,
+    AccessDeniedComponent
 
   ],
   imports: [

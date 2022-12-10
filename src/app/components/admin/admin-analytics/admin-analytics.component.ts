@@ -20,7 +20,6 @@ export class AdminAnalyticsComponent implements OnInit {
     this.getUsers();
   }
 
-  //get users
   getUsers() {
     this.api.getUsers().subscribe(data => {
       this.users = data;

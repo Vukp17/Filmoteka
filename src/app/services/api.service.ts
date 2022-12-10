@@ -35,7 +35,7 @@ export class ApiService {
    this.loadUserPayload()
   }
 
-  loadRentsPayload() {
+  loadRentsPayload() { // loads rents payload with keys
     this.rentsRef = this.db.list('rents');
     this.itemsRents = this.rentsRef?.snapshotChanges().pipe(
       map((changes: any[]) =>
@@ -44,7 +44,7 @@ export class ApiService {
     );
   }
 
-  loadMoviesPayload() {
+  loadMoviesPayload() { // loads movies payload with keys
     this.moviesRef = this.db.list('movies');
     this.itemsMovies = this.moviesRef?.snapshotChanges().pipe(
       map((changes: any[]) =>
@@ -53,7 +53,7 @@ export class ApiService {
     );
   }
 
-  loadUserPayload() {
+  loadUserPayload() { // loads users payload with keys
     this.usersRef = this.db.list('users');
     this.itemsUsers = this.usersRef?.snapshotChanges().pipe(
       map((changes: any[]) =>

@@ -17,7 +17,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthComponent } from './components/auth/auth.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
-import { AdminAnalyticsComponent } from './components/admin-analytics/admin-analytics.component';
+import { AdminAnalyticsComponent } from './components/admin/admin-analytics/admin-analytics.component';
 
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
