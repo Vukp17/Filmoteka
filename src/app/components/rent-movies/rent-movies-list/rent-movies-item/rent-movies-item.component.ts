@@ -10,10 +10,18 @@ import { ApiService } from 'src/app/services/api.service';
 export class RentMoviesItemComponent implements OnInit {
   @Input() movies: Movie;
   constructor(private api:ApiService) { }
-
+daysLeft:string;
   ngOnInit(): void {
+    
   }
-  Return(key: any,id: any){
+
+  returnMovie(key: any,id: any){
     this.api.returnMovie(key,id)
   }
+  returnDaysLeft(){
+    const date = Date.parse(this.movies.date);
+    
+
+  }
+
 }

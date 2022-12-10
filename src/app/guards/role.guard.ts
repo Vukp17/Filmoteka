@@ -18,7 +18,7 @@ import { UserService } from '../services/user.service';
   providedIn: 'root',
 })
 export class RoleGuard implements CanActivate {
-  isAdmin: boolean;
+  isAdmin: boolean = false;
 
   constructor(
     public auth: Auth,
@@ -27,20 +27,24 @@ export class RoleGuard implements CanActivate {
     private us: UserService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.authService.isAdminSubject
+    .subscribe( isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean> {
-    this.authService.isAdminSubject.subscribe((data) => {
-      this.isAdmin = data;
-    });
+    console.log(this.isAdmin)
     if (this.isAdmin) {
       return true;
+    } else {
+      console.log('You are not authorized for this action!');
+      this.router.navigate(['/access-denied']);
+      return false;
     }
-    console.log('You are not authorized for this action!');
-    this.router.navigate(['/access-denied']);
-    return false;
   }
 }
