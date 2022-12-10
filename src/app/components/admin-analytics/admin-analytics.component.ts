@@ -21,6 +21,9 @@ export class AdminAnalyticsComponent implements OnInit {
 
   //get users
   getUsers() {
-    this.usersObservable = this.api.loadUsers();
+    this.api.loadUsers().subscribe(data => {
+     this.users = data;
+     console.log(this.users);
+    });
   }
 }
