@@ -55,6 +55,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
 import { AuthComponent } from './components/auth/auth.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { UserTableComponent } from './user-table/user-table.component';
+import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
 
 
 
@@ -83,7 +84,8 @@ import { UserTableComponent } from './user-table/user-table.component';
     AdminDatabseListComponent,
     AdminDatabseListItemComponent,
     AuthComponent,
-    UserTableComponent
+    UserTableComponent,
+    AdminDbListComponent
 
   ],
   imports: [

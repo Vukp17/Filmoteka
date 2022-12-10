@@ -50,7 +50,7 @@ export class MenubarComponent implements OnInit {
       {
         label: 'DataBase',
         icon: 'pi pi-fw pi-database',
-        routerLink: ['/admin-list'],
+        routerLink: ['/admin-db-list'],
       },
     ];
     this.userItems = [
