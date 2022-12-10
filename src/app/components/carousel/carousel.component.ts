@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Movie } from '../../models/movie.model';
@@ -13,12 +14,16 @@ export class CarouselComponent implements OnInit, OnChanges {
   @Input() carouselElement: string;
   movies: Movie[];
 
-
+  details: any = []
+  display: boolean = false;
+  ////Api
+  error: string = "";
+  response: any = {}
 
   responsiveOptions;
   message: string;
 
-  constructor(private http: HttpClient, private api: ApiService, private movieService: MovieService) {
+  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
     this.movies=[]
     this.responsiveOptions = [
       {
@@ -66,12 +71,28 @@ export class CarouselComponent implements OnInit, OnChanges {
         this.movies.push(item);
       }else{
        
-        console.log("tip je serija")
+      
       }
       
     }
-    console.log(this.movies)
+    
     });
+  }
+  showDialog(id: string) {
+    this.api.loadMoviesDetails(id).subscribe(result => {
+      this.display = true;
+      this.details = result
+      console
+    })
+
+  }
+  searchByKeyword(title: string) {
+    this.api.searchByKeyword(title).subscribe(result => {
+      this.response = result
+    })
+  }
+  getVideoSource(id: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
 }
 
