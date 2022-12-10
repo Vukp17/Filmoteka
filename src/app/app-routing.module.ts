@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router'
-import { LoginComponent } from './components/login/login.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { RentMoviesComponent } from './components/rent-movies/rent-movies.component';
-import { SingupComponent } from './components/signup/signup.component';
 import { MovieResloverService } from './services/movie-reslover.service';
 import {
   canActivate,
@@ -40,14 +38,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'login',
+    path: 'auth',
     pathMatch: 'full',
-    component: LoginComponent,
-  },
-  {
-    path: 'signup',
-    pathMatch: 'full',
-    component: SingupComponent,
+    component: AuthComponent,
   },
   {
     path: 'admin',
@@ -70,6 +63,11 @@ const routes: Routes = [
     path: 'landing',
     pathMatch: 'full',
     component: LandingComponent,
+  },
+  {
+    path: 'auth',
+    pathMatch: 'full',
+    component: AuthComponent,
   },
 ];
 @NgModule({

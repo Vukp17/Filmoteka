@@ -32,8 +32,6 @@ import { RentMoviesComponent } from './components/rent-movies/rent-movies.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './components/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
-import { SingupComponent } from './components/signup/signup.component'
 import { LandingComponent } from './components/landing/landing.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { RentMoviesListComponent } from './components/rent-movies/rent-movies-list/rent-movies-list.component';
@@ -53,6 +51,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 import { AdminDatabseListComponent } from './components/admin-database/admin-databse-list/admin-databse-list.component';
 import { AdminDatabseListItemComponent } from './components/admin-database/admin-databse-list/admin-databse-list-item/admin-databse-list-item.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 
 
@@ -69,9 +68,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     RentMoviesComponent,
     MenubarComponent,
     FooterComponent,
-    LoginComponent,
     LandingComponent,
-    SingupComponent,
     CarouselComponent,
     RentMoviesListComponent,
     RentMoviesItemComponent,
@@ -82,6 +79,7 @@ import { AdminDatabseListItemComponent } from './components/admin-database/admin
     AdminDatabaseComponent,
     AdminDatabseListComponent,
     AdminDatabseListItemComponent,
+    AuthComponent
 
   ],
   imports: [

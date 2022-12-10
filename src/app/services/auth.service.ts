@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
-import { from, Observable, switchMap, take ,of} from 'rxjs';
+import { from, Observable, switchMap, take, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +18,12 @@ export class AuthService {
   claims: any = {};
   isAdmin = false;
   userEmail: string;
-  userEmailSubject= new Subject<string>();
+  userEmailSubject = new Subject<string>();
   isLoggedInSubject = new Subject<boolean>();
   userSubject = new Subject();
   claimsSubject = new Subject();
   isAdminSubject = new Subject<boolean>();
-  
+
   user1 = new BehaviorSubject<User | null>(null);
   constructor(
     private router: Router,
@@ -39,56 +39,56 @@ export class AuthService {
     });
   }
 
-getAuthState(){
-  this.afAuth.authState
-  .subscribe(
-    authUser => {
+  getAuthState() {
+    this.afAuth.authState
+      .subscribe(
+        authUser => {
 
-      if (authUser) { // logged in
-        this.isLoggedInSubject.next(true);
-        this.uid = authUser.uid;
-        this.userEmail = authUser.email;
-        this.claims = authUser.getIdTokenResult()
-          .then( idTokenResult => {
-            this.claims = idTokenResult.claims;
-            this.isAdmin = this.hasClaim('admin');
-            console.log(this.hasClaim('admin'));
-            this.userEmailSubject.next(this.userEmail);
-            this.isAdminSubject.next(this.isAdmin);
-            this.claimsSubject.next(this.claims);
-          });
+          if (authUser) { // logged in
+            this.isLoggedInSubject.next(true);
+            this.uid = authUser.uid;
+            this.userEmail = authUser.email;
+            this.claims = authUser.getIdTokenResult()
+              .then(idTokenResult => {
+                this.claims = idTokenResult.claims;
+                this.isAdmin = this.hasClaim('admin');
+                console.log(this.hasClaim('admin'));
+                this.userEmailSubject.next(this.userEmail);
+                this.isAdminSubject.next(this.isAdmin);
+                this.claimsSubject.next(this.claims);
+              });
 
-      }
-      else { // logged out
-        console.log('Auth Service says: no User is logged in.');
-      }
-    }
- );
-}
-
-hasClaim(claim): boolean {
-  return !!this.claims[claim];
-}
-resetState() {
-  this.uid = null;
-  this.claims = {};
-  this.user = null;
-  this.isAdmin = false;
-
-  this.isLoggedInSubject.next(false);
-  this.isAdminSubject.next(false);
-  this.claimsSubject.next(this.claims);
-  this.userSubject.next(this.user);
-}
-
-
-  get userObject(){
-return this.user1;
+          }
+          else { // logged out
+            console.log('Auth Service says: no User is logged in.');
+          }
+        }
+      );
   }
-autoLogin(){
-  this.getAuthState();
-}
-  
+
+  hasClaim(claim): boolean {
+    return !!this.claims[claim];
+  }
+  resetState() {
+    this.uid = null;
+    this.claims = {};
+    this.user = null;
+    this.isAdmin = false;
+
+    this.isLoggedInSubject.next(false);
+    this.isAdminSubject.next(false);
+    this.claimsSubject.next(this.claims);
+    this.userSubject.next(this.user);
+  }
+
+
+  get userObject() {
+    return this.user1;
+  }
+  autoLogin() {
+    this.getAuthState();
+  }
+
 
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth
@@ -96,7 +96,7 @@ autoLogin(){
       .then(() => {
         this.afAuth.onAuthStateChanged((user) => {
           user?.getIdTokenResult().then((idtoken) => {
-             this.getAuthState();
+            this.getAuthState();
           });
         });
       })
@@ -117,7 +117,7 @@ autoLogin(){
         if (error.code) return { isValid: false, message: error.message };
       });
   }
-  
- 
 
-  }
+
+
+}

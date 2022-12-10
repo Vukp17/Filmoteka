@@ -1,0 +1,105 @@
+/* .login-form-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width:100%;
+ 
+
+}
+
+.button-flex-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+mat-card{
+  width: 50%;
+  background-color:#262625;
+  color: white;
+  border-radius: 3%
+}
+
+mat-card-content{
+  justify-content: center;
+  align-items: center;
+  display :flex;
+
+}
+.mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
+  background-color: #f44336;
+  width: 100%;
+}
+
+mat-card-title{
+  justify-content: center;
+  align-items: center;
+  display :flex;
+}
+.footer{
+  justify-content: left;
+  display :flex; 
+}
+.footer-text{
+  margin-top: 10px;
+} */
+
+
+body {
+  background: #181818;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+}
+
+.container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+input, button {
+  height: 65px;
+  border-radius: 5px;
+  padding: 0 20px;
+  font-size: 1.2rem;
+  border: 0;
+}
+
+input {
+  background: #2E2E2E;
+  margin-bottom: 2px;
+}
+
+button {
+  margin: 20px 0;
+  background: none;
+  border: 2px solid #2e2e2e;
+  color: #aaa;
+}
+
+a {
+  margin: 20px auto;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  font-weight: bold;
+}
+
+img {
+  width: 100%;
+}
+
+.titleFilmoteka {
+  width: 100%;
+  color: red;
+  font-weight: 800;
+  font-size: 46pt;
+  text-align: center;
+  margin-bottom: 10pt;
+}
+
+form{
+  margin:0px;
+  padding:0px;
+}
