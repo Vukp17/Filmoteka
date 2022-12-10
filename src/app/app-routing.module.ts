@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { RoleGuard } from './guards/role.guard';
 import { LandingComponent } from './components/landing/landing.component';
-import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthComponent } from './components/auth/auth.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';

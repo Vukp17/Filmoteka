@@ -49,13 +49,11 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 //////Hot-toast
 import { HotToastModule } from '@ngneat/hot-toast';
-import { AdminDatabaseComponent } from './components/admin-database/admin-database.component';
-import { AdminDatabseListComponent } from './components/admin-database/admin-databse-list/admin-databse-list.component';
-import { AdminDatabseListItemComponent } from './components/admin-database/admin-databse-list/admin-databse-list-item/admin-databse-list-item.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
+import { AdminDbListItemComponent } from './components/admin/admin-db-list/admin-db-list-item/admin-db-list-item.component';
 
 
 
@@ -80,12 +78,10 @@ import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-
     AdminComponent,
     AdminListComponent,
     AdminListItemComponent,
-    AdminDatabaseComponent,
-    AdminDatabseListComponent,
-    AdminDatabseListItemComponent,
     AuthComponent,
     UserTableComponent,
-    AdminDbListComponent
+    AdminDbListComponent,
+    AdminDbListItemComponent
 
   ],
   imports: [

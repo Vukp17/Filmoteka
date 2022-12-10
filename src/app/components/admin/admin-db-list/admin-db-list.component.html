@@ -1,12 +1,18 @@
 <div class="row">
-    <ng-container *ngFor="let movie of movies">
-   
-        <app-admin-databse-list-item
-          class="d-flex justify-content-center col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-xs-12"
-          [movies]="movie"
-      
-        >
-        </app-admin-databse-list-item>
-      </ng-container>
-    
-  </div>
+
+  <h1 class="corouselTitle">NOT RENTED MOVIES</h1>
+  <hr>
+  <ng-container *ngFor="let movie of unrentedMovies">
+    <app-admin-db-list-item
+      class="d-flex justify-content-center col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-xs-12" [movies]="movie">
+    </app-admin-db-list-item>
+  </ng-container>
+  <hr>
+  <h1 class="corouselTitle">RENTED MOVIES</h1>
+  <hr>
+  <ng-container *ngFor="let movie of rentedMovies">
+    <app-admin-db-list-item
+      class="d-flex justify-content-center col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-xs-12" [movies]="movie">
+    </app-admin-db-list-item>
+  </ng-container>
+</div>

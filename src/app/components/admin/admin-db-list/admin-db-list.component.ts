@@ -11,16 +11,35 @@ export class AdminDbListComponent implements OnInit {
 
   movies:Movie[];
 
+  rentedMovies: Movie[];
+  unrentedMovies: Movie[];
+
+
+
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
     this.loadMovies();
+    this.loadRentedMovies();
+    this.loadUnrentedMovies();
   }
 
   ngOnChanges(){
     this.loadMovies();
   }
 
+  loadRentedMovies() {
+   this.api.getRentedMovies().subscribe(data =>{
+    this.rentedMovies = data;
+   })
+  }
+
+  loadUnrentedMovies() {
+    this.api.getUnrentedMovies().subscribe(data => {
+      this.unrentedMovies = data;
+    })
+  }
+ 
   loadMovies(){
     this.api.getMovies().subscribe(data =>{
       this.movies = data

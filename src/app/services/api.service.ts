@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from '../models/movie.model';
-import { map, Observable } from 'rxjs';
-import { Database, ref, update } from '@angular/fire/database';
+import { filter, map, Observable } from 'rxjs';
+import { Database, object, ref, update } from '@angular/fire/database';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireList, AngularFireObject, } from '@angular/fire/compat/database';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
+import { forEach } from 'lodash';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
+  rentedMovie: Movie;
+  rentedMovies: Observable<Movie[]>
 
   moviesRef: AngularFireList<Movie>;
   rentsRef: AngularFireList<Movie>;
@@ -25,7 +30,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private db: AngularFireDatabase, public database: Database) {
     this.moviesRef = db.list('movies');
-    this.rentsRef = db.list('rents')
+    this.rentsRef = db.list('rents');
     /////Rents payload key
     this.itemsRents = this.rentsRef?.snapshotChanges().pipe(
       map((changes: any[]) =>
@@ -41,13 +46,27 @@ export class ApiService {
   }
 
 
+  getRentedMovies() {
+    return this.moviesRef.valueChanges().pipe(
+      map(movies => movies.filter(movie => movie.isRented === true))
+    );
+  }
+
+  getUnrentedMovies() {
+    return this.moviesRef.valueChanges().pipe(
+      map(movies => movies.filter(movie => movie.isRented === false))
+    );
+  }
+  
+
+
   getMovies(){
     return this.itemsMovies;
   }
   getDate(){
-    this. date=new Date();
+    this.date=new Date();
 
-    return this.date.toISOString().substr(0,10);
+    // return this.date.toISOString().substr(0,10);
   }
 
   getRents(): Observable<Movie[]> {
@@ -76,7 +95,7 @@ export class ApiService {
       Year: movies.Year,
       imdbID: movies.imdbID,
       user: user,
-      date: this.date.toISOString().substr(0,10),
+      // date: this.date.toISOString().substr(0,10),
       id: key
     });
     update(ref(this.database, 'movies/' + key), {
