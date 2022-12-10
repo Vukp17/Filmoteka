@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Injectable, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
@@ -14,19 +14,21 @@ import { Movie } from '../../models/movie.model';
 
 })
 export class CarouselComponent implements OnInit, OnChanges {
+
   @Input() carouselElement: string;
+
   movies: Movie[];
+  moviesType: string = 'movies';
+  seriesType: string = 'series';
 
   details: any = []
   display: boolean = false;
   ////Api
   error: string = "";
   response: any = {}
+  responsiveOptions: any;
 
-  responsiveOptions;
-  message: string;
-
-  constructor(private sanitizer: DomSanitizer, private myTranslateService: MyTranslateService, private api: ApiService, private movieService: MovieService) {
+  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
 
     this.movies = []
     this.responsiveOptions = [
@@ -46,70 +48,56 @@ export class CarouselComponent implements OnInit, OnChanges {
         numScroll: 1
       }
     ];
-
   }
+
   ngOnChanges(changes: SimpleChanges): void {
 
   }
 
-
   ngOnInit() {
-    if (this.carouselElement == undefined) {
-      this.loadMoviesDatabase()
-    } else {
-
-      this.fetchMoviesbyType(this.carouselElement)
-    }
+    this.fillCorousel()
 
   }
-  loadMoviesDatabase() {
+
+  loadByType(element: string) { // load movies by type
+    this.api.getItemsByType(element).subscribe(data => {
+      this.movies = data
+      console.log(this.movies)
+    })
+  }
+
+  loadMoviesDatabase() { // loads all movies from database
     this.api.getMovies().subscribe(data => {
       this.movies = data
     })
   }
 
-  async fetchMoviesbyType(key: string) {
-    this.api.getMovies().subscribe(data => {
-      for (let item of data) {
-        if (item.Type == key) {
-          this.movies.push(item);
-        } else {
-
-
-        }
-
-      }
-
-    });
+  showDialog(id: string) { // opens movie details with modal
+    this.api.loadMoviesDetails(id).subscribe(result => {
+      this.display = true;
+      this.details = result
+    })
   }
-  showDialog(id: string) {
-    console.log("alo")
-    this.api.loadMoviesDetails(id).pipe(
-      // Translate the response data
-      map((response) => {
-        const translatedResponse = this.myTranslateService.translate(response)
-        
-        this.details =translatedResponse
-        console.log(translatedResponse)
-      })
-    );
-  }
-  searchByKeyword(title: string) {
+
+  searchByKeyword(title: string) { // searches for youtube video with keyword
     this.api.searchByKeyword(title).subscribe(result => {
       this.response = result
     })
   }
-  getVideoSource(id: string): SafeResourceUrl {
+  getVideoSource(id: string): SafeResourceUrl { // gets the video source for youtube trailer
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
-}
 
-
-@Injectable()
-export class MyTranslateService extends TranslateService {
-  // Custom translate method
-  translate(data: any) {
-    // Use the translate method of the TranslateService to translate the data
-    return this.get(data).toPromise();
+  fillCorousel() { // fills the corousel 
+    if (this.carouselElement == undefined) {
+      this.loadMoviesDatabase()
+    }
+    else {
+      this.loadByType(this.carouselElement)
+    }
   }
+
 }
+
+
+

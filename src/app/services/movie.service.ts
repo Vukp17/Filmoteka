@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { ApiService } from './api.service';
@@ -7,8 +6,10 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class MovieService implements OnInit {
+
   movies: Movie[];
-  isAdmin: boolean
+  isAdmin: boolean;
+
   constructor(private api: ApiService) { }
   ngOnInit(): void {
     this.load();

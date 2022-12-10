@@ -67,7 +67,12 @@ export class MenubarComponent implements OnInit, OnChanges{
       {
         label: 'DataBase',
         icon: 'pi pi-fw pi-database',
-        routerLink: ['/admin-list'],
+        routerLink: ['/admin-db-list'],
+      },
+      {
+        label: 'Analytics',
+        icon: 'pi pi-fw pi-chart-line',
+        routerLink: ['/admin-analytics'],
       },
     ];
     this.userItems = [

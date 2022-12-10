@@ -1,0 +1,21 @@
+<p-table [value]="usersObservable |async" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Movies Rented</th>
+            <th>Quantity</th>
+        </tr>
+
+        <div class="container" *ngFor="let user of users"> 
+            {{user.email}}
+            {{user.admin}}
+       
+        </div>
+
+    </ng-template>
+
+  
+
+</p-table>
+
