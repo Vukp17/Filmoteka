@@ -109,6 +109,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     InputTextModule,
     DividerModule,
     TableModule,
+    CascadeSelectModule,
     SelectButtonModule,
     //ngx-translate
     TranslateModule.forRoot({
