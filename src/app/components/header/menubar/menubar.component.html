@@ -1,62 +1,81 @@
-<p-menubar [model]="items" *ngIf="(afAuth.user | async) && isAdmin else user">
+<p-menubar [model]="items" *ngIf="(afAuth.user | async) && isAdmin; else user">
   <ng-template pTemplate="start">
     <h2 class="titleFilmoteka">FILMOTEKA</h2>
   </ng-template>
   <ng-template pTemplate="end">
-    <p-selectButton (click)="setLanguage()" [options]="countries" [(ngModel)]="selectedCountryCode" optionLabel="name" ></p-selectButton>
+    <p-cascadeSelect
+    (click)="setLanguage()"
+    [(ngModel)]="selectedCountryCode"
+    [options]="countries"
+    optionLabel="name"
+    [optionGroupChildren]="['states']"
+    [style]="{ minWidth: '14rem' }"
+  ></p-cascadeSelect>
 
     <button
-    
       pButton
-      label="Logout"
+      label="{{'navbar.logout' | translate}}"
       class="p-button-raised p-button-rounded"
       class="p-button-danger"
       icon="pi pi-sign-out"
       (click)="logout()"
     ></button>
- 
   </ng-template>
 </p-menubar>
 
-<p-menubar [model]="userItems" *ngIf=" (afAuth.user | async) && !isAdmin else nonUser" #user>
-    <ng-template pTemplate="start">
-      <h2 class="titleFilmoteka">FILMOTEKA</h2>
-    </ng-template>
-    <ng-template pTemplate="end">
-    
-      <button
-        pButton
-        label="{{'navbar.login' | translate}}"
-        class="p-button-raised p-button-rounded"
-        class="p-button-danger"
-        icon="pi pi-sign-out"
-        (click)="logout()"
-      ></button>
-      <p-selectButton (click)="setLanguage()" [options]="countries" [(ngModel)]="selectedCountryCode" optionLabel="name" ></p-selectButton>
-    </ng-template>
-  </p-menubar>
+<p-menubar
+  [model]="userItems"
+  *ngIf="(afAuth.user | async) && !isAdmin; else nonUser"
+  #user
+>
+  <ng-template pTemplate="start">
+    <h2 class="titleFilmoteka">FILMOTEKA</h2>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <p-cascadeSelect
+    (click)="setLanguage()"
+    [(ngModel)]="selectedCountryCode"
+    [options]="countries"
+    optionLabel="name"
+    [optionGroupChildren]="['states']"
+    [style]="{ minWidth: '14rem' }"
+  ></p-cascadeSelect>
+    <button
+      pButton
+      label="{{'navbar.logout' | translate}}"
+      class="p-button-raised p-button-rounded"
+      class="p-button-danger"
+      icon="pi pi-sign-out"
+      (click)="logout()"
+    ></button>
+  </ng-template>
+</p-menubar>
 
-  <ng-template #nonUser>
-    <div  *ngIf="!(afAuth.user | async) ">
+<ng-template #nonUser>
+  <div *ngIf="!(afAuth.user | async)">
     <p-menubar [model]="notLoggedInItems">
       <ng-template pTemplate="start">
         <h2 class="titleFilmoteka">FILMOTEKA</h2>
       </ng-template>
       <ng-template pTemplate="end">
-        <p-selectButton (click)="setLanguage()" [options]="countries" [(ngModel)]="selectedCountryCode" optionLabel="name" ></p-selectButton>
+        <p-cascadeSelect
+        (click)="setLanguage()"
+        [(ngModel)]="selectedCountryCode"
+        [options]="countries"
+        optionLabel="name"
+        [optionGroupChildren]="['states']"
+        [style]="{ minWidth: '5rem' }"
+      ></p-cascadeSelect>
 
         <button
-        pButton
-        label="Log In"
-        class="p-button-raised p-button-rounded"
-        class="p-button-danger"
-        icon="pi pi-sign-in"
-        routerLink="/auth"
-      ></button>
+          pButton
+          label="{{'navbar.login' | translate}}"
+          class="p-button-raised p-button-rounded"
+          class="p-button-danger"
+          icon="pi pi-sign-in"
+          routerLink="/auth"
+        ></button>
       </ng-template>
     </p-menubar>
   </div>
-  </ng-template>
-
-  
-
+</ng-template>

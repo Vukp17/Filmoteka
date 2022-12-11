@@ -54,7 +54,7 @@ export class MenubarComponent implements OnInit, OnChanges{
   ngOnInit() {
     console.log(this.selectedCountryCode)
     this.countries = [
-      {name: 'Englis', code: 'en'},
+      {name: 'English', code: 'en'},
       {name: 'Deutch', code: 'de'},
   ];
    this.items = [

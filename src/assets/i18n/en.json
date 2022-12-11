@@ -1,11 +1,13 @@
 {
-  "movies": "Filme",
+  "movies": "Movies",
   "series": "Series",
   "navbar": {
-    "home": "Heim",
-    "movies": "Filme",
-    "rent": "Miete",
-    "login": "Login"
+    "home": "Home",
+    "movies": "Movies",
+    "rent": "Rent",
+    "login": "Login",
+    "logout": "Logout"
+
   },
   "auth": {
     "email": "Please enter your e-mail address",
@@ -30,5 +32,15 @@
   "carousel": {
     "about": "About",
     "favorite": "Favorite"
+  },
+  "denied": {
+    "desc": "Access Denied",
+    "permission":"You do not have permission to access this page."
+  },
+  "footer":{
+    "home": "Home",
+    "features":"Features",
+    "about":"About"
+
   }
 }

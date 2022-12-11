@@ -6,7 +6,8 @@
         "home": "Heim",
         "movies": "Filme",
         "rent": "Miete",
-        "login": "Einloggen"
+        "login": "Einloggen",
+        "logout": "Ausloggen"
       },
     "auth": {
         "email": "Bitte geben Sie ihre E-Mail-Adresse ein ",
@@ -33,7 +34,16 @@
     "carousel": {
         "about": "Um",
         "favorite": "Favorit"
-      }
-      
+      },
+    "denied": {
+      "desc": "Zugriff abgelehnt",
+      "permission":"Sie sind nicht berechtigt, auf diese Seite zuzugreifen."
+    },
+    "footer":{
+      "home": "Heim",
+      "features":"Merkmale",
+      "about":"Um"
+
+    }
     
 }
