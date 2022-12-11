@@ -1,5 +1,5 @@
 <div class="row">
-
+  <h1 class="warningMessage" *ngIf="rentedMessage != null">{{rentedMessage}}</h1>  
   <h1 class="corouselTitle">{{'admin.nonRented' | translate | uppercase}}</h1>
   <hr>
   <ng-container *ngFor="let movie of unrentedMovies">
@@ -10,6 +10,7 @@
   <hr>
   <h1 class="corouselTitle">{{'admin.rented' | translate | uppercase}}</h1>
   <hr>
+  <h1 class="warningMessage" *ngIf="unrentedMessage != null">{{unrentedMessage}}</h1>
   <ng-container *ngFor="let movie of rentedMovies">
     <app-admin-db-list-item
       class="d-flex justify-content-center col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-xs-12" [movies]="movie">

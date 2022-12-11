@@ -14,7 +14,7 @@ export class MovieListComponent implements OnInit, OnChanges {
   @Output() movieWasSelected = new EventEmitter<Movie>();
 
   availableMovies: Movie[]
-  message:string;
+  message: string;
 
   constructor(private api: ApiService) { }
 
@@ -26,7 +26,7 @@ export class MovieListComponent implements OnInit, OnChanges {
   }
 
   loadAvailableMovies() {
-    this.api.getAvailableMovies().subscribe(data =>{
+    this.api.getAvailableMovies().subscribe(data => {
       this.availableMovies = data
       if (data.length == 0) {
         this.message = 'Currently there is no movies available in our store.'

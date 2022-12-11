@@ -1,5 +1,11 @@
 <div class="row">
-  {{message}}
+
+  <hr>
+  <h1 class="corouselTitle">{{'yourMovies' | translate | uppercase}}</h1>
+ <hr>
+
+ <h1 class="warningMessage" *ngIf="message != null">{{message}}</h1>
+
     <ng-container *ngFor="let item of moviesForUser">
 
        

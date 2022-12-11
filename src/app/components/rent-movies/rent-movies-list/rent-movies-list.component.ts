@@ -33,7 +33,12 @@ export class RentMoviesListComponent implements OnInit {
 
   loadMovies(){
     this.api.getCurrUserRentedMovies(this.movieIds).subscribe(data =>{
-      this.moviesForUser = data
+      if (data.length == 0) {
+        this.message = 'Currently you have no rented movies'
+      }
+      else {
+        this.moviesForUser = data
+      }
     })
   }
 
