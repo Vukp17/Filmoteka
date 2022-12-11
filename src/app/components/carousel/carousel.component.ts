@@ -63,7 +63,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   loadByType(element: string) { // load movies by type
     this.api.getItemsByType(element).subscribe(data => {
       this.movies = data
-      console.log(this.movies)
+      // console.log(this.movies)
     })
   }
 
