@@ -13,6 +13,7 @@ export class RentMoviesListComponent implements OnInit {
 
   rents:Rent[];
   moviesForUser: Movie[]
+  movieIds: Array<string>
 
   message: string;
   email: string
@@ -22,26 +23,20 @@ export class RentMoviesListComponent implements OnInit {
     this.email=this.userService.Email
     this.loadUserRentedMovies()
   }
-  
-  loadRentedMovies(){
-     this.api.getRents().subscribe(data =>{
-      if (data.length == 0) {
-        this.message = 'You dont have any rented movies at the moment.'
-      }
-      else {
-        this.rents = data
-        console.log(this.rents)
-      }
-    });
-  }
-
-
 
   loadUserRentedMovies() {
     this.api.getCurrUserRented(this.email).subscribe(data =>{
-      this.rents = data;
-      console.log(this.rents)
+      this.movieIds = data
+      this.loadMovies();
     })
   }
+
+  loadMovies(){
+    console.log(this.movieIds)
+    this.api.getCurrUserRentedMovies(this.movieIds).subscribe(data =>{
+      this.moviesForUser = data
+    })
+  }
+
 
 }

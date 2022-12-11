@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./rent-movies-item.component.css'],
 })
 export class RentMoviesItemComponent implements OnInit {
-  @Input() movies: Movie;
+  @Input() movie: Movie;
 
   constructor(private api: ApiService) {}
 
@@ -19,7 +19,7 @@ export class RentMoviesItemComponent implements OnInit {
   }
   
   returnDaysLeft() {
-    const isoString = Date.parse(this.movies.date);
+    const isoString = Date.parse(this.movie.date);
     const rentDate = new Date(isoString);
     let now = new Date();
     console.log(now)

@@ -1,10 +1,13 @@
 <div class="row">
   {{message}}
-    <ng-container *ngFor="let item of rents"  >
+    <ng-container *ngFor="let item of moviesForUser">
+
+       
         <app-rent-movies-item
-          class="d-flex justify-content-center col-xl-4 col-lg-6 col-md-6 col-xs-12"
-          
+          class="d-flex justify-content-center col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-xs-12"
+          [movie]="item"
         >
         </app-rent-movies-item>
+
       </ng-container>
   </div>

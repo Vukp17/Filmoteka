@@ -99,9 +99,15 @@ export class ApiService implements OnInit, OnChanges {
       )
   }
 
-  getCurrUserRented(email) {
+  getCurrUserRented(email): Observable<string[]> {
     return this.rentsRef.valueChanges().pipe(
-      map(movies => movies.filter(rents => rents.userId === email))
+      map(rents => rents.filter(rents => rents.userId === email).map(rent => rent.movieId))
+    );
+  }
+
+  getCurrUserRentedMovies(movieIds) {
+    return this.itemsMovies.pipe(
+      map(movies => movies.filter(movie => movieIds.includes(movie.key))),
     );
   }
 
@@ -177,7 +183,7 @@ export class ApiService implements OnInit, OnChanges {
   pushMovieRents(movies: Movie, user: string, key: string) {
     // push rent to database
     this.rentsRef.push({
-      movieId: movies,
+      movieId: key,
       userId: user,
       date: this.date.toISOString().substr(0,10),
     });
