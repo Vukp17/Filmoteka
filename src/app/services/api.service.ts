@@ -194,8 +194,8 @@ export class ApiService implements OnInit, OnChanges {
 
   returnMovie(key: string, id: string) {
     // return movie from rent list
-    this.rentsRef.remove(key);
-    update(ref(this.database, 'movies/' + id), {
+    this.rentsRef.remove(id);
+    update(ref(this.database, 'movies/' + key), {
       isRented: false,
     });
   }

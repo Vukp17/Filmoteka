@@ -35,6 +35,7 @@ export class RentMoviesListComponent implements OnInit {
     console.log(this.movieIds)
     this.api.getCurrUserRentedMovies(this.movieIds).subscribe(data =>{
       this.moviesForUser = data
+      console.log(data)
     })
   }
 

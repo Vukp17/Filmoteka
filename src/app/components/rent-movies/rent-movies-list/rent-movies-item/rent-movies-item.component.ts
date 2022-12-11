@@ -14,7 +14,7 @@ export class RentMoviesItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  returnMovie(key: any, id: any) {
+  returnMovie(key: string, id: string) {
     this.api.returnMovie(key, id);
   }
   
