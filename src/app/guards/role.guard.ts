@@ -38,8 +38,8 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean> {
-    console.log(this.isAdmin)
-    if (this.isAdmin) {
+   // console.log(this.isAdmin)
+    if (this.authService.hasClaim('admin')) {
       return true;
     } else {
       console.log('You are not authorized for this action!');

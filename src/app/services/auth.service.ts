@@ -54,7 +54,7 @@ export class AuthService {
               .then(idTokenResult => {
                 this.claims = idTokenResult.claims;
                 this.isAdmin = this.hasClaim('admin');
-                console.log(this.hasClaim('admin'));
+                
                 this.userEmailSubject.next(this.userEmail);
                 this.isAdminSubject.next(this.isAdmin);
                 this.claimsSubject.next(this.claims);
