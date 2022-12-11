@@ -2,6 +2,7 @@ import { Movie } from "./movie.model";
 
 export class Rent {
 
+    key? : string;
     rentId?: string;
     movieId: string;
     userId: string;

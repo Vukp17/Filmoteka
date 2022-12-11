@@ -45,6 +45,19 @@ export class ApiService implements OnInit, OnChanges {
     this.loadUserPayload();
   }
 
+  ngOnInit() {
+    this.headers = new HttpHeaders().set(
+      'Accept-Language',
+      this.translateService.currentLang
+    );
+  }
+  ngOnChanges() {
+    this.headers = new HttpHeaders().set(
+      'Accept-Language',
+      this.translateService.currentLang
+    );
+  }
+
   loadRentsPayload() {
     // loads rents payload with keys
     this.rentsRef = this.db.list('rents');
@@ -67,18 +80,6 @@ export class ApiService implements OnInit, OnChanges {
           changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
-  }
-  ngOnInit() {
-    this.headers = new HttpHeaders().set(
-      'Accept-Language',
-      this.translateService.currentLang
-    );
-  }
-  ngOnChanges() {
-    this.headers = new HttpHeaders().set(
-      'Accept-Language',
-      this.translateService.currentLang
-    );
   }
 
   loadUserPayload() {
@@ -159,8 +160,14 @@ export class ApiService implements OnInit, OnChanges {
   }
   
   getRentsByUser(user: string){
-    return this.rentsRef.valueChanges()
+    return this.itemsRents
       .pipe(map((rents) => rents.filter((rent) => rent.userId === user)));
+  }
+
+  getRentLocation(user: string, movieId: string){
+    return this.itemsRents.pipe(
+      map((rents) => rents.filter((rent) => rent.userId === user && rent.movieId === movieId).map((rent) => rent.key))
+    );
   }
 
   deleteMovie(id: string) {
@@ -194,11 +201,13 @@ export class ApiService implements OnInit, OnChanges {
 
   returnMovie(key: string, id: string) {
     // return movie from rent list
+    console.log(id)
     this.rentsRef.remove(id);
     update(ref(this.database, 'movies/' + key), {
       isRented: false,
     });
   }
+
   loadUsers(): Observable<User[]> {
     const url = environment.databaseUsers;
     return this.http.get<User[]>(url);

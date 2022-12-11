@@ -3,7 +3,6 @@
      <p-card 
       class="cardMain"
       header="{{ movie.Title }}"
-      subheader="{{ movie.Type }}"
       [style]="{ width: '360px' }"
       styleClass="p-card-shadow">      <ng-template pTemplate="header">
         <img class="cImg" alt="Card" [src]="movie.Poster" />
@@ -15,7 +14,7 @@
           styleClass="p-button-lg p-button-danger"
           label="Return"
           icon="pi pi-trash"
-         (click)="returnMovie(movie.key,movie.id)"
+         (click)="getRentLocation(movie.key)"
         ></p-button>
       </ng-template>
     </p-card>
