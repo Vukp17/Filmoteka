@@ -16,7 +16,10 @@ export class RentMoviesItemComponent implements OnInit {
 
   rentsForUser: Rent[]
   rentToDelete: string[]
+
   rentDeleteKey: string
+  movieToDelete: string
+
   rentsIds: Array<string>
 
   constructor(private api: ApiService, private userService: UserService) {
@@ -34,21 +37,21 @@ export class RentMoviesItemComponent implements OnInit {
     })
   }
 
-
-  getRentLocation(idMovie) {
+  returnMovie(idMovie) {
     this.api.getRentLocation(this.email,idMovie).subscribe(data => {
-      this.rentToDelete = data // this returns ["-NIUXFHI2dceHtm1wxCp"] but
-      console.log(this.rentToDelete.toString())
-      this.api.returnMovie(idMovie , this.rentToDelete.toString())
+      data.forEach(element => {
+        this.rentDeleteKey = element.toString();
+        this.movieToDelete = idMovie;
+      });
+      this.returnMovieBack()
     })
   }
   
-  // returnMovie(key) {
-  //   this.getRentLocation
-  //   rentDeleteKey
-  //   this.api.returnMovie(key,)
-  // }
-
+  returnMovieBack() {
+    if (this.rentDeleteKey != undefined){
+      this.api.returnMovie(this.movieToDelete , this.rentDeleteKey)
+    }
+  }
 
   returnDaysLeft() {
     const isoString = Date.parse(this.movie.date);

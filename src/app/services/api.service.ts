@@ -154,17 +154,13 @@ export class ApiService implements OnInit, OnChanges {
     // get all rents
     return this.itemsRents;
   }
-
-  fillArray(element) {
-   this.array.push(element)
-  }
   
   getRentsByUser(user: string){
     return this.itemsRents
       .pipe(map((rents) => rents.filter((rent) => rent.userId === user)));
   }
 
-  getRentLocation(user: string, movieId: string){
+  getRentLocation(user: string, movieId: string): Observable<string[]>{
     return this.itemsRents.pipe(
       map((rents) => rents.filter((rent) => rent.userId === user && rent.movieId === movieId).map((rent) => rent.key))
     );
