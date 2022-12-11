@@ -1,23 +1,30 @@
 <!-- <div [ngClass]="{'red-bg': returnDaysLeft() < 1}"> -->
-  <div> 
-     <p-card 
-      class="cardMain"
-      header="{{ movie.Title }}"
-      [style]="{ width: '360px' }"
-      styleClass="p-card-shadow">      <ng-template pTemplate="header">
-        <img class="cImg" alt="Card" [src]="movie.Poster" />
-      </ng-template>
-      <!-- <p [ngClass]="{'red-text': returnDaysLeft() < 1}">Days left: {{returnDaysLeft()}}</p> -->
-      <ng-template pTemplate="footer">
-        <p-button
-          class="d-flex justify-content-center"
-          styleClass="p-button-lg p-button-danger"
-          label="{{'return' | translate}}"
-          icon="pi pi-trash"
-         (click)="returnMovie(movie.key)"
-        ></p-button>
-      </ng-template>
-    </p-card>
-  </div>
+<div>
+  <p-card
+    class="cardMain"
+    header="{{ movie.Title }}"
+    [style]="{ width: '360px' }"
+    styleClass="p-card-shadow"
+  >
+    <ng-template pTemplate="header">
+      <img
+        class="cImg"
+        alt="Card"
+        [src]="movie.Poster"
+        (click)="showDialog()"
+      />
+    </ng-template>
+    <!-- <p [ngClass]="{'red-text': returnDaysLeft() < 1}">Days left: {{returnDaysLeft()}}</p> -->
+    <ng-template pTemplate="footer">
+      <p-button
+        class="d-flex justify-content-center"
+        styleClass="p-button-lg p-button-danger"
+        label="{{ 'return' | translate }}"
+        icon="pi pi-trash"
+        (click)="returnMovie(movie.key)"
+      ></p-button>
+    </ng-template>
+  </p-card>
+</div>
 
-
+<app-dialog [display]="display" [movie]="movie"></app-dialog>

@@ -16,7 +16,7 @@ import { Movie } from '../../../../models/movie.model';
 })
 
 export class MovieItemComponent implements OnInit {
-  @Input() movies: Movie;
+  @Input() movie: Movie;
   @Output() moviesSelected = new EventEmitter<void>();
   email: string | any;
   details: any = []
@@ -27,7 +27,7 @@ export class MovieItemComponent implements OnInit {
   response: any = {}
 
   constructor(public api: ApiService, public authService: AuthService,
-    private toastService: HotToastService,private userService: UserService,
+    private toastService: HotToastService, private userService: UserService,
     private sanitizer: DomSanitizer) {
     this.authService.getCurrentUserEmail()
 
@@ -50,18 +50,8 @@ export class MovieItemComponent implements OnInit {
     this.api.pushMovieRents(movies, this.userService.email, key)
   }
 
-  showDialog(id: string) {
-    this.api.loadMoviesDetails(id).subscribe(result => {
-      this.show = true;
-      this.details = result
-      console
-    })
-  }
-
-  searchByKeyword(title: string) {
-    this.api.searchByKeyword(title).subscribe(result => {
-      this.response = result
-    })
+  showDialog() {
+    this.display = true;
   }
 
 

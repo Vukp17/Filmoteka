@@ -10,7 +10,9 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./admin-db-list-item.component.css']
 })
 export class AdminDbListItemComponent implements OnInit {
-  @Input() movies: Movie;
+  @Input() movie: Movie;
+  display: boolean = false;
+
   constructor(public api: ApiService, private toastService: HotToastService,) {
 
   }
@@ -28,4 +30,8 @@ export class AdminDbListItemComponent implements OnInit {
     }
 
   }
+  showDialog() {
+    this.display = true;
+  }
+
 }

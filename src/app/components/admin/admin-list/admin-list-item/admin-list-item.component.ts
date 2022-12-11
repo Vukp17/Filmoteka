@@ -10,8 +10,8 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./admin-list-item.component.css']
 })
 export class AdminListItemComponent implements OnInit {
-  @Input() movies: Movie;
-
+  @Input() movie: Movie;
+  display: boolean = false;
   constructor(private api: ApiService, private movieService: MovieService, private toastService: HotToastService) { }
 
   ngOnInit(): void {
@@ -24,5 +24,8 @@ export class AdminListItemComponent implements OnInit {
       this.api.pushMovie(movies)
       this.toastService.success('You have successefully added this movie to database')
     }
+  }
+  showDialog(){
+    this.display= true;
   }
 }

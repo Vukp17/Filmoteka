@@ -6,7 +6,7 @@
       styleClass="p-card-shadow"
     >
       <ng-template pTemplate="header">
-        <img class="cImg" alt="Card" [src]="movies.Poster" />
+        <img class="cImg" alt="Card" [src]="movie.Poster" (click)="showDialog()" />
       </ng-template>
   
      
@@ -14,9 +14,11 @@
         class="d-flex justify-content-center"
           styleClass="p-button-lg p-button-primary w-100"
           label="Add movie"
-        (click)="pushMovie(movies,movies.imdbID)"
+        (click)="pushMovie(movie,movie.imdbID)"
       ></p-button>
    
      
     </p-card> 
+    <app-dialog [display]="display" [movie]="movie"></app-dialog>
+
   </div>

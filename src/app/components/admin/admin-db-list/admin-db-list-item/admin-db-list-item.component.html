@@ -5,15 +5,17 @@
     styleClass="p-card-shadow"
   >
     <ng-template pTemplate="header">
-      <img class="cImg" alt="Card" [src]="movies.Poster" />
+      <img class="cImg" alt="Card" [src]="movie.Poster" (click)="showDialog()"/>
     </ng-template>
       <p-button
       class="d-flex justify-content-center w-100"
       styleClass="p-button-lg p-button-danger w-100"
       icon="pi pi-trash"
-      (click)="Remove(movies.key,movies.isRented)"
+      (click)="Remove(movie.key,movie.isRented)"
     ></p-button>
  
    
   </p-card> 
+  <app-dialog [display]="display" [movie]="movie"></app-dialog>
+
 </div>

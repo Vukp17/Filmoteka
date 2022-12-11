@@ -21,6 +21,7 @@ export class RentMoviesItemComponent implements OnInit {
   movieToDelete: string
 
   rentsIds: Array<string>
+  display: boolean=false;
 
   constructor(private api: ApiService, private userService: UserService) {
     this.email = this.userService.Email
@@ -63,4 +64,8 @@ export class RentMoviesItemComponent implements OnInit {
       Math.trunc((now.getTime() - rentDate.getTime()) / (1000 * 3600 * 24));
     return daysLeft;
   }
+  showDialog() {
+    this.display = true;
+  }
+
 }

@@ -9,13 +9,15 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  @Input()details: any = []
+  details: any = []
   @Input()display: boolean;
-  @Input()response: any = {}
-  @Input() Rent: Function;
+  response: any = {}
+  @Input()movie: Movie
     constructor(private api: ApiService,private sanitizer: DomSanitizer) { }
   
     ngOnInit(): void {
+      this.showDialog(this.movie.imdbID)
+      this.searchByKeyword(this.movie.Title)
     }
     showDialog(id: string) {
       this.api.loadMoviesDetails(id).subscribe(result => {

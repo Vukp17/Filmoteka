@@ -2,7 +2,7 @@
   <div>
     <p-card
       class="cardMain"
-      header="{{ movies.Title }}"
+      header="{{ movie.Title }}"
       [style]="{ width: '360px' }"
       styleClass="p-card-shadow"
     >
@@ -10,8 +10,8 @@
         <img
           class="cImg"
           alt="Card"
-          [src]="movies.Poster"
-          (click)="showDialog(movies.imdbID); searchByKeyword(movies.Title)"
+          [src]="movie.Poster"
+          (click)="showDialog()"
         />
       </ng-template>
 
@@ -20,14 +20,14 @@
           class="d-flex justify-content-center w-100"
           styleClass="p-button-lg p-button-warning w-100"
           label="{{'rent' | translate}}"
-          (click)="Rent(movies, movies.key)"
+          (click)="Rent(movie, movie.key)"
           icon="pi pi-plus"
         ></p-button>
       </ng-template>
     </p-card>
   </div>
 
-  <app-dialog [display]="show" [details]="details" [response]="response" [Rent]="Rent"></app-dialog>
+  <app-dialog [display]="display" [movie]="movie"></app-dialog>
 </body>
 
 
