@@ -11,12 +11,12 @@ import { Movie } from '../../models/movie.model';
   providers: [MovieService,ApiService]
 })
 export class MoviesComponent implements OnInit {
+
 selectedMovie : Movie;
-  constructor(private movieService:MovieService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-
-    
 
   }
 

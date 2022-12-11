@@ -1,6 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 ///Services
 import { HotToastService } from '@ngneat/hot-toast';
@@ -32,19 +30,19 @@ export class MovieItemComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
 
-
   }
+
   onSelected() {
     this.moviesSelected.emit();
   }
+
   Remove(key: any) {
     this.api.deleteMovie(key)
-    this.toastService.success('Uspenso izbrisan iz baze')
-
+    this.toastService.success('Successefully deleted from database')
   }
+
   Rent(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.userService.Email, key)
   }
@@ -55,15 +53,17 @@ export class MovieItemComponent implements OnInit {
       this.details = result
       console
     })
-
   }
+
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(result => {
       this.response = result
     })
   }
+
   getVideoSource(id: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
+  
 }
 

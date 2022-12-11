@@ -10,11 +10,8 @@ import { ApiService } from 'src/app/services/api.service';
 export class AdminDbListComponent implements OnInit {
 
   movies:Movie[];
-
   rentedMovies: Movie[];
   unrentedMovies: Movie[];
-
-
 
   constructor(private api:ApiService) { }
 

@@ -19,10 +19,10 @@ export class AdminListItemComponent implements OnInit {
   }
   pushMovie(movies: Movie, imdbID: string) {
     if (this.movieService.checkIfMovieExsist(imdbID) == true) {
-      this.toastService.warning('Film vec postoji u bazi!');
+      this.toastService.warning('Instance of this movie is already in database');
     } else {
       this.api.pushMovie(movies)
-      this.toastService.success('Uspenso si dodao film u bazu')
+      this.toastService.success('You have successefully added this movie to database')
     }
   }
 }

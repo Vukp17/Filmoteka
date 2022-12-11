@@ -17,15 +17,15 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovie(key: any, id: any) {
     this.api.returnMovie(key, id);
   }
+  
   returnDaysLeft() {
     const isoString = Date.parse(this.movies.date);
     const rentDate = new Date(isoString);
     let now = new Date();
+    console.log(now)
     let daysLeft =
       30 -
       Math.trunc((now.getTime() - rentDate.getTime()) / (1000 * 3600 * 24));
-  
-      
       return daysLeft;
   }
 }

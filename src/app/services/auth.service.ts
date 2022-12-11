@@ -27,7 +27,6 @@ export class AuthService {
   isAdminSubject = new Subject<boolean>();
 
   constructor(
-    private router: Router,
     private afAuth: AngularFireAuth,
     private userService: UserService,
   ) {
