@@ -1,11 +1,8 @@
 <body>
   <div>
-
-
     <p-card
       class="cardMain"
       header="{{ movies.Title }}"
-      subheader="{{ movies.Type }}"
       [style]="{ width: '360px' }"
       styleClass="p-card-shadow"
     >
@@ -20,8 +17,8 @@
 
       <ng-template pTemplate="footer">
         <p-button
-          class="d-flex justify-content-center"
-          styleClass="p-button-lg p-button-warning"
+          class="d-flex justify-content-center w-100"
+          styleClass="p-button-lg p-button-warning w-100"
           label="Rent"
           (click)="Rent(movies, movies.key)"
           icon="pi pi-plus"
@@ -72,8 +69,5 @@
     </div>
     <ng-template pTemplate="footer">
     </ng-template>
-
- 
-  
   </p-dialog>
 </body>

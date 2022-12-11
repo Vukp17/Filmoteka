@@ -20,8 +20,8 @@ export class UserService {
   users: User[]
   email: string
   hadAccess: boolean
-  constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient,private afAuth:AngularFireAuth) {
-    
+  constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient, private afAuth: AngularFireAuth) {
+
     this.email = ""
     this.usersRef = db.list('users');
     this.items = this.usersRef?.snapshotChanges().pipe(
@@ -31,11 +31,10 @@ export class UserService {
     );
   }
 
-  async getUserClaims(){
-this.userToken = (await this.afAuth.currentUser).getIdTokenResult();
-return (await this.userToken);
+  async getUserClaims() {
+    this.userToken = (await this.afAuth.currentUser).getIdTokenResult();
+    return (await this.userToken);
   }
-
 
   getUsers() {
     return this.items;
@@ -44,14 +43,9 @@ return (await this.userToken);
     this.usersRef.push({
       email: email,
       admin: admin,
-      user_id : user_id
-
-    });
-
-
+      user_id: user_id
+    })
   }
-
-
 
   set Users(user: User[]) {
     this.users = user
@@ -65,6 +59,7 @@ return (await this.userToken);
   get Email() {
     return this.email
   }
+
 }
 
 

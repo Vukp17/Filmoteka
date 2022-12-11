@@ -3,6 +3,7 @@ export class User {
     admin: boolean;
     user_id?: string;
     email: string;
+    moviesRented?: string;
 
     constructor(admin: boolean,user_id: string, email:string) {
         this.admin= admin;

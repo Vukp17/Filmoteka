@@ -8,24 +8,24 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./rent-movies-item.component.css'],
 })
 export class RentMoviesItemComponent implements OnInit {
-  @Input() movies: Movie;
+  @Input() movie: Movie;
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {}
 
-  returnMovie(key: any, id: any) {
+  returnMovie(key: string, id: string) {
     this.api.returnMovie(key, id);
   }
+  
   returnDaysLeft() {
-    const isoString = Date.parse(this.movies.date);
+    const isoString = Date.parse(this.movie.date);
     const rentDate = new Date(isoString);
     let now = new Date();
+    console.log(now)
     let daysLeft =
       30 -
       Math.trunc((now.getTime() - rentDate.getTime()) / (1000 * 3600 * 24));
-  
-      
       return daysLeft;
   }
 }
