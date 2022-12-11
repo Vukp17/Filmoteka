@@ -22,6 +22,8 @@ export class ApiService implements OnInit, OnChanges {
   itemsMovies: Observable<Movie[]>;
   itemsUsers: Observable<User[]>;
 
+  availableMovies: Observable<Movie[]>
+
   users: User[]
   error: string = "";
   date: Date = new Date();
@@ -70,6 +72,18 @@ export class ApiService implements OnInit, OnChanges {
     );
   }
 
+  getAvailableMovies() {
+   return this.itemsMovies.pipe(
+      map(movies => movies.filter(movie => movie.isRented === false))
+      )
+  }
+
+  // getCurrUserRented(email) {
+  //   return this.rentsRef.valueChanges().pipe(
+  //     map(movies => movies.filter(rents => rents.email === email))
+  //   );
+  // }
+
   getUsers(): Observable<User[]> {
     return this.itemsUsers
   }
@@ -94,6 +108,7 @@ export class ApiService implements OnInit, OnChanges {
   getMovies() { // Returns full movie list
     return this.itemsMovies;
   }
+
 
   getDate() {
     this.date = new Date();

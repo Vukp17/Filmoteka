@@ -13,30 +13,32 @@ export class MovieListComponent implements OnInit, OnChanges {
 
   @Output() movieWasSelected = new EventEmitter<Movie>();
 
-  movies: Movie[];
+  availableMovies: Movie[]
   message:string;
 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.loadMovies();
+    this.loadAvailableMovies()
   }
   onMovieSeleted(movie: Movie) {
     this.movieWasSelected.emit(movie);
   }
-  loadMovies() {
-    this.api.getMovies().subscribe(data => {
+
+  loadAvailableMovies() {
+    this.api.getAvailableMovies().subscribe(data =>{
+      this.availableMovies = data
       if (data.length == 0) {
         this.message = 'Currently there is no movies available in our store.'
       }
       else {
-        this.movies = data
+        this.availableMovies = data
       }
-      
-    });
+    })
   }
+
   ngOnChanges() {
-    this.loadMovies();
+    this.loadAvailableMovies()
   }
 
 }
