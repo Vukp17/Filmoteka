@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
+import { Rent } from 'src/app/models/rents.model';
 import { ApiService } from 'src/app/services/api.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./rent-movies-list.component.css']
 })
 export class RentMoviesListComponent implements OnInit {
-  movies:Movie[];
 
+  rents:Rent[];
   moviesForUser: Movie[]
 
   message: string;
@@ -18,8 +19,8 @@ export class RentMoviesListComponent implements OnInit {
   constructor(private api:ApiService,private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loadRentedMovies()
     this.email=this.userService.Email
+    this.loadUserRentedMovies()
   }
   
   loadRentedMovies(){
@@ -28,13 +29,19 @@ export class RentMoviesListComponent implements OnInit {
         this.message = 'You dont have any rented movies at the moment.'
       }
       else {
-        this.movies = data
+        this.rents = data
+        console.log(this.rents)
       }
     });
   }
 
+
+
   loadUserRentedMovies() {
-    
+    this.api.getCurrUserRented(this.email).subscribe(data =>{
+      this.rents = data;
+      console.log(this.rents)
+    })
   }
 
 }

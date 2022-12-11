@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 ///Services
 import { HotToastService } from '@ngneat/hot-toast';
+import { now } from 'lodash';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
@@ -44,7 +45,7 @@ export class MovieItemComponent implements OnInit {
   }
 
   Rent(movies: Movie, key: any) {
-    this.api.pushMovieRents(movies, this.userService.Email, key)
+    this.api.pushMovieRents(movies, this.userService.email, key)
   }
 
   showDialog(id: string) {

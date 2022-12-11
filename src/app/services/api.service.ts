@@ -11,28 +11,25 @@ import {
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { Rent } from '../models/rents.model';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService implements OnInit, OnChanges {
-  moviesRef: AngularFireList<Movie>;
-  rentsRef: AngularFireList<Movie>;
-  movieRef: AngularFireObject<any>;
-  usersRef: AngularFireList<Movie>;
 
-  itemsRents: Observable<Movie[]>;
+  moviesRef: AngularFireList<Movie>;
   itemsMovies: Observable<Movie[]>;
+
+  rentsRef: AngularFireList<Rent>;
+  itemsRents: Observable<Rent[]>;
+
+  usersRef: AngularFireList<User>;
   itemsUsers: Observable<User[]>;
 
-<<<<<<< Updated upstream
-  availableMovies: Observable<Movie[]>
+  array: string[]
 
-  users: User[]
-  error: string = "";
-=======
   users: User[];
   error: string = '';
->>>>>>> Stashed changes
   date: Date = new Date();
   response: any = {};
   headers: HttpHeaders;
@@ -102,11 +99,11 @@ export class ApiService implements OnInit, OnChanges {
       )
   }
 
-  // getCurrUserRented(email) {
-  //   return this.rentsRef.valueChanges().pipe(
-  //     map(movies => movies.filter(rents => rents.email === email))
-  //   );
-  // }
+  getCurrUserRented(email) {
+    return this.rentsRef.valueChanges().pipe(
+      map(movies => movies.filter(rents => rents.userId === email))
+    );
+  }
 
   getUsers(): Observable<User[]> {
     return this.itemsUsers;
@@ -146,16 +143,18 @@ export class ApiService implements OnInit, OnChanges {
      return this.date.toISOString().substr(0,10);
   }
 
-  getRents(): Observable<Movie[]> {
+  getRents(): Observable<Rent[]> {
     // get all rents
     return this.itemsRents;
   }
-  getRentsByUser(user: string): Observable<Movie[]> {
-    console.log(user);
-    // get rents by user
-    return this.rentsRef
-      .valueChanges()
-      .pipe(map((rents) => rents.filter((rent) => rent.user === user)));
+
+  fillArray(element) {
+   this.array.push(element)
+  }
+  
+  getRentsByUser(user: string){
+    return this.rentsRef.valueChanges()
+      .pipe(map((rents) => rents.filter((rent) => rent.userId === user)));
   }
 
   deleteMovie(id: string) {
@@ -178,14 +177,9 @@ export class ApiService implements OnInit, OnChanges {
   pushMovieRents(movies: Movie, user: string, key: string) {
     // push rent to database
     this.rentsRef.push({
-      Title: movies.Title,
-      Poster: movies.Poster,
-      Type: movies.Type,
-      Year: movies.Year,
-      imdbID: movies.imdbID,
-      user: user,
+      movieId: movies,
+      userId: user,
       date: this.date.toISOString().substr(0,10),
-      id: key,
     });
     update(ref(this.database, 'movies/' + key), {
       isRented: true,
