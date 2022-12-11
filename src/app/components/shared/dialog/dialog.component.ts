@@ -32,7 +32,12 @@ response: any = {}
   }
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(result => {
-      this.response = result
+      if (result == null) {
+        console.log('There is no response at the moment')
+      }
+      else {
+        this.response = result
+      }
     })
   }
   getVideoSource(id: string): SafeResourceUrl {

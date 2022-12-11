@@ -32,10 +32,10 @@ export class MenubarComponent implements OnInit, OnChanges {
   notLoggedInItems: MenuItem[];
   navColor = 'primary';
   //check is user or admin
-  isLoggedIn = false;
-  userSubscription = null;
-  isAdmin = false;
-  user = null;
+  isLoggedIn:boolean = false;
+  userSubscription: Subscription = null;
+  isAdmin: boolean = false;
+  user;
   //cascadeselect
   countries: Country[];
   selectedCountry: Country;
@@ -47,10 +47,10 @@ export class MenubarComponent implements OnInit, OnChanges {
     public afAuth: AngularFireAuth,
     public authService: AuthService,
     public translate: TranslateService,
-    private mytranslate:MytranslateService
+    private mytranslate: MytranslateService
   ) {
   }
-//lifecycle
+  //lifecycle
   ngOnChanges() {
     this.authService.isLoggedInSubject
       .subscribe(isLoggedIn => {
@@ -64,7 +64,7 @@ export class MenubarComponent implements OnInit, OnChanges {
       { name: 'DE', code: 'de' },
     ];
 
-    this.userItems= [
+    this.userItems = [
       {
         label: "Home",
         icon: 'pi pi-fw pi-home',
@@ -110,13 +110,13 @@ export class MenubarComponent implements OnInit, OnChanges {
         this.user = user;
       });
   }
-//logut
+  //logut
   logout(): void {
     this.afAuth.signOut();
     this.authService.resetState();
   }
- //set language 
- setLanguage() {
-  this.mytranslate.setLanguage(this.selectedCountry,this.userItems,this.items)
+  //set language 
+  setLanguage() {
+    this.mytranslate.setLanguage(this.selectedCountry, this.userItems, this.items)
   }
 }

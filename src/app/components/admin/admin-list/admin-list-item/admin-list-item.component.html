@@ -1,22 +1,13 @@
+<div>
+  <p-card class="cardMain" [style]="{ width: '360px' }" styleClass="p-card-shadow">
+    <ng-template pTemplate="header">
+      <img class="cImg" alt="Card" [src]="movies.Poster" />
+    </ng-template>
 
-  <div>
-    <p-card
-      class="cardMain"
-      [style]="{ width: '360px' }"
-      styleClass="p-card-shadow"
-    >
-      <ng-template pTemplate="header">
-        <img class="cImg" alt="Card" [src]="movies.Poster" />
-      </ng-template>
-  
-     
-        <p-button
-        class="d-flex justify-content-center"
-          styleClass="p-button-lg p-button-primary w-100"
-          label="Add movie"
-        (click)="pushMovie(movies,movies.imdbID)"
-      ></p-button>
-   
-     
-    </p-card> 
-  </div>
+
+    <p-button class="d-flex justify-content-center" styleClass="p-button-lg p-button-primary w-100" label="Add movie"
+      (click)="pushMovie(movies,movies.imdbID)"></p-button>
+
+
+  </p-card>
+</div>

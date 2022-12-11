@@ -50,15 +50,26 @@ export class MovieItemComponent implements OnInit {
 
   showDialog(id: string) {
     this.api.loadMoviesDetails(id).subscribe(result => {
-      this.display = true;
-      this.details = result
-      console
-    })
+      if (result == null) {
+        console.log('Response is null')
+      }
+      else {
+        this.display = true;
+        this.details = result
+  
+      }
+ })
   }
 
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(result => {
-      this.response = result
+      if (result == null) {
+        console.log('There is no result from api call')
+      }
+      else {
+        this.response = result
+      }
+      
     })
   }
 
