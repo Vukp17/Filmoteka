@@ -18,12 +18,15 @@ import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
+import {DropdownModule} from 'primeng/dropdown';
 ///////Material////////
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 //////COMPONENTS/////
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -112,6 +115,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     TableModule,
     CascadeSelectModule,
     SelectButtonModule,
+    DropdownModule,
     //ngx-translate
     TranslateModule.forRoot({
       loader:{
@@ -127,6 +131,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     MatToolbarModule,
     MatCardModule,
     MatDividerModule,
+    MatSelectModule,
+    MatIconModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { IdTokenResult } from '@angular/fire/auth';
 import { TranslateService } from '@ngx-translate/core';
+import { MytranslateService } from 'src/app/services/mytranslate.service';
 
 interface Country {
   name: string,
@@ -25,39 +26,62 @@ interface Country {
 })
 
 
-export class MenubarComponent implements OnInit, OnChanges{
+export class MenubarComponent implements OnInit, OnChanges {
   items: MenuItem[];
   userItems: MenuItem[];
   notLoggedInItems: MenuItem[];
   navColor = 'primary';
+  //check is user or admin
   isLoggedIn = false;
   userSubscription = null;
   isAdmin = false;
   user = null;
+  //cascadeselect
   countries: Country[];
-
-  selectedCountryCode: Country;
-
+  selectedCountry: Country;
+  selectedCountryName: string
+  //login
   loginClicked = false;
   logoutClicked = false;
-
   constructor(
     public afAuth: AngularFireAuth,
     public authService: AuthService,
-    private userService: UserService,
-    private translate: TranslateService
+    public translate: TranslateService,
+    private mytranslate:MytranslateService
   ) {
-
-   }
-
-
+  }
+//lifecycle
+  ngOnChanges() {
+    this.authService.isLoggedInSubject
+      .subscribe(isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+      });
+  }
   ngOnInit() {
-    console.log(this.selectedCountryCode)
+
     this.countries = [
-      {name: 'English', code: 'en'},
-      {name: 'Deutch', code: 'de'},
-  ];
-   this.items = [
+      { name: 'EN', code: 'en' },
+      { name: 'DE', code: 'de' },
+    ];
+
+    this.userItems= [
+      {
+        label: "Home",
+        icon: 'pi pi-fw pi-home',
+        routerLink: ['/home']
+      },
+      {
+        label: 'Movies',
+        icon: 'pi pi-fw pi-video',
+        routerLink: ['/movies'],
+      },
+      {
+        label: 'Rent',
+        icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: ['/rent'],
+      },
+    ];
+    this.items = [
       { label: "Home", icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       {
         label: 'Add movies',
@@ -75,50 +99,24 @@ export class MenubarComponent implements OnInit, OnChanges{
         routerLink: ['/admin-analytics'],
       },
     ];
-    this.userItems = [
-      { 
-      label: "('navbar.home' | translate)",
-      icon: 'pi pi-fw pi-home', 
-      routerLink: ['/home'] },
-      { 
-        label: this.translate.instant('navbar.login '),
-        icon: 'pi pi-fw pi-video',
-        routerLink: ['/movies'],
-      },
-      {
-        label: 'Rent',
-        icon: 'pi pi-fw pi-shopping-cart',
-        routerLink: ['/rent'],
-      },
-    ];
- 
 
-    this.authService.isLoggedInSubject
-    .subscribe( isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-    });
-  
-  this.authService.isAdminSubject
-    .subscribe( isAdmin => {
-      this.isAdmin = isAdmin;
-    });
-  
-  this.authService.userSubject
-    .subscribe( user => {
-      this.user = user;
-    });
+    this.authService.isAdminSubject
+      .subscribe(isAdmin => {
+        this.isAdmin = isAdmin;
+      });
 
- 
+    this.authService.userSubject
+      .subscribe(user => {
+        this.user = user;
+      });
   }
-  ngOnChanges(){
-    console.log(this.selectedCountryCode)
-  }
+//logut
   logout(): void {
     this.afAuth.signOut();
     this.authService.resetState();
   }
-  setLanguage(){
-    this.translate.use(this.selectedCountryCode.code);
-    console.log(this.selectedCountryCode.code)
+ //set language 
+ setLanguage() {
+  this.mytranslate.setLanguage(this.selectedCountry,this.userItems,this.items)
   }
 }

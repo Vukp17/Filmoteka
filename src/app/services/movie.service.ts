@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Movie } from '../models/movie.model';
 import { ApiService } from './api.service';
 
@@ -10,7 +11,7 @@ export class MovieService implements OnInit {
   movies: Movie[];
   isAdmin: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,private translate: TranslateService ) { }
   ngOnInit(): void {
     this.load();
   }
