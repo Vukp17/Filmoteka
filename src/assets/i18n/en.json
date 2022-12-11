@@ -1,6 +1,9 @@
 {
   "movies": "Movies",
   "series": "Series",
+  "availableMovies":"Available Movies",
+  "rent":"Rent",
+  "return":"Return",
   "navbar": {
     "home": "Home",
     "movies": "Movies",

@@ -2,6 +2,9 @@
     
     "movies": "Filme",
     "series": "Serie",
+    "availableMovies":"Verfügbare Filme",
+    "rent":"Miete",
+    "return":"Zurückkehren",
     "navbar": {
         "home": "Heim",
         "movies": "Filme",
