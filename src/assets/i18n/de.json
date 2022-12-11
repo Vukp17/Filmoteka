@@ -7,7 +7,10 @@
         "movies": "Filme",
         "rent": "Miete",
         "login": "Einloggen",
-        "logout": "Ausloggen"
+        "logout": "Ausloggen",
+        "addmovies": "Filme hinzufügen",
+        "dataBase": "Datenbank",
+        "analytics":"Analytik"
       },
     "auth": {
         "email": "Bitte geben Sie ihre E-Mail-Adresse ein ",
@@ -44,6 +47,9 @@
       "features":"Merkmale",
       "about":"Um"
 
+    },
+    "admin":{
+      "nonRented": "nicht ausgeliehene Filme",
+      "rented": "ausgeliehene Filme"
     }
-    
 }

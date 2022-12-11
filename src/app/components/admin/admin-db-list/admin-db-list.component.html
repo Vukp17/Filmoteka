@@ -1,6 +1,6 @@
 <div class="row">
 
-  <h1 class="corouselTitle">NOT RENTED MOVIES</h1>
+  <h1 class="corouselTitle">{{'admin.nonRented' | translate | uppercase}}</h1>
   <hr>
   <ng-container *ngFor="let movie of unrentedMovies">
     <app-admin-db-list-item
@@ -8,7 +8,7 @@
     </app-admin-db-list-item>
   </ng-container>
   <hr>
-  <h1 class="corouselTitle">RENTED MOVIES</h1>
+  <h1 class="corouselTitle">{{'admin.rented' | translate | uppercase}}</h1>
   <hr>
   <ng-container *ngFor="let movie of rentedMovies">
     <app-admin-db-list-item

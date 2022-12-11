@@ -77,3 +77,7 @@ html, body, app-root {
             font-size: 32pt;
             text-align: center;
           } 
+
+.titleFilmoteka{
+    cursor: pointer;
+}          

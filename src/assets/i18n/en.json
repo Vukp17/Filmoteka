@@ -6,7 +6,11 @@
     "movies": "Movies",
     "rent": "Rent",
     "login": "Login",
-    "logout": "Logout"
+    "logout": "Logout",
+    "addmovies": "Add Movies",
+    "dataBase": "DataBase",
+    "analytics":"Analytics"
+  
 
   },
   "auth": {
@@ -42,5 +46,9 @@
     "features":"Features",
     "about":"About"
 
+  },
+  "admin":{
+    "nonRented": "not rented movies",
+    "rented": "rented movies"
   }
 }

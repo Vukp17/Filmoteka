@@ -25,9 +25,8 @@ interface Country {
 })
 
 
-export class MenubarComponent implements OnInit, OnChanges{
+export class MenubarComponent implements OnInit, OnChanges {
   items: MenuItem[];
-  userItems: MenuItem[];
   notLoggedInItems: MenuItem[];
   navColor = 'primary';
   isLoggedIn = false;
@@ -35,29 +34,53 @@ export class MenubarComponent implements OnInit, OnChanges{
   isAdmin = false;
   user = null;
   countries: Country[];
-
-  selectedCountryCode: Country;
-
+  selectedCountry: Country;
+  selectedCountryName: string
   loginClicked = false;
   logoutClicked = false;
-
+  userItems: MenuItem[] = [
+    {
+      label: "Home",
+      icon: 'pi pi-fw pi-home',
+      routerLink: ['/home']
+    },
+    {
+      label: 'Movies',
+      icon: 'pi pi-fw pi-video',
+      routerLink: ['/movies'],
+    },
+    {
+      label: 'Rent',
+      icon: 'pi pi-fw pi-shopping-cart',
+      routerLink: ['/rent'],
+    },
+  ];
   constructor(
     public afAuth: AngularFireAuth,
     public authService: AuthService,
-    private userService: UserService,
-    private translate: TranslateService
+    public translate: TranslateService
   ) {
-
-   }
+    this.translate.get('navbar.home').subscribe((translation: string) => {
+      this.userItems[0].label = translation;
+      console.log(translation)
+    });
+    this.translate.get('navbar.movies').subscribe((translation: string) => {
+      this.userItems[1].label = translation;
+      console.log(translation)
+    });
+    this.translate.get('navbar.rent').subscribe((translation: string) => {
+      this.userItems[2].label = translation;
+      console.log(translation)
+    });
+  }
 
 
   ngOnInit() {
-    console.log(this.selectedCountryCode)
     this.countries = [
-      {name: 'English', code: 'en'},
-      {name: 'Deutch', code: 'de'},
-  ];
-   this.items = [
+      { name: 'EN', code: 'en' },
+      { name: 'DE', code: 'de' },
+    ];
+    this.items = [
       { label: "Home", icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       {
         label: 'Add movies',
@@ -75,50 +98,45 @@ export class MenubarComponent implements OnInit, OnChanges{
         routerLink: ['/admin-analytics'],
       },
     ];
-    this.userItems = [
-      { 
-      label: "('navbar.home' | translate)",
-      icon: 'pi pi-fw pi-home', 
-      routerLink: ['/home'] },
-      { 
-        label: this.translate.instant('navbar.login '),
-        icon: 'pi pi-fw pi-video',
-        routerLink: ['/movies'],
-      },
-      {
-        label: 'Rent',
-        icon: 'pi pi-fw pi-shopping-cart',
-        routerLink: ['/rent'],
-      },
-    ];
- 
 
-    this.authService.isLoggedInSubject
-    .subscribe( isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-    });
-  
-  this.authService.isAdminSubject
-    .subscribe( isAdmin => {
-      this.isAdmin = isAdmin;
-    });
-  
-  this.authService.userSubject
-    .subscribe( user => {
-      this.user = user;
-    });
+    this.authService.isAdminSubject
+      .subscribe(isAdmin => {
+        this.isAdmin = isAdmin;
+      });
 
- 
+    this.authService.userSubject
+      .subscribe(user => {
+        this.user = user;
+      });
   }
-  ngOnChanges(){
-    console.log(this.selectedCountryCode)
+  ngOnChanges() {
+    this.authService.isLoggedInSubject
+      .subscribe(isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+      });
   }
   logout(): void {
     this.afAuth.signOut();
     this.authService.resetState();
   }
-  setLanguage(){
-    this.translate.use(this.selectedCountryCode.code);
-    console.log(this.selectedCountryCode.code)
+  setLanguage() {
+    if (this.selectedCountry !== undefined) {
+      this.translate.use(this.selectedCountry.code);
+      const userKeys = ['navbar.home', 'navbar.movies', 'navbar.rent'];
+      const userKeysLength = userKeys.length;
+      userKeys.forEach((key, index) => {
+        this.translate.get(key).subscribe((translation: string) => {
+          this.userItems[index].label = translation;
+        });
+      });
+      const itemsKeys = ['navbar.home', 'navbar.addmovies', 'navbar.dataBase', 'navbar.analytics'];
+      const itemsKeysLength = itemsKeys.length;
+      itemsKeys.forEach((key, index) => {
+        this.translate.get(key).subscribe((translation: string) => {
+          this.items[index].label = translation;
+        });
+      });
+      
+    }
   }
 }

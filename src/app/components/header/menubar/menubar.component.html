@@ -1,20 +1,21 @@
 <p-menubar [model]="items" *ngIf="(afAuth.user | async) && isAdmin; else user">
   <ng-template pTemplate="start">
-    <h2 class="titleFilmoteka">FILMOTEKA</h2>
+    <h2 routerLink="/home" class="titleFilmoteka">FILMOTEKA</h2>
   </ng-template>
   <ng-template pTemplate="end">
     <p-cascadeSelect
     (click)="setLanguage()"
-    [(ngModel)]="selectedCountryCode"
+    [(ngModel)]="selectedCountry"
     [options]="countries"
     optionLabel="name"
     [optionGroupChildren]="['states']"
-    [style]="{ minWidth: '14rem' }"
+    [style]="{ minWidth: '2rem'}"
+    placeholder="EN"
   ></p-cascadeSelect>
 
     <button
       pButton
-      label="{{'navbar.logout' | translate}}"
+      label="{{ 'navbar.logout' | translate }}"
       class="p-button-raised p-button-rounded"
       class="p-button-danger"
       icon="pi pi-sign-out"
@@ -29,20 +30,22 @@
   #user
 >
   <ng-template pTemplate="start">
-    <h2 class="titleFilmoteka">FILMOTEKA</h2>
+    <h2 routerLink="/home" class="titleFilmoteka">FILMOTEKA</h2>
   </ng-template>
   <ng-template pTemplate="end">
     <p-cascadeSelect
     (click)="setLanguage()"
-    [(ngModel)]="selectedCountryCode"
+    [(ngModel)]="selectedCountry"
     [options]="countries"
     optionLabel="name"
     [optionGroupChildren]="['states']"
-    [style]="{ minWidth: '14rem' }"
+    [style]="{ minWidth: '2rem'}"
+    placeholder="EN"
   ></p-cascadeSelect>
+    <i class="flag-poland flag"></i>
     <button
       pButton
-      label="{{'navbar.logout' | translate}}"
+      label="{{ 'navbar.logout' | translate }}"
       class="p-button-raised p-button-rounded"
       class="p-button-danger"
       icon="pi pi-sign-out"
@@ -55,27 +58,33 @@
   <div *ngIf="!(afAuth.user | async)">
     <p-menubar [model]="notLoggedInItems">
       <ng-template pTemplate="start">
-        <h2 class="titleFilmoteka">FILMOTEKA</h2>
+        <h2  routerLink="/landing" class="titleFilmoteka">FILMOTEKA</h2>
+        
       </ng-template>
       <ng-template pTemplate="end">
         <p-cascadeSelect
         (click)="setLanguage()"
-        [(ngModel)]="selectedCountryCode"
+        [(ngModel)]="selectedCountry"
         [options]="countries"
         optionLabel="name"
         [optionGroupChildren]="['states']"
-        [style]="{ minWidth: '5rem' }"
+        [style]="{ minWidth: '2rem'}"
+        placeholder="EN"
       ></p-cascadeSelect>
-
+  
         <button
           pButton
-          label="{{'navbar.login' | translate}}"
+          label="{{ 'navbar.login' | translate }}"
           class="p-button-raised p-button-rounded"
           class="p-button-danger"
           icon="pi pi-sign-in"
           routerLink="/auth"
         ></button>
+        
       </ng-template>
+
+
+
     </p-menubar>
   </div>
 </ng-template>
