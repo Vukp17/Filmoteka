@@ -55,7 +55,8 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import { UserTableComponent } from './user-table/user-table.component';
 //ngx-translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AdminDbListComponent } from './components/admin/admin-db-list/admin-db-list.component';
 import { AdminDbListItemComponent } from './components/admin/admin-db-list/admin-db-list-item/admin-db-list-item.component';
 import { AdminAnalyticsComponent } from './components/admin/admin-analytics/admin-analytics.component';
 
