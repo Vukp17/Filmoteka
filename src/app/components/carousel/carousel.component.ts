@@ -27,6 +27,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   error: string = "";
   response: any = {}
   responsiveOptions: any;
+  show = false;
 
   constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
 
@@ -74,7 +75,7 @@ export class CarouselComponent implements OnInit, OnChanges {
 
   showDialog(id: string) { // opens movie details with modal
     this.api.loadMoviesDetails(id).subscribe(result => {
-      this.display = true;
+      this.show = true;
       this.details = result
     })
   }
@@ -84,9 +85,7 @@ export class CarouselComponent implements OnInit, OnChanges {
       this.response = result
     })
   }
-  getVideoSource(id: string): SafeResourceUrl { // gets the video source for youtube trailer
-    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
-  }
+
 
   fillCorousel() { // fills the corousel 
     if (this.carouselElement == undefined) {

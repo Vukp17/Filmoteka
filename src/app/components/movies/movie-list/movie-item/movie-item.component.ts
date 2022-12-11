@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 ///Services
 import { HotToastService } from '@ngneat/hot-toast';
@@ -14,12 +14,14 @@ import { Movie } from '../../../../models/movie.model';
   templateUrl: './movie-item.component.html',
   styleUrls: ['./movie-item.component.css']
 })
+
 export class MovieItemComponent implements OnInit {
   @Input() movies: Movie;
   @Output() moviesSelected = new EventEmitter<void>();
   email: string | any;
   details: any = []
   display: boolean = false;
+  show = false;
   ////Api
   error: string = "";
   response: any = {}
@@ -50,7 +52,7 @@ export class MovieItemComponent implements OnInit {
 
   showDialog(id: string) {
     this.api.loadMoviesDetails(id).subscribe(result => {
-      this.display = true;
+      this.show = true;
       this.details = result
       console
     })
@@ -62,9 +64,6 @@ export class MovieItemComponent implements OnInit {
     })
   }
 
-  getVideoSource(id: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
-  }
-  
+
 }
 

@@ -55,7 +55,6 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { AuthComponent } from './components/auth/auth.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
-import { UserTableComponent } from './user-table/user-table.component';
 //ngx-translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -64,6 +63,7 @@ import { AdminDbListItemComponent } from './components/admin/admin-db-list/admin
 import { AdminAnalyticsComponent } from './components/admin/admin-analytics/admin-analytics.component';
 
 import {SelectButtonModule} from 'primeng/selectbutton';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
@@ -87,11 +87,11 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     AdminListComponent,
     AdminListItemComponent,
     AuthComponent,
-    UserTableComponent,
     AdminDbListComponent,
     AdminDbListItemComponent,
     AdminAnalyticsComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    DialogComponent
 
   ],
   imports: [
