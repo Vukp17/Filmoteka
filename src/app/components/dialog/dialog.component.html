@@ -1,4 +1,3 @@
-<ng-container *ngIf="display == true">
   <p-dialog
     [(visible)]="display"
     [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
@@ -22,9 +21,9 @@
       </div>
       <div class="row embed-responsive embed-responsive-16by9">
         <h2>Trailer</h2>
-        <!-- <div class="row" *ngIf="!isLoaded && error">
+        <div class="row" *ngIf="!isLoaded && error">
           <p class="text-danger">Error:{{error}}</p>
-        </div> -->
+        </div>
         <ng-container *ngFor="let item of response.items">
           <iframe
             width="315"
@@ -39,4 +38,3 @@
     </div>
     <ng-template pTemplate="footer"> </ng-template>
   </p-dialog>
-</ng-container>

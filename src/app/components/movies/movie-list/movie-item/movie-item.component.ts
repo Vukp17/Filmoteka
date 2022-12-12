@@ -18,14 +18,16 @@ import { Movie } from '../../../../models/movie.model';
 export class MovieItemComponent implements OnInit {
   @Input() movie: Movie;
   @Output() moviesSelected = new EventEmitter<void>();
+  @Output() onClose = new EventEmitter<boolean>();
   email: string | any;
   details: any = []
   display: boolean = false;
-  show = false;
   ////Api
   error: string = "";
   response: any = {}
   isLoaded: boolean;
+  selectedMovie:Movie;
+  visible: boolean=false;
 
   constructor(public api: ApiService, public authService: AuthService,
     private toastService: HotToastService, private userService: UserService,
@@ -52,11 +54,18 @@ export class MovieItemComponent implements OnInit {
     this.api.pushMovieRents(movies, this.userService.email, key)
   }
 
-  showDialog(movieTitle: string) {
+  showDialog(movie: Movie) {
     this.display = true;
-    this.searchByKeyword(movieTitle)
+    this.searchByKeyword(movie.Title)
+    this.selectedMovie=movie
+    this.visible = true;
   }
-
+  close() {
+    this.visible = false;
+    this.display=false;
+    this.selectedMovie = null;
+    console.log(this.visible)
+  }
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(
       result => {
