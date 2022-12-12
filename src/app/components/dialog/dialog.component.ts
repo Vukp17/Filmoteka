@@ -13,17 +13,15 @@ export class DialogComponent implements OnInit {
   details: Detail
   @Input() display: boolean;
   @Input() movie: Movie
-  response: any = {}
+  @Input() response: any = {}
   error :string = ''
   isLoaded: boolean;
   constructor(private api: ApiService, private sanitizer: DomSanitizer) { }
 
 
   ngOnInit(): void {
-    if (this.movie != undefined) {
-      this.showDialog(this.movie.imdbID)
-      this.searchByKeyword(this.movie.Title)
-    }
+          this.showDialog(this.movie.imdbID)
+    
   }
   showDialog(id: string) {
     this.api.loadMoviesDetails(id).subscribe(result => {
@@ -32,19 +30,9 @@ export class DialogComponent implements OnInit {
     })
   }
 
-  searchByKeyword(title: string) {
-    this.api.searchByKeyword(title).subscribe(
-      result => {
-        this.response = result;
-        this.isLoaded = true;
-      },
-      err => {
-        this.isLoaded = false;
-        this.error = err.message;
-      }
-    );
-  }
+
   getVideoSource(id: string): SafeResourceUrl {
+    console.log(id)
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
 }

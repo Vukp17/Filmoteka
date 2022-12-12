@@ -25,6 +25,7 @@ export class MovieItemComponent implements OnInit {
   ////Api
   error: string = "";
   response: any = {}
+  isLoaded: boolean;
 
   constructor(public api: ApiService, public authService: AuthService,
     private toastService: HotToastService, private userService: UserService,
@@ -34,6 +35,7 @@ export class MovieItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.getCurrentUserEmail();
 
   }
 
@@ -50,10 +52,22 @@ export class MovieItemComponent implements OnInit {
     this.api.pushMovieRents(movies, this.userService.email, key)
   }
 
-  showDialog() {
+  showDialog(movieTitle: string) {
     this.display = true;
+    this.searchByKeyword(movieTitle)
   }
 
-
+  searchByKeyword(title: string) {
+    this.api.searchByKeyword(title).subscribe(
+      result => {
+        this.response = result;
+        this.isLoaded = true;
+      },
+      err => {
+        this.isLoaded = false;
+        this.error = err.message;
+      }
+    );
+  }
 }
 

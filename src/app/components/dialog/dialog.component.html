@@ -22,9 +22,9 @@
       </div>
       <div class="row embed-responsive embed-responsive-16by9">
         <h2>Trailer</h2>
-        <div class="row" *ngIf="!isLoaded && error">
+        <!-- <div class="row" *ngIf="!isLoaded && error">
           <p class="text-danger">Error:{{error}}</p>
-        </div>
+        </div> -->
         <ng-container *ngFor="let item of response.items">
           <iframe
             width="315"

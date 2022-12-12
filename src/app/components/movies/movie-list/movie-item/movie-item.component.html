@@ -11,7 +11,7 @@
           class="cImg"
           alt="Card"
           [src]="movie.Poster"
-          (click)="showDialog()"
+          (click)="showDialog(movie.Title)"
         />
       </ng-template>
 
@@ -27,7 +27,7 @@
     </p-card>
   </div>
 
-  <app-dialog [display]="display" [movie]="movie"></app-dialog>
+  <app-dialog [display]="display" [movie]="movie" [response]="response" (onClose)="display = false"></app-dialog>
 </body>
 
 
