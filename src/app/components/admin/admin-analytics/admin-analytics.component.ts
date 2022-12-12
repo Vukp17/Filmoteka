@@ -35,10 +35,10 @@ export class AdminAnalyticsComponent implements OnInit {
    // UNFINISHED COMPONENT 
 
   ngOnInit(): void {
-    this.getUsers();
+    // this.getUsers();
     
-    this.userMovieRentals();
-    console.log(this.users);
+    // this.userMovieRentals();
+    // console.log(this.users);
   }
 
   getUsers() {

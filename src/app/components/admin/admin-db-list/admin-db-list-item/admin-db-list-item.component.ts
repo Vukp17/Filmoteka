@@ -25,6 +25,7 @@ export class AdminDbListItemComponent implements OnInit {
     if (isRented == true) {
       this.toastService.warning("Movie is already rented and cannot be deleted from database");
     } else {
+      console.log(' tu sam key log ' + key)
       this.api.deleteMovie(key)
       this.toastService.success('Successefully deleted movie from database');
     }
