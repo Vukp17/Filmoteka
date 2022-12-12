@@ -41,7 +41,7 @@ export class RoleGuard implements CanActivate {
     if ( this.authService.hasClaim('admin')) {
       return true;
     } else {
-      console.log('You are not authorized for this action!');
+      
       this.router.navigate(['/access-denied']);
       return false;
     }

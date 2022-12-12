@@ -30,12 +30,12 @@ export class MovieItemComponent implements OnInit {
   constructor(public api: ApiService, public authService: AuthService,
     private toastService: HotToastService, private userService: UserService,
     private sanitizer: DomSanitizer) {
-    this.authService.getCurrentUserEmail()
+    
 
   }
 
   ngOnInit(): void {
-    this.authService.getCurrentUserEmail();
+
 
   }
 
@@ -49,7 +49,7 @@ export class MovieItemComponent implements OnInit {
   }
 
   rent(movies: Movie, key: any) {
-    this.api.pushMovieRents(movies, this.userService.email, key)
+    this.api.pushMovieRents(movies, this.authService.userEmail, key)
   }
 
   showDialog(movieTitle: string) {

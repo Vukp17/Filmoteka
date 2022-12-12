@@ -18,11 +18,10 @@ export class UserService {
   itemRef: AngularFireObject<any>;
   items: Observable<any[]>;
   users: User[]
-  email: string
   hadAccess: boolean
   constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient, private afAuth: AngularFireAuth) {
 
-    this.email = ""
+  
     this.usersRef = db.list('users');
     this.items = this.usersRef?.snapshotChanges().pipe(
       map((changes: any[]) =>
@@ -53,12 +52,12 @@ export class UserService {
   get Users() {
     return this.users
   }
-  set Email(email: string) {
-    this.email = email;
-  }
-  get Email() {
-    return this.email
-  }
+  // set Email(email: string) {
+  //   this.email = email;
+  // }
+  // get Email() {
+  //   return this.email
+  // }
 
 }
 

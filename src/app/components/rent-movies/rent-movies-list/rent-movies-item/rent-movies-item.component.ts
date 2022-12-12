@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
 import { Rent } from 'src/app/models/rents.model';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class RentMoviesItemComponent implements OnInit {
   @Input() movie: Movie;
 
-  email: string;
+ 
 
   rentsForUser: Rent[]
   rentToDelete: string[]
@@ -23,16 +24,17 @@ export class RentMoviesItemComponent implements OnInit {
   rentsIds: Array<string>
   display: boolean=false;
 
-  constructor(private api: ApiService, private userService: UserService) {
-    this.email = this.userService.Email
+  constructor(private api: ApiService, private userService: UserService,private authService: AuthService) {
+   
   }
 
   ngOnInit(): void {
     this.getListWithId()
+   
   }
 
   getListWithId() {
-    this.api.getRentsByUser(this.email).subscribe(data => {
+    this.api.getRentsByUser(this.authService.userEmail).subscribe(data => {
       if (data.length == 0) {
         console.log('There is no list we can provide')
       }
@@ -43,7 +45,7 @@ export class RentMoviesItemComponent implements OnInit {
   }
 
   returnMovie(idMovie) {
-    this.api.getRentLocation(this.email,idMovie).subscribe(data => {
+    this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
       if (data.length == 0) {
         console.log('There is no response for us to provide')
       }

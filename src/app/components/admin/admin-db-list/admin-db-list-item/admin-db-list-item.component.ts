@@ -23,10 +23,10 @@ export class AdminDbListItemComponent implements OnInit {
 
   remove(key: any, isRented: boolean | undefined): void {
     if (isRented == true) {
-      this.toastService.warning("Movie is already rented and cannot be deleted from database")
+      this.toastService.warning("Movie is already rented and cannot be deleted from database");
     } else {
       this.api.deleteMovie(key)
-      this.toastService.success('Successefully deleted movie from database')
+      this.toastService.success('Successefully deleted movie from database');
     }
 
   }
