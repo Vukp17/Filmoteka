@@ -51,6 +51,9 @@ export class ApiService implements OnInit, OnChanges {
       'Accept-Language',
       this.translateService.currentLang
     );
+
+    
+
   }
   ngOnChanges() {
     this.headers = new HttpHeaders().set(
@@ -59,6 +62,8 @@ export class ApiService implements OnInit, OnChanges {
     );
   }
 
+  
+  
   loadRentsPayload() {
     // loads rents payload with keys
     this.rentsRef = this.db.list('rents');

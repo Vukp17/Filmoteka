@@ -23,6 +23,9 @@ export class RentMoviesListComponent implements OnInit {
     this.email=this.userService.Email
     this.loadUserRentedMovies()
   }
+  ngOnChanges(){
+    this.loadUserRentedMovies
+  }
 
   loadUserRentedMovies() {
     this.api.getCurrUserRented(this.email).subscribe(data =>{
@@ -35,6 +38,7 @@ export class RentMoviesListComponent implements OnInit {
     this.api.getCurrUserRentedMovies(this.movieIds).subscribe(data =>{
       if (data.length == 0) {
         this.message = 'Currently you have no rented movies'
+        this.moviesForUser = data
       }
       else {
         this.moviesForUser = data
