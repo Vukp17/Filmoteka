@@ -36,7 +36,7 @@ export class RentMoviesItemComponent implements OnInit {
   getListWithId() {
     this.api.getRentsByUser(this.authService.userEmail).subscribe(data => {
       if (data.length == 0) {
-        console.log('There is no list we can provide')
+        // console.log('There is no list we can provide')
       }
       else {
         this.rentsForUser = data;
@@ -47,7 +47,6 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovie(idMovie) {
     this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
       if (data.length == 0) {
-        console.log('There is no response for us to provide')
       }
       else {
         data.forEach(element => {
