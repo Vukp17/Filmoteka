@@ -20,6 +20,20 @@ export class AdminAnalyticsComponent implements OnInit {
 
   constructor(private api: ApiService, private authService: AuthService) {}
 
+
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+   // UNFINISHED COMPONENT 
+
   ngOnInit(): void {
     this.getUsers();
     
@@ -32,15 +46,9 @@ export class AdminAnalyticsComponent implements OnInit {
       this.users = data;
     });
   }
-// getRentals() {
-//     this.api.getRents().subscribe((data) => {
-//       this.rents = data;
 
-//     });
-//   }
   userMovieRentals() {
     this.users.forEach(item => {
-      // Add a new attribute to each item in the array
       item.moviesRented = '3';
     });
     console.log(this.users);

@@ -20,14 +20,16 @@ export class CarouselComponent implements OnInit, OnChanges {
   movies: Movie[];
   moviesType: string = 'movies';
   seriesType: string = 'series';
+  selectedMovie:Movie
+  moviesMessage: string;
+  typeMessage: string;
 
-  details: any = []
-  display: boolean = false;
+  details: any = [] // youtube details
+  display: boolean ;
   ////Api
   error: string = "";
   response: any = {}
   responsiveOptions: any;
-  show = false;
 
   constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
 
@@ -52,40 +54,53 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   ngOnInit() {
     this.fillCorousel()
-
   }
 
   loadByType(element: string) { // load movies by type
     this.api.getItemsByType(element).subscribe(data => {
-      this.movies = data
-      // console.log(this.movies)
+      if (data.length == 0) {
+        this.typeMessage = 'You cannot load this type of our items because it is not available'
+      }
+      else {
+        this.movies = data
+      }
     })
   }
 
   loadMoviesDatabase() { // loads all movies from database
     this.api.getMovies().subscribe(data => {
-      this.movies = data
+      if (data.length == 0) {
+        this.moviesMessage = 'There is no movies available at the moment'
+      }
+      else {
+        this.movies = data
+      }
     })
   }
 
-  showDialog(id: string) { // opens movie details with modal
-    this.api.loadMoviesDetails(id).subscribe(result => {
-      this.show = true;
-      this.details = result
-    })
+  showDialog(movie: Movie) { // opens movie details with modal
+     this.display= true
+     this.selectedMovie=movie
+     console.log(this.selectedMovie)
   }
 
   searchByKeyword(title: string) { // searches for youtube video with keyword
     this.api.searchByKeyword(title).subscribe(result => {
-      this.response = result
+      if (result.length == 0) {
+        console.log('Search by keywoard returns null')
+      }
+      else {
+        this.response = result
+      }
     })
   }
-
+  getVideoSource(id: string): SafeResourceUrl { // gets the video source for youtube trailer
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
+  }
 
   fillCorousel() { // fills the corousel 
     if (this.carouselElement == undefined) {

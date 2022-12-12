@@ -22,9 +22,9 @@ export class AuthComponent implements OnInit {
     password: new FormControl('')
   })
 
-  hide:boolean = true;
+  hide: boolean = true;
   errorMessage: string = '';
-  loading:boolean = false;
+  loading: boolean = false;
 
   ngOnInit(): void {
   }
@@ -66,10 +66,10 @@ export class AuthComponent implements OnInit {
   }
 
   signup() {
-    if (this.form.invalid)                
+    if (this.form.invalid)
       return;
     this.authService.signupUser(this.loginForm.value).then((result) => {
-      if (result == null) 
+      if (result == null)
         this.router.navigate(['/movies']);
       else if (result.isValid == false)
         this.firebaseErrorMessage = result.message;

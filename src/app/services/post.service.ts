@@ -17,14 +17,6 @@ export class PostService {
   
   constructor( private db: AngularFireDatabase,public auth: Auth,private api: ApiService) {
     
-      
-
     }
-
-  
-
-  
-
-
   
 }

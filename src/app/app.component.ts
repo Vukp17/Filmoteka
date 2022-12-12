@@ -24,7 +24,4 @@ export class AppComponent  {
     this.authService.getCurrentUserEmail();
    }
 
-
-  
-  
 }

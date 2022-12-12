@@ -41,12 +41,12 @@ export class MovieItemComponent implements OnInit {
     this.moviesSelected.emit();
   }
 
-  Remove(key: any) {
+  remove(key: any) {
     this.api.deleteMovie(key)
     this.toastService.success('Successefully deleted from database')
   }
 
-  Rent(movies: Movie, key: any) {
+  rent(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.userService.email, key)
   }
 

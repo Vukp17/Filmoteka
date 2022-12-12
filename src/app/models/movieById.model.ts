@@ -1,11 +1,7 @@
-declare module MovieById{
 
-    export interface Rating {
-        Source: string;
-        Value: string;
-    }
 
-    export interface Details{
+
+    export class Detail{
         Title: string;
         Year: string;
         Rated: string;
@@ -20,7 +16,7 @@ declare module MovieById{
         Country: string;
         Awards: string;
         Poster: string;
-        Ratings: Rating[];
+        Ratings: Array<string>[];
         Metascore: string;
         imdbRating: string;
         imdbVotes: string;
@@ -33,4 +29,9 @@ declare module MovieById{
         Response: string;
     }
 
-}
+    export class Ratings{
+        Ratings: Array<string>[];
+        Metascore: string;
+        imdbRating: string;
+        imdbVotes: string;
+    }

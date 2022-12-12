@@ -80,4 +80,11 @@ html, body, app-root {
 
 .titleFilmoteka{
     cursor: pointer;
-}          
+}      
+
+.warningMessage{
+    padding-top: 250pt;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 250pt;
+}

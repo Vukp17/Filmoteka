@@ -33,18 +33,27 @@ export class RentMoviesItemComponent implements OnInit {
 
   getListWithId() {
     this.api.getRentsByUser(this.email).subscribe(data => {
-      this.rentsForUser = data;
-      // console.log(data)
+      if (data.length == 0) {
+        console.log('There is no list we can provide')
+      }
+      else {
+        this.rentsForUser = data;
+      }
     })
   }
 
   returnMovie(idMovie) {
     this.api.getRentLocation(this.email,idMovie).subscribe(data => {
-      data.forEach(element => {
-        this.rentDeleteKey = element.toString();
-        this.movieToDelete = idMovie;
-      });
-      this.returnMovieBack()
+      if (data.length == 0) {
+        console.log('There is no response for us to provide')
+      }
+      else {
+        data.forEach(element => {
+          this.rentDeleteKey = element.toString();
+          this.movieToDelete = idMovie;
+        });
+        this.returnMovieBack()
+      }
     })
   }
   

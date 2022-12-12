@@ -26,8 +26,13 @@ export class AdminListComponent implements OnInit {
   loadMovies() {
     this.api.adminLoadMovies(this.search)
       .subscribe((result) => {
-        this.movies = result.Search
-        this.error = result.Error
+        if (result == null) {
+          this.error = 'Api not working at the moment :)'
+        }
+        else {
+          this.movies = result.Search
+          this.error = result.Error
+        }
       })
   }
 

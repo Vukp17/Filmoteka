@@ -12,6 +12,7 @@ import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { Rent } from '../models/rents.model';
+import { Detail } from '../models/movieById.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -212,7 +213,7 @@ export class ApiService implements OnInit, OnChanges {
   loadMoviesDetails(id: string) {
     // movie load function based on ID
     const url = environment.apiBase + id + environment.omdb_api_key;
-    return this.http.get(url);
+    return this.http.get<Detail>(url);
   }
 
   searchByKeyword(title: string) {

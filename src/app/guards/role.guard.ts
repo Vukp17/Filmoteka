@@ -8,7 +8,6 @@ import {
   UrlTree,
 } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { User } from '../models/user.model';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 import { PostService } from '../services/post.service';

@@ -21,7 +21,7 @@ export class AdminDbListItemComponent implements OnInit {
 
   }
 
-  Remove(key: any, isRented: boolean | undefined): void {
+  remove(key: any, isRented: boolean | undefined): void {
     if (isRented == true) {
       this.toastService.warning("Movie is already rented and cannot be deleted from database")
     } else {

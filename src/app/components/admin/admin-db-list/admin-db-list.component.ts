@@ -12,34 +12,43 @@ export class AdminDbListComponent implements OnInit {
   movies:Movie[];
   rentedMovies: Movie[];
   unrentedMovies: Movie[];
+  rentedMessage: string;
+  unrentedMessage: string;
 
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
-    this.loadMovies();
+    
     this.loadRentedMovies();
     this.loadUnrentedMovies();
   }
 
   ngOnChanges(){
-    this.loadMovies();
+    
   }
 
   loadRentedMovies() {
    this.api.getRentedMovies().subscribe(data =>{
-    this.rentedMovies = data;
+    console.log(data)
+    if (data.length == 0) {
+      this.unrentedMessage = 'All movies are currently rented'
+    }
+    else {
+      this.rentedMovies = data;
+    }
    })
   }
 
   loadUnrentedMovies() {
     this.api.getUnrentedMovies().subscribe(data => {
-      this.unrentedMovies = data;
+      if (data.length == 0) {
+        this.rentedMessage = 'There is no rented movies at the moment'
+      }
+      else {
+        this.unrentedMovies = data;
+      }
     })
   }
  
-  loadMovies(){
-    this.api.getMovies().subscribe(data =>{
-      this.movies = data
-    });
-  }
+ 
 }
