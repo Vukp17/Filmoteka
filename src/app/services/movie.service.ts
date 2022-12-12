@@ -29,7 +29,6 @@ export class MovieService implements OnInit {
   load() {
     this.api.getMovies().subscribe(data => {
       this.movies = data
-      console.log(this.movies)
     });
   }
 }

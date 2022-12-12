@@ -49,6 +49,7 @@ export class AuthService {
             this.isLoggedInSubject.next(true);
             this.uid = authUser.uid;
             this.userEmail = authUser.email;
+           
             this.claims = authUser.getIdTokenResult()
               .then(idTokenResult => {
                 this.claims = idTokenResult.claims;
@@ -66,11 +67,7 @@ export class AuthService {
       );
   }
   
-  getCurrentUserEmail() {
-    return this.afAuth.user.subscribe(user => {
-      this.userService.Email = user.email;
-    });
-  }
+ 
 
   hasClaim(claim): boolean {
     return !!this.claims[claim];
@@ -92,7 +89,7 @@ export class AuthService {
   autoLogin() {
     this.getAuthState();
   }
-
+  
 
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth

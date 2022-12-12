@@ -51,6 +51,9 @@ export class ApiService implements OnInit, OnChanges {
       'Accept-Language',
       this.translateService.currentLang
     );
+
+    
+
   }
   ngOnChanges() {
     this.headers = new HttpHeaders().set(
@@ -59,6 +62,8 @@ export class ApiService implements OnInit, OnChanges {
     );
   }
 
+  
+  
   loadRentsPayload() {
     // loads rents payload with keys
     this.rentsRef = this.db.list('rents');
@@ -119,15 +124,13 @@ export class ApiService implements OnInit, OnChanges {
 
   getRentedMovies() {
     // filter by isRented = true
-    return this.moviesRef
-      .valueChanges()
+    return this.itemsMovies
       .pipe(map((movies) => movies.filter((movie) => movie.isRented === true)));
   }
 
   getUnrentedMovies() {
     // filter by isRented = false
-    return this.moviesRef
-      .valueChanges()
+    return this.itemsMovies
       .pipe(
         map((movies) => movies.filter((movie) => movie.isRented === false))
       );
@@ -167,9 +170,10 @@ export class ApiService implements OnInit, OnChanges {
     );
   }
 
-  deleteMovie(id: string) {
+  deleteMovie(key: string) {
+    console.log(' tu sam key log ' + key)
     // delete movie from database
-    this.moviesRef.remove(id);
+    this.moviesRef.remove(key);
   }
 
   pushMovie(movies: Movie) {

@@ -35,6 +35,7 @@ export class AdminDbListComponent implements OnInit {
     }
     else {
       this.rentedMovies = data;
+      console.log(data)
     }
    })
   }
@@ -46,6 +47,7 @@ export class AdminDbListComponent implements OnInit {
       }
       else {
         this.unrentedMovies = data;
+        console.log(data)
       }
     })
   }
