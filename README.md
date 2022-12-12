@@ -1,5 +1,5 @@
 # LearnApp
-Filmoteka is multilanguage suported app.Represent biggest movvie base on the internet.
+Filmoteka is multilanguage suported app. Represent biggest movvie base on the internet.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
 
 ## Development server
