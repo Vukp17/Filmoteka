@@ -48,8 +48,9 @@ export class MovieItemComponent implements OnInit {
     this.toastService.success('Successefully deleted from database')
   }
 
-  rent(movies: Movie, key: any) {
+  rentMovie(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.authService.userEmail, key)
+    this.toastService.success('Successefully rented a movie')
   }
 
   showDialog(movieTitle: string) {

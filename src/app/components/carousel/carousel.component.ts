@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HotToastService } from '@ngneat/hot-toast';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
@@ -31,7 +32,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   response: any = {}
   responsiveOptions: any;
 
-  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
+  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService, private toast: HotToastService) {
 
     this.movies = []
     this.responsiveOptions = [
@@ -61,7 +62,8 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   loadByType(element: string) { // load movies by type
-    this.api.getItemsByType(element).subscribe(data => {
+    this.api.getItemsByType(element)
+    .subscribe(data => {
       if (data.length == 0) {
         this.typeMessage = 'You cannot load this type of our items because it is not available'
       }
@@ -72,7 +74,8 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   loadMoviesDatabase() { // loads all movies from database
-    this.api.getMovies().subscribe(data => {
+    this.api.getMovies()
+    .subscribe(data => {
       if (data.length == 0) {
         this.moviesMessage = 'There is no movies available at the moment'
       }
@@ -89,9 +92,16 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   searchByKeyword(title: string) { // searches for youtube video with keyword
-    this.api.searchByKeyword(title).subscribe(result => {
+    this.api.searchByKeyword(title)
+    .pipe(
+      this.toast.observe({
+        success: 'Loaded',
+        loading: 'Loading ...',
+      })
+    )
+    .subscribe(result => {
       if (result.length == 0) {
-        console.log('Search by keywoard returns null')
+        this.toast.warning('Currently we cant provide a result, please try again!')
       }
       else {
         this.response = result

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -29,7 +30,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private toast: HotToastService) {
     this.loginForm = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', Validators.required)
@@ -54,8 +55,8 @@ export class AuthComponent implements OnInit {
   loginUser() {
     if (this.loginForm.invalid)
       return;
-
-    this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
+    this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+    .then((result) => {
       if (result == null) {
         this.router.navigate(['/home']);
       }
@@ -64,6 +65,10 @@ export class AuthComponent implements OnInit {
       }
     });
   }
+
+
+  
+
 
   signup() {
     if (this.form.invalid)

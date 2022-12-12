@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Movie } from 'src/app/models/movie.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -15,7 +16,7 @@ export class AdminDbListComponent implements OnInit {
   rentedMessage: string;
   unrentedMessage: string;
 
-  constructor(private api:ApiService) { }
+  constructor(private api:ApiService,private toast: HotToastService) { }
 
   ngOnInit(): void {
     
@@ -28,14 +29,19 @@ export class AdminDbListComponent implements OnInit {
   }
 
   loadRentedMovies() {
-   this.api.getRentedMovies().subscribe(data =>{
-    console.log(data)
+   this.api.getRentedMovies()
+   .pipe(
+    this.toast.observe({
+      success: 'Loaded',
+      loading: 'Loading ...',
+    })
+  )
+   .subscribe(data =>{
     if (data.length == 0) {
       this.unrentedMessage = 'All movies are currently rented'
     }
     else {
       this.rentedMovies = data;
-      console.log(data)
     }
    })
   }
@@ -47,7 +53,6 @@ export class AdminDbListComponent implements OnInit {
       }
       else {
         this.unrentedMovies = data;
-        console.log(data)
       }
     })
   }
