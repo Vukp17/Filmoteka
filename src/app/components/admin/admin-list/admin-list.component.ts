@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
 import { ApiService } from 'src/app/services/api.service';
 import { Movie } from '../../../models/movie.model';
 
@@ -14,7 +15,7 @@ export class AdminListComponent implements OnInit {
   search: string;
   error: string = 'Please enter your search!';
 
-  constructor(private http: HttpClient, private api: ApiService) { }
+  constructor(private http: HttpClient, private api: ApiService, private toast: HotToastService) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,7 @@ export class AdminListComponent implements OnInit {
 
   loadMovies() {
     this.api.adminLoadMovies(this.search)
+    
       .subscribe((result) => {
         if (result == null) {
           this.error = 'Api not working at the moment :)'

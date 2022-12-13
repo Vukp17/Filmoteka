@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Movie } from 'src/app/models/movie.model';
 import { Rent } from 'src/app/models/rents.model';
@@ -29,7 +30,7 @@ export class RentMoviesItemComponent implements OnInit {
   isLoaded: boolean;
   error: string;
 
-  constructor( private sanitizer: DomSanitizer,private api: ApiService, private userService: UserService,private authService: AuthService) {
+  constructor(private api: ApiService,  private sanitizer: DomSanitizer,private authService: AuthService,private toastService: HotToastService) {
    
   }
 
@@ -41,7 +42,7 @@ export class RentMoviesItemComponent implements OnInit {
   getListWithId() {
     this.api.getRentsByUser(this.authService.userEmail).subscribe(data => {
       if (data.length == 0) {
-        // console.log('There is no list we can provide')
+        this.toastService.warning('You have no rented movies')
       }
       else {
         this.rentsForUser = data;
@@ -52,6 +53,7 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovie(idMovie) {
     this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
       if (data.length == 0) {
+        this.toastService.warning('Successefully returned movie')
       }
       else {
         data.forEach(element => {
@@ -66,6 +68,10 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovieBack() {
     if (this.rentDeleteKey != undefined){
       this.api.returnMovie(this.movieToDelete , this.rentDeleteKey)
+      this.toastService.success('Successefully returned movie')
+    }
+    else {
+      this.toastService.success('Error, please try again')
     }
   }
 
@@ -79,19 +85,16 @@ export class RentMoviesItemComponent implements OnInit {
       Math.trunc((now.getTime() - rentDate.getTime()) / (1000 * 3600 * 24));
     return daysLeft;
   }
-
-  getVideoSource(id: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
-  }
   showDialog(movie: Movie) {
     this.api.loadMoviesDetails(movie.imdbID).subscribe(result => {
       this.details = result
     })
     this.searchByKeyword(movie.Title)
-    this.display=true;
 
   }
-
+  getVideoSource(id: string): SafeResourceUrl { // gets the video source for youtube trailer
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
+  }
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(
       result => {

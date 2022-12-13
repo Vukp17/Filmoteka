@@ -2,7 +2,6 @@
   <div>
     <p-card
       class="cardMain"
-      header="{{ movie.Title }}"
       [style]="{ width: '360px' }"
       styleClass="p-card-shadow"
     >
@@ -20,7 +19,7 @@
           class="d-flex justify-content-center w-100"
           styleClass="p-button-lg p-button-warning w-100"
           label="{{'rent' | translate}}"
-          (click)="rent(movie, movie.key)"
+          (click)="rentMovie(movie, movie.key)"
           icon="pi pi-plus"
         ></p-button>
       </ng-template>
@@ -69,3 +68,6 @@
 </div>
 <ng-template pTemplate="footer"> </ng-template>
 </p-dialog>
+<!-- <ng-container *ngIf="display">
+  <app-dialog [display]="visible" [movie]="selectedMovie" [response]="response" (onClose)="close()"></app-dialog>
+</ng-container> -->

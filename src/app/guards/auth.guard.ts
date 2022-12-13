@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
               if (user) {
                   resolve(true);
               } else {
-                  console.log('Auth Guard: user is not logged in');
                   this.router.navigate(['/landing']);                   // a logged out user will always be sent to home
                   resolve(false);
               }

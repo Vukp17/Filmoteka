@@ -61,7 +61,7 @@ export class AuthService {
               });
           }
           else { // logged out
-            console.log('Auth Service says: no User is logged in.');
+            // console.log('Auth Service says: no User is logged in.');
           }
         }
       );

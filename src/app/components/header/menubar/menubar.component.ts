@@ -47,7 +47,8 @@ export class MenubarComponent implements OnInit, OnChanges {
     public afAuth: AngularFireAuth,
     public authService: AuthService,
     public translate: TranslateService,
-    private mytranslate: MytranslateService
+    private mytranslate: MytranslateService,
+    private router: Router
   ) {
   }
   //lifecycle
@@ -110,11 +111,14 @@ export class MenubarComponent implements OnInit, OnChanges {
         this.user = user;
       });
   }
+  
   //logut
   logout(): void {
     this.afAuth.signOut();
     this.authService.resetState();
+    this.router.navigate(['/auth'])
   }
+
   //set language 
   setLanguage() {
     this.mytranslate.setLanguage(this.selectedCountry, this.userItems, this.items)

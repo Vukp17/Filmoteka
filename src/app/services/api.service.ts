@@ -171,7 +171,6 @@ export class ApiService implements OnInit, OnChanges {
   }
 
   deleteMovie(key: string) {
-    console.log(' tu sam key log ' + key)
     // delete movie from database
     this.moviesRef.remove(key);
   }
@@ -202,7 +201,6 @@ export class ApiService implements OnInit, OnChanges {
 
   returnMovie(key: string, id: string) {
     // return movie from rent list
-    console.log(id)
     this.rentsRef.remove(id);
     update(ref(this.database, 'movies/' + key), {
       isRented: false,

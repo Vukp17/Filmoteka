@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HotToastService } from '@ngneat/hot-toast';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
@@ -32,7 +33,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   responsiveOptions: any;
   isLoaded: boolean;
 
-  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
+  constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService, private toast: HotToastService) {
 
     this.movies = []
     this.responsiveOptions = [
@@ -62,7 +63,8 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   loadByType(element: string) { // load movies by type
-    this.api.getItemsByType(element).subscribe(data => {
+    this.api.getItemsByType(element)
+    .subscribe(data => {
       if (data.length == 0) {
         this.typeMessage = 'You cannot load this type of our items because it is not available'
       }
@@ -73,7 +75,8 @@ export class CarouselComponent implements OnInit, OnChanges {
   }
 
   loadMoviesDatabase() { // loads all movies from database
-    this.api.getMovies().subscribe(data => {
+    this.api.getMovies()
+    .subscribe(data => {
       if (data.length == 0) {
         this.moviesMessage = 'There is no movies available at the moment'
       }

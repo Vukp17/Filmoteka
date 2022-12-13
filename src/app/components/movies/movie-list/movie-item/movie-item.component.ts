@@ -42,17 +42,19 @@ export class MovieItemComponent implements OnInit {
 
   }
 
-  onSelected() {
-    this.moviesSelected.emit();
+  close(){
+    this.display = false;
+    this.visible=false;
   }
-
+  
   remove(key: any) {
     this.api.deleteMovie(key)
     this.toastService.success('Successefully deleted from database')
   }
 
-  rent(movies: Movie, key: any) {
+  rentMovie(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.authService.userEmail, key)
+    this.toastService.success('Successefully rented a movie')
   }
   getVideoSource(id: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
