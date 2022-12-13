@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit,OnChanges {
-  details: Detail
+  details: any=[]
   @Input() display: boolean=false
   @Input() movie: Movie
   @Input() response: any = {}
@@ -20,12 +20,12 @@ export class DialogComponent implements OnInit,OnChanges {
   constructor(private api: ApiService, private sanitizer: DomSanitizer) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['display'] && changes['display'].currentValue) {
+    if (changes['display'] && changes['display'].currentValue ) {
       this.showDialog(this.movie.imdbID);
     }
   }
   ngOnInit(): void {
-
+   console.log("Hejk")
   }
   showDialog(id: string) {
     this.api.loadMoviesDetails(id).subscribe(result => {

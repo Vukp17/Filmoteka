@@ -30,6 +30,7 @@ export class CarouselComponent implements OnInit, OnChanges {
   error: string = "";
   response: any = {}
   responsiveOptions: any;
+  isLoaded: boolean;
 
   constructor(private sanitizer: DomSanitizer, private api: ApiService, private movieService: MovieService) {
 
@@ -82,26 +83,31 @@ export class CarouselComponent implements OnInit, OnChanges {
     })
   }
 
-  showDialog(movie: Movie) { // opens movie details with modal
-     this.display= true
-     this.selectedMovie=movie
-     console.log(this.selectedMovie)
+  showDialog(movie: Movie) {
+    this.api.loadMoviesDetails(movie.imdbID).subscribe(result => {
+      this.details = result
+    })
+    this.searchByKeyword(movie.Title)
+    this.selectedMovie=movie
+    this.display = true;
   }
 
-  searchByKeyword(title: string) { // searches for youtube video with keyword
-    this.api.searchByKeyword(title).subscribe(result => {
-      if (result.length == 0) {
-        console.log('Search by keywoard returns null')
-      }
-      else {
-        this.response = result
-      }
-    })
-  }
+
   getVideoSource(id: string): SafeResourceUrl { // gets the video source for youtube trailer
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
   }
-
+  searchByKeyword(title: string) {
+    this.api.searchByKeyword(title).subscribe(
+      result => {
+        this.response = result;
+        this.isLoaded = true;
+      },
+      err => {
+        this.isLoaded = false;
+        this.error = err.message;
+      }
+    );
+  }
   fillCorousel() { // fills the corousel 
     if (this.carouselElement == undefined) {
       this.loadMoviesDatabase()

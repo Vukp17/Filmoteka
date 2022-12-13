@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Movie } from 'src/app/models/movie.model';
 import { Rent } from 'src/app/models/rents.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -23,8 +24,12 @@ export class RentMoviesItemComponent implements OnInit {
 
   rentsIds: Array<string>
   display: boolean=false;
+  details: any=[];
+  response: any={};
+  isLoaded: boolean;
+  error: string;
 
-  constructor(private api: ApiService, private userService: UserService,private authService: AuthService) {
+  constructor( private sanitizer: DomSanitizer,private api: ApiService, private userService: UserService,private authService: AuthService) {
    
   }
 
@@ -74,8 +79,29 @@ export class RentMoviesItemComponent implements OnInit {
       Math.trunc((now.getTime() - rentDate.getTime()) / (1000 * 3600 * 24));
     return daysLeft;
   }
-  showDialog() {
-    this.display = true;
+
+  getVideoSource(id: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
+  }
+  showDialog(movie: Movie) {
+    this.api.loadMoviesDetails(movie.imdbID).subscribe(result => {
+      this.details = result
+    })
+    this.searchByKeyword(movie.Title)
+    this.display=true;
+
   }
 
+  searchByKeyword(title: string) {
+    this.api.searchByKeyword(title).subscribe(
+      result => {
+        this.response = result;
+        this.isLoaded = true;
+      },
+      err => {
+        this.isLoaded = false;
+        this.error = err.message;
+      }
+    );
+  }
 }

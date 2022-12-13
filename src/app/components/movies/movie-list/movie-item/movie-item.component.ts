@@ -22,12 +22,13 @@ export class MovieItemComponent implements OnInit {
   email: string | any;
   details: any = []
   display: boolean = false;
+  visible: boolean=false;
   ////Api
   error: string = "";
   response: any = {}
   isLoaded: boolean;
   selectedMovie:Movie;
-  visible: boolean=false;
+
 
   constructor(public api: ApiService, public authService: AuthService,
     private toastService: HotToastService, private userService: UserService,
@@ -53,19 +54,19 @@ export class MovieItemComponent implements OnInit {
   rent(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.authService.userEmail, key)
   }
-
+  getVideoSource(id: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
+  }
   showDialog(movie: Movie) {
-    this.display = true;
+    this.api.loadMoviesDetails(movie.imdbID).subscribe(result => {
+      this.details = result
+    })
     this.searchByKeyword(movie.Title)
     this.selectedMovie=movie
     this.visible = true;
+    this.display = true;
   }
-  close() {
-    this.visible = false;
-    this.display=false;
-    this.selectedMovie = null;
-    console.log(this.visible)
-  }
+
   searchByKeyword(title: string) {
     this.api.searchByKeyword(title).subscribe(
       result => {
