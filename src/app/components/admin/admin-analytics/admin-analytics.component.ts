@@ -5,6 +5,7 @@ import { Movie } from 'src/app/models/movie.model';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Rent } from 'src/app/models/rents.model';
 
 @Component({
   selector: 'app-admin-analytics',
@@ -14,31 +15,30 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AdminAnalyticsComponent implements OnInit {
   usersObservable: Observable<User[]>;
   users: User[];
-  rents: Movie[];
+  rents: Rent[];
   rentsObservable: Observable<Movie[]>;
   user: User;
 
-  constructor(private api: ApiService, private authService: AuthService) {}
+  constructor(private api: ApiService, private authService: AuthService) { }
 
 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
-   // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
+  // UNFINISHED COMPONENT 
 
   ngOnInit(): void {
-    // this.getUsers();
-    
-    // this.userMovieRentals();
+  // this.loadALL()
     // console.log(this.users);
+    this.loadALL()
   }
 
   getUsers() {
@@ -48,9 +48,37 @@ export class AdminAnalyticsComponent implements OnInit {
   }
 
   userMovieRentals() {
-    this.users.forEach(item => {
-      item.moviesRented = '3';
-    });
-    console.log(this.users);
+    this.api.getRents().subscribe(data => {
+
+      this.rents = data;
+      console.log(this.rents);
+    })
+  }
+  loadALL() {
+this.userMovieRentals()
+      this.api.getUsers().subscribe((data) => {
+        this.users = data;
+        
+        // Use reduce() to count the number of movies rented by each user
+        const userRentalCounts = this.rents.reduce((counts, rental) => {
+          if (counts[rental.userId]) {
+            counts[rental.userId]++;
+          } else {
+            counts[rental.userId] = 1;
+          }
+          console.log(counts)
+          return counts;
+          
+        }, {});
+    
+        // Add the rental counts to each user object
+        this.users = this.users.map(user => {
+          user.rentalCount = userRentalCounts[user.email] || 0;
+          return user;
+        });
+    
+        console.log(this.users);
+      });
+    
   }
 }

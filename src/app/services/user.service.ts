@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IdTokenResult } from '@angular/fire/auth';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UserService {
   items: Observable<any[]>;
   users: User[]
   hadAccess: boolean
-  constructor(private db: AngularFireDatabase, public database: Database, private http: HttpClient, private afAuth: AngularFireAuth) {
+  constructor(private db: AngularFireDatabase,private api: ApiService, public database: Database, private afAuth: AngularFireAuth) {
 
   
     this.usersRef = db.list('users');
@@ -59,7 +60,39 @@ export class UserService {
   //   return this.email
   // }
 
+  // Count the number of movies rented by each user
+  countUserRentals() {
+    // Get the list of rented movies from the API
+    this.api.getRents().subscribe(rents => {
+      return rents.reduce((counts, rental) => {
+        if (counts[rental.userId]) {
+          counts[rental.userId]++;
+        } else {
+          counts[rental.userId] = 1;
+        }
+        return counts;
+      }, {});
+    });
+  }
+  
+  // Add the rental counts to each user object
+  addRentalCountsToUsers(users, rentalCounts) {
+    // Initialize the user object with an empty object
+    let user = {} as User;
+  
+    return users.map(u => {
+      // Make sure the user object is defined before trying to access its properties
+      if (u) {
+        user = u;
+      }
+  
+      user.rentalCount = rentalCounts[user.email] || 0;
+      return user;
+    });
+  }
 }
+
+
 
 
 
