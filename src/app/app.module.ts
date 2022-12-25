@@ -19,6 +19,8 @@ import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
 import {DropdownModule} from 'primeng/dropdown';
+import {SplitButtonModule} from 'primeng/splitbutton';
+
 ///////Material////////
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -116,6 +118,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     CascadeSelectModule,
     SelectButtonModule,
     DropdownModule,
+    SplitButtonModule,
     //ngx-translate
     TranslateModule.forRoot({
       loader:{

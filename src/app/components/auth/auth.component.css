@@ -59,4 +59,21 @@ form{
 
 .containerLogin {
   margin-top: 90pt;
+  display: flex;
+  width: 100%;
+}
+
+
+/* Make the login container flexible and fill the available space on screens with a width of 767 pixels or less */
+@media (max-width: 767px) {
+  .container {
+    display: flex;
+    flex: 1;
+  }
+  .containerLogin{
+    display: flex;
+    flex: 1;
+    width: 10%;
+  }
+
 }

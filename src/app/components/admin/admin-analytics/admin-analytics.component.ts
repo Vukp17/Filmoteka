@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, shareReplay } from 'rxjs';
 import { Movie } from 'src/app/models/movie.model';
@@ -6,79 +6,39 @@ import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Rent } from 'src/app/models/rents.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin-analytics',
   templateUrl: './admin-analytics.component.html',
   styleUrls: ['./admin-analytics.component.css'],
 })
-export class AdminAnalyticsComponent implements OnInit {
+export class AdminAnalyticsComponent implements OnInit,OnChanges {
   usersObservable: Observable<User[]>;
   users: User[];
   rents: Rent[];
   rentsObservable: Observable<Movie[]>;
   user: User;
 
-  constructor(private api: ApiService, private authService: AuthService) { }
+  constructor(private api: ApiService, private userService: UserService) { }
+  ngOnChanges(){
+    this.loadUsers()
 
-
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-  // UNFINISHED COMPONENT 
-
-  ngOnInit(): void {
-  // this.loadALL()
-    // console.log(this.users);
-    this.loadALL()
   }
-
-  getUsers() {
-    this.api.getUsers().subscribe((data) => {
-      this.users = data;
-    });
+  ngOnInit(): void {
+    this.loadUsers()
   }
 
   userMovieRentals() {
     this.api.getRents().subscribe(data => {
-
-      this.rents = data;
-      console.log(this.rents);
-    })
+      this.rents = data;   
+     })
   }
-  loadALL() {
-this.userMovieRentals()
-      this.api.getUsers().subscribe((data) => {
-        this.users = data;
-        
-        // Use reduce() to count the number of movies rented by each user
-        const userRentalCounts = this.rents.reduce((counts, rental) => {
-          if (counts[rental.userId]) {
-            counts[rental.userId]++;
-          } else {
-            counts[rental.userId] = 1;
-          }
-          console.log(counts)
-          return counts;
-          
-        }, {});
-    
-        // Add the rental counts to each user object
-        this.users = this.users.map(user => {
-          user.rentalCount = userRentalCounts[user.email] || 0;
-          return user;
-        });
-    
-        console.log(this.users);
-      });
-    
+  loadUsers() {
+    this.userMovieRentals()
+    this.api.getUsers().subscribe((data) => {
+      this.users = data;
+      this.users = this.userService.countRentalCounts(this.rents, this.users);
+    });
   }
 }

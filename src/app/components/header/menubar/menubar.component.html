@@ -18,7 +18,6 @@
   <ng-template pTemplate="end">
     <p-cascadeSelect (click)="setLanguage()" [(ngModel)]="selectedCountry" [options]="countries" optionLabel="name"
       [optionGroupChildren]="['states']" [style]="{ minWidth: '2rem'}" placeholder="EN"></p-cascadeSelect>
-    <i class="flag-poland flag"></i>
     <button pButton label="{{ 'navbar.logout' | translate }}" class="p-button-raised p-button-rounded"
       class="p-button-danger" icon="pi pi-sign-out" (click)="logout()"></button>
   </ng-template>

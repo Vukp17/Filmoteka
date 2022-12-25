@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit } from '@angular/core';
 //Prime
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
@@ -27,6 +27,7 @@ interface Country {
 
 
 export class MenubarComponent implements OnInit, OnChanges {
+  screenSize: string;
   items: MenuItem[];
   userItems: MenuItem[];
   notLoggedInItems: MenuItem[];
@@ -50,6 +51,7 @@ export class MenubarComponent implements OnInit, OnChanges {
     private mytranslate: MytranslateService,
     private router: Router
   ) {
+    
   }
   //lifecycle
   ngOnChanges() {
@@ -110,6 +112,12 @@ export class MenubarComponent implements OnInit, OnChanges {
       .subscribe(user => {
         this.user = user;
       });
+
+      if (window.innerWidth < 500) {
+        this.screenSize = 'small';
+      } else {
+        this.screenSize = 'large';
+      }
   }
   
   //logut
@@ -122,5 +130,14 @@ export class MenubarComponent implements OnInit, OnChanges {
   //set language 
   setLanguage() {
     this.mytranslate.setLanguage(this.selectedCountry, this.userItems, this.items)
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (event.target.innerWidth < 500) {
+      this.screenSize = 'small';
+    } else {
+      this.screenSize = 'large';
+    }
   }
 }
