@@ -1,12 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HotToastService } from '@ngneat/hot-toast';
-import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
-import { Movie } from '../../models/movie.model';
+import { Movie } from '../../../../models/movie.model';
 
 @Component({
   selector: 'app-carousel',
