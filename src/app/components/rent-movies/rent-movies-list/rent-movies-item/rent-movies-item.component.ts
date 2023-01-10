@@ -6,6 +6,7 @@ import { Rent } from 'src/app/models/rents.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rent-movies-item',
@@ -29,7 +30,7 @@ export class RentMoviesItemComponent implements OnInit {
   response: any={};
   isLoaded: boolean;
   error: string;
-
+  sub: Subscription;
   constructor(private api: ApiService,  private sanitizer: DomSanitizer,private authService: AuthService,private toastService: HotToastService) {
    
   }
@@ -51,24 +52,27 @@ export class RentMoviesItemComponent implements OnInit {
   }
 
   returnMovie(idMovie) {
-    this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
+   this.sub =  this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
       if (data.length == 0) {
   
       }
       else {
-        data.forEach(element => {
+        const movie = data; 
+        movie.forEach(element => {
           this.rentDeleteKey = element.toString();
           this.movieToDelete = idMovie;
         });
         this.returnMovieBack()
       }
     })
+    
   }
   
   returnMovieBack() {
     if (this.rentDeleteKey != undefined){
       this.api.returnMovie(this.movieToDelete , this.rentDeleteKey)
       this.toastService.success('Successefully returned movie')
+     this.sub.unsubscribe();
     }
     else {
       this.toastService.success('Error, please try again')
