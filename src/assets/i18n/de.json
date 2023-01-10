@@ -54,5 +54,11 @@
     "admin":{
       "nonRented": "nicht ausgeliehene Filme",
       "rented": "ausgeliehene Filme"
+    },
+    "errors":{
+      "no_movies_available": " Derzeit sind keine Filme in unserem Shop verfügbar.",
+      "api_not_working": "API funktioniert im Moment nicht :)",
+      "enter_search": "Bitte geben Sie Ihre Suche ein!"
     }
+
 }

@@ -53,5 +53,11 @@
   "admin":{
     "nonRented": "not rented movies",
     "rented": "rented movies"
+  },
+  "errors":{
+    "no_movies_available": "Currently there is no movies available in our store.",
+    "api_not_working": "Api not working at the moment :)",
+    "enter_search": "Please enter your search!"
   }
 }
+
