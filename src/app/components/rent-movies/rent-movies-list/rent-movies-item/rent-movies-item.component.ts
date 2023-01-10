@@ -36,7 +36,6 @@ export class RentMoviesItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListWithId()
-   
   }
 
   getListWithId() {
@@ -53,7 +52,7 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovie(idMovie) {
     this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
       if (data.length == 0) {
-        this.toastService.warning('Successefully returned movie')
+        this.toastService.success('Successefully returned movie')
       }
       else {
         data.forEach(element => {
@@ -68,7 +67,6 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovieBack() {
     if (this.rentDeleteKey != undefined){
       this.api.returnMovie(this.movieToDelete , this.rentDeleteKey)
-      this.toastService.success('Successefully returned movie')
     }
     else {
       this.toastService.success('Error, please try again')

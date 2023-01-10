@@ -8,7 +8,6 @@ import { NgImageSliderModule } from 'ng-image-slider';
 ///////PRIME NG////////
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { CarouselModule } from 'primeng/carousel';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
@@ -25,13 +24,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 //////COMPONENTS/////
 import { AppComponent } from './app.component';
-import { RentMoviesComponent } from './components/rent-movies/rent-movies.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './components/footer/footer.component';
 
-import { RentMoviesListComponent } from './components/rent-movies/rent-movies-list/rent-movies-list.component';
-import { RentMoviesItemComponent } from './components/rent-movies/rent-movies-list/rent-movies-item/rent-movies-item.component';
 //novi moduli
 import { MoviesModule } from './components/movies/movies.module';
 ///////Auth
