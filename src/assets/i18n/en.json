@@ -4,6 +4,8 @@
   "availableMovies":"Available Movies",
   "rent":"Rent",
   "return":"Return",
+  "yourMovies":"Your Movies",
+
   "navbar": {
     "home": "Home",
     "movies": "Movies",
@@ -13,7 +15,7 @@
     "addmovies": "Add Movies",
     "dataBase": "DataBase",
     "analytics":"Analytics"
-  
+    
 
   },
   "auth": {
@@ -57,7 +59,8 @@
   "errors":{
     "no_movies_available": "Currently there is no movies available in our store.",
     "api_not_working": "Api not working at the moment :)",
-    "enter_search": "Please enter your search!"
+    "enter_search": "Please enter your search!",
+    "no_rented_movies": "Currently you have no rented movies"
   }
 }
 
