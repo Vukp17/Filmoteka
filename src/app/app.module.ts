@@ -15,14 +15,6 @@ import { DividerModule } from 'primeng/divider';
 import {DropdownModule} from 'primeng/dropdown';
 import {SplitButtonModule} from 'primeng/splitbutton';
 
-///////Material////////
-import { MatInputModule } from '@angular/material/input';
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import {MatSelectModule} from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 //////COMPONENTS/////
 import { AppComponent } from './app.component';
 import { RentMoviesComponent } from './components/rent-movies/rent-movies.component';
@@ -99,14 +91,6 @@ import { RentMoviesModule } from './components/rent-movies/rent-movies.module';
       }
     }),
 
-    //Material
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatIconModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
