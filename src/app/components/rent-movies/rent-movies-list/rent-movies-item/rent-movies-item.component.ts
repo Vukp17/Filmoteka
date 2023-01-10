@@ -52,7 +52,7 @@ export class RentMoviesItemComponent implements OnInit {
   returnMovie(idMovie) {
     this.api.getRentLocation(this.authService.userEmail,idMovie).subscribe(data => {
       if (data.length == 0) {
-        this.toastService.success('Successefully returned movie')
+  
       }
       else {
         data.forEach(element => {

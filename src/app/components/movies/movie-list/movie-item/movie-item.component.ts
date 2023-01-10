@@ -49,12 +49,11 @@ export class MovieItemComponent implements OnInit {
   
   remove(key: any) {
     this.api.deleteMovie(key)
-    this.toastService.success('Successefully deleted from database')
+
   }
 
   rentMovie(movies: Movie, key: any) {
     this.api.pushMovieRents(movies, this.authService.userEmail, key)
-    this.toastService.success('Successefully rented a movie')
   }
   getVideoSource(id: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + id)
