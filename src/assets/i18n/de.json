@@ -5,6 +5,8 @@
     "availableMovies":"Verfügbare Filme",
     "rent":"Miete",
     "return":"Zurückkehren",
+    "yourMovies":"Ihre Filme",
+    
     "navbar": {
         "home": "Heim",
         "movies": "Filme",
@@ -54,5 +56,12 @@
     "admin":{
       "nonRented": "nicht ausgeliehene Filme",
       "rented": "ausgeliehene Filme"
+    },
+    "errors":{
+      "no_movies_available": " Derzeit sind keine Filme in unserem Shop verfügbar.",
+      "api_not_working": "API funktioniert im Moment nicht :)",
+      "enter_search": "Bitte geben Sie Ihre Suche ein!",
+      "no_rented_movies": "Derzeit haben Sie keine ausgeliehenen Filme"
     }
+
 }

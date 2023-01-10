@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Movie } from '../../../models/movie.model';
 
@@ -15,7 +16,9 @@ export class AdminListComponent implements OnInit {
   search: string;
   error: string = 'Please enter your search!';
 
-  constructor(private http: HttpClient, private api: ApiService, private toast: HotToastService) { }
+  constructor(private api: ApiService,private translate: TranslateService) { 
+    this.error = this.translate.instant('errors.enter_search');
+  }
 
   ngOnInit(): void {
   }
@@ -29,7 +32,7 @@ export class AdminListComponent implements OnInit {
     
       .subscribe((result) => {
         if (result == null) {
-          this.error = 'Api not working at the moment :)'
+          this.error = this.translate.instant('errors.api_not_working');
         }
         else {
           this.movies = result.Search

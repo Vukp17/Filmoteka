@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Movie } from '../../../models/movie.model';
@@ -16,11 +17,12 @@ export class MovieListComponent implements OnInit, OnChanges {
   availableMovies: Movie[]
   message: string;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.loadAvailableMovies()
   }
+
   onMovieSeleted(movie: Movie) {
     this.movieWasSelected.emit(movie);
   }
@@ -29,7 +31,7 @@ export class MovieListComponent implements OnInit, OnChanges {
     this.api.getAvailableMovies().subscribe(data => {
       this.availableMovies = data
       if (data.length == 0) {
-        this.message = 'Currently there is no movies available in our store.'
+        this.message = this.translate.instant('errors.no_movies_available');
       }
       else {
         this.availableMovies = data

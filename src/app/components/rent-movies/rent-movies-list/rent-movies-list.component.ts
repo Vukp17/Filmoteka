@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Movie } from 'src/app/models/movie.model';
 import { Rent } from 'src/app/models/rents.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -17,7 +18,9 @@ export class RentMoviesListComponent implements OnInit {
   movieIds: Array<string>
   message: string;
  
-  constructor(private api:ApiService,private userService: UserService,private authService: AuthService) { }
+  constructor(private api:ApiService,private translate: TranslateService,private authService: AuthService) {
+    
+   }
 
   ngOnInit(): void {
    
@@ -37,7 +40,7 @@ export class RentMoviesListComponent implements OnInit {
   loadMovies(){
     this.api.getCurrUserRentedMovies(this.movieIds).subscribe(data =>{
       if (data.length == 0) {
-        this.message = 'Currently you have no rented movies'
+        this.message = this.translate.instant('errors.no_rented_movies');
         this.moviesForUser = data
       }
       else {

@@ -37,7 +37,6 @@ export class RentMoviesItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListWithId()
-   
   }
 
   getListWithId() {
