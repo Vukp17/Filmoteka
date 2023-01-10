@@ -47,9 +47,6 @@ import { LandingModule } from './components/landing/landing.module';
 import { RentMoviesModule } from './components/rent-movies/rent-movies.module';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

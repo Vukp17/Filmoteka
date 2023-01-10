@@ -213,7 +213,7 @@ export class ApiService implements OnInit, OnChanges {
   }
 
   loadMoviesDetails(id: string) {
-    // movie load function based on ID
+    // movie load function based on  ID
     const url = environment.apiBase + id + environment.omdb_api_key;
     return this.http.get<Detail>(url);
   }
