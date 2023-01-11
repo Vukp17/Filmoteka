@@ -43,7 +43,7 @@ export class RentMoviesItemComponent implements OnInit {
   getListWithId() {
     this.api.getRentsByUser(this.authService.userEmail).subscribe(data => {
       if (data.length == 0) {
-        this.toastService.warning('You have no rented movies')
+        this.error="You have no rented movies"
       }
       else {
         this.rentsForUser = data;
